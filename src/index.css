@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#030508] text-slate-100 antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Prestige Dark Cinematic Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #030508;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #111726;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #E21A22;
+  }
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+@keyframes hudScan {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-hud-scan {
+  animation: hudScan 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
