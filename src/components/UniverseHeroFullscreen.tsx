@@ -33,7 +33,7 @@ const UNIVERSE_CONFIGS: Record<string, {
       "/assets/Images/Spiderman/spiderman1.jpg",
       "/assets/Images/Spiderman/spiderman2.jpg",
       "/assets/Images/Spiderman/spiderman3.jpg",
-      "/assets/Images/Spiderman/spiderman4.jpeg",
+      "/assets/Images/Spiderman/Spiderman4.jpeg",
       "/assets/Images/Spiderman/Marvel3.jpg"
     ],
     stages: [
