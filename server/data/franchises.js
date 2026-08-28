@@ -6,13 +6,48 @@ export const FRANCHISES = {
     icon: "Shield",
     themeColor: "red",
     presetTargets: [
-      { id: "mcu-doomsday", title: "Avengers: Doomsday", year: 2026, type: "Movie" },
-      { id: "mcu-secret-wars", title: "Avengers: Secret Wars", year: 2027, type: "Movie" },
-      { id: "mcu-deadpool-wolverine", title: "Deadpool & Wolverine", year: 2024, type: "Movie" },
-      { id: "mcu-endgame", title: "Avengers: Endgame", year: 2019, type: "Movie" },
-      { id: "mcu-loki-s2", title: "Loki (Season 2 Finale)", year: 2023, type: "Series" },
-      { id: "mcu-spiderman-nwh", title: "Spider-Man: No Way Home", year: 2021, type: "Movie" },
-      { id: "mcu-thunderbolts", title: "Thunderbolts*", year: 2025, type: "Movie" }
+      {
+        id: "mcu-doomsday",
+        title: "Avengers: Doomsday",
+        year: 2026,
+        type: "Movie",
+      },
+      {
+        id: "mcu-secret-wars",
+        title: "Avengers: Secret Wars",
+        year: 2027,
+        type: "Movie",
+      },
+      {
+        id: "mcu-deadpool-wolverine",
+        title: "Deadpool & Wolverine",
+        year: 2024,
+        type: "Movie",
+      },
+      {
+        id: "mcu-endgame",
+        title: "Avengers: Endgame",
+        year: 2019,
+        type: "Movie",
+      },
+      {
+        id: "mcu-loki-s2",
+        title: "Loki (Season 2 Finale)",
+        year: 2023,
+        type: "Series",
+      },
+      {
+        id: "mcu-spiderman-nwh",
+        title: "Spider-Man: No Way Home",
+        year: 2021,
+        type: "Movie",
+      },
+      {
+        id: "mcu-thunderbolts",
+        title: "Thunderbolts*",
+        year: 2025,
+        type: "Movie",
+      },
     ],
     nodes: [
       {
@@ -26,12 +61,21 @@ export const FRANCHISES = {
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
         streamUrl: "https://www.hotstar.com/in/movies/iron-man/1660000038",
-        poster: "https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg",
-        synopsis: "Billionaire industrialist Tony Stark is captured in Afghanistan and builds a high-tech suit of armor to escape, becoming the armored hero Iron Man.",
-        reason: "Origin of Tony Stark, the foundational bedrock of the MCU, and the debut of the Avengers Initiative.",
-        postCredits: "Nick Fury steps out of the shadows: 'Mr. Stark, you've become part of a bigger universe.'",
-        charactersIntroduced: ["Tony Stark", "Pepper Potts", "James Rhodes", "Nick Fury"],
-        prerequisites: []
+        poster:
+          "https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg",
+        synopsis:
+          "Billionaire industrialist Tony Stark is captured in Afghanistan and builds a high-tech suit of armor to escape, becoming the armored hero Iron Man.",
+        reason:
+          "Origin of Tony Stark, the foundational bedrock of the MCU, and the debut of the Avengers Initiative.",
+        postCredits:
+          "Nick Fury steps out of the shadows: 'Mr. Stark, you've become part of a bigger universe.'",
+        charactersIntroduced: [
+          "Tony Stark",
+          "Pepper Potts",
+          "James Rhodes",
+          "Nick Fury",
+        ],
+        prerequisites: [],
       },
       {
         id: "mcu-cap1",
@@ -43,13 +87,23 @@ export const FRANCHISES = {
         runtimeMinutes: 124,
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/captain-america-the-first-avenger/1660000034",
-        poster: "https://image.tmdb.org/t/p/w500/vSNxAJTl00cuun09ZkWbg99umGQ.jpg",
-        synopsis: "Steve Rogers volunteers for a top-secret super-soldier program during WWII, taking the fight to Red Skull and the sinister HYDRA faction.",
-        reason: "Introduces the Tesseract (Space Stone), Steve Rogers, Bucky Barnes, Peggy Carter, and HYDRA.",
-        postCredits: "Steve wakes up in modern Times Square; Nick Fury recruits him for a mission.",
-        charactersIntroduced: ["Steve Rogers", "Bucky Barnes", "Peggy Carter", "Red Skull"],
-        prerequisites: []
+        streamUrl:
+          "https://www.hotstar.com/in/movies/captain-america-the-first-avenger/1660000034",
+        poster:
+          "https://image.tmdb.org/t/p/w500/vSNxAJTl00cuun09ZkWbg99umGQ.jpg",
+        synopsis:
+          "Steve Rogers volunteers for a top-secret super-soldier program during WWII, taking the fight to Red Skull and the sinister HYDRA faction.",
+        reason:
+          "Introduces the Tesseract (Space Stone), Steve Rogers, Bucky Barnes, Peggy Carter, and HYDRA.",
+        postCredits:
+          "Steve wakes up in modern Times Square; Nick Fury recruits him for a mission.",
+        charactersIntroduced: [
+          "Steve Rogers",
+          "Bucky Barnes",
+          "Peggy Carter",
+          "Red Skull",
+        ],
+        prerequisites: [],
       },
       {
         id: "mcu-thor1",
@@ -62,12 +116,22 @@ export const FRANCHISES = {
         tier: "Supplementary",
         streamingOn: "Disney+ Hotstar",
         streamUrl: "https://www.hotstar.com/in/movies/thor/1660000044",
-        poster: "https://image.tmdb.org/t/p/w500/prSfAi1xGrhLQNxVSUFh61xQ4Qx.jpg",
-        synopsis: "The arrogant god of thunder Thor is cast out of Asgard to Earth without his powers, learning humility while Loki plots in the shadows.",
-        reason: "Introduces the cosmic realm of Asgard, Thor, Loki, Odin, Hawkeye (cameo), and the Bifrost.",
-        postCredits: "Dr. Erik Selvig is recruited to study the Tesseract with Loki invisibly influencing him.",
-        charactersIntroduced: ["Thor", "Loki", "Odin", "Jane Foster", "Hawkeye"],
-        prerequisites: []
+        poster:
+          "https://image.tmdb.org/t/p/w500/prSfAi1xGrhLQNxVSUFh61xQ4Qx.jpg",
+        synopsis:
+          "The arrogant god of thunder Thor is cast out of Asgard to Earth without his powers, learning humility while Loki plots in the shadows.",
+        reason:
+          "Introduces the cosmic realm of Asgard, Thor, Loki, Odin, Hawkeye (cameo), and the Bifrost.",
+        postCredits:
+          "Dr. Erik Selvig is recruited to study the Tesseract with Loki invisibly influencing him.",
+        charactersIntroduced: [
+          "Thor",
+          "Loki",
+          "Odin",
+          "Jane Foster",
+          "Hawkeye",
+        ],
+        prerequisites: [],
       },
       {
         id: "mcu-avengers1",
@@ -79,13 +143,18 @@ export const FRANCHISES = {
         runtimeMinutes: 143,
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/marvels-the-avengers/1660000015",
-        poster: "https://image.tmdb.org/t/p/w500/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg",
-        synopsis: "Earth's mightiest heroes assemble for the first time to stop Loki and his invading Chitauri army from subjugating Earth.",
-        reason: "The foundational crossover climax of Phase 1. Debuts the Mind Stone (Loki's Scepter) and reveals Thanos.",
-        postCredits: "The Other warns Thanos that challenging humans is courting death; Thanos turns with a grin.",
+        streamUrl:
+          "https://www.hotstar.com/in/movies/marvels-the-avengers/1660000015",
+        poster:
+          "https://image.tmdb.org/t/p/w500/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg",
+        synopsis:
+          "Earth's mightiest heroes assemble for the first time to stop Loki and his invading Chitauri army from subjugating Earth.",
+        reason:
+          "The foundational crossover climax of Phase 1. Debuts the Mind Stone (Loki's Scepter) and reveals Thanos.",
+        postCredits:
+          "The Other warns Thanos that challenging humans is courting death; Thanos turns with a grin.",
         charactersIntroduced: ["Thanos", "The Other", "Maria Hill"],
-        prerequisites: ["mcu-ironman", "mcu-cap1", "mcu-thor1"]
+        prerequisites: ["mcu-ironman", "mcu-cap1", "mcu-thor1"],
       },
       {
         id: "mcu-winter-soldier",
@@ -97,13 +166,22 @@ export const FRANCHISES = {
         runtimeMinutes: 136,
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/captain-america-the-winter-soldier/1660000035",
-        poster: "https://image.tmdb.org/t/p/w500/tVFRpFw3xTed5JwTCWZZflREmZv.jpg",
-        synopsis: "Steve Rogers and Natasha Romanoff uncover a massive conspiracy within S.H.I.E.L.D. orchestrated by HYDRA, facing the Winter Soldier.",
-        reason: "Dismantles S.H.I.E.L.D., introduces Sam Wilson (Falcon), reveals Bucky Barnes alive, and redefines MCU geopolitics.",
-        postCredits: "Baron Strucker observes the Mind Stone and the twins: Pietro and Wanda Maximoff.",
-        charactersIntroduced: ["Sam Wilson (Falcon)", "Sharon Carter", "Brock Rumlow"],
-        prerequisites: ["mcu-avengers1"]
+        streamUrl:
+          "https://www.hotstar.com/in/movies/captain-america-the-winter-soldier/1660000035",
+        poster:
+          "https://image.tmdb.org/t/p/w500/tVFRpFw3xTed5JwTCWZZflREmZv.jpg",
+        synopsis:
+          "Steve Rogers and Natasha Romanoff uncover a massive conspiracy within S.H.I.E.L.D. orchestrated by HYDRA, facing the Winter Soldier.",
+        reason:
+          "Dismantles S.H.I.E.L.D., introduces Sam Wilson (Falcon), reveals Bucky Barnes alive, and redefines MCU geopolitics.",
+        postCredits:
+          "Baron Strucker observes the Mind Stone and the twins: Pietro and Wanda Maximoff.",
+        charactersIntroduced: [
+          "Sam Wilson (Falcon)",
+          "Sharon Carter",
+          "Brock Rumlow",
+        ],
+        prerequisites: ["mcu-avengers1"],
       },
       {
         id: "mcu-guardians1",
@@ -115,13 +193,25 @@ export const FRANCHISES = {
         runtimeMinutes: 121,
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/guardians-of-the-galaxy/1660000041",
-        poster: "https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg",
-        synopsis: "A group of intergalactic criminals are forced to work together to stop the fanatical Ronan the Accuser from destroying Xandar with an ancient orb.",
-        reason: "Introduces the Cosmic MCU, the Power Stone (Orb), the Collector's lore on Infinity Stones, and Thanos' daughters Gamora & Nebula.",
-        postCredits: "The Collector sits in his ruined museum with Howard the Duck.",
-        charactersIntroduced: ["Peter Quill (Star-Lord)", "Gamora", "Drax", "Rocket", "Groot", "Nebula"],
-        prerequisites: []
+        streamUrl:
+          "https://www.hotstar.com/in/movies/guardians-of-the-galaxy/1660000041",
+        poster:
+          "https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg",
+        synopsis:
+          "A group of intergalactic criminals are forced to work together to stop the fanatical Ronan the Accuser from destroying Xandar with an ancient orb.",
+        reason:
+          "Introduces the Cosmic MCU, the Power Stone (Orb), the Collector's lore on Infinity Stones, and Thanos' daughters Gamora & Nebula.",
+        postCredits:
+          "The Collector sits in his ruined museum with Howard the Duck.",
+        charactersIntroduced: [
+          "Peter Quill (Star-Lord)",
+          "Gamora",
+          "Drax",
+          "Rocket",
+          "Groot",
+          "Nebula",
+        ],
+        prerequisites: [],
       },
       {
         id: "mcu-age-of-ultron",
@@ -133,13 +223,18 @@ export const FRANCHISES = {
         runtimeMinutes: 141,
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/marvels-avengers-age-of-ultron/1660000037",
-        poster: "https://image.tmdb.org/t/p/w500/4ssDuvEDkS9urMFxewkvmtM07nn.jpg",
-        synopsis: "Tony Stark inadvertently creates Ultron, a sentient AI obsessed with human extinction, forcing the Avengers to unite with new allies Wanda and Vision.",
-        reason: "Debuts Wanda Maximoff, Vision (Mind Stone in his forehead), sets up Sokovia Accords, and foreshadows Infinity War.",
-        postCredits: "Thanos retrieves the Infinity Gauntlet: 'Fine, I'll do it myself.'",
+        streamUrl:
+          "https://www.hotstar.com/in/movies/marvels-avengers-age-of-ultron/1660000037",
+        poster:
+          "https://image.tmdb.org/t/p/w500/4ssDuvEDkS9urMFxewkvmtM07nn.jpg",
+        synopsis:
+          "Tony Stark inadvertently creates Ultron, a sentient AI obsessed with human extinction, forcing the Avengers to unite with new allies Wanda and Vision.",
+        reason:
+          "Debuts Wanda Maximoff, Vision (Mind Stone in his forehead), sets up Sokovia Accords, and foreshadows Infinity War.",
+        postCredits:
+          "Thanos retrieves the Infinity Gauntlet: 'Fine, I'll do it myself.'",
         charactersIntroduced: ["Wanda Maximoff", "Vision", "Ultron"],
-        prerequisites: ["mcu-winter-soldier"]
+        prerequisites: ["mcu-winter-soldier"],
       },
       {
         id: "mcu-civil-war",
@@ -151,13 +246,22 @@ export const FRANCHISES = {
         runtimeMinutes: 147,
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/captain-america-civil-war/1660000036",
-        poster: "https://image.tmdb.org/t/p/w500/rAGiDXAfB9nxYkvXT4AnQv95NkM.jpg",
-        synopsis: "Political pressure over collateral damage splits the Avengers into opposing factions led by Captain America and Iron Man.",
-        reason: "Shatters the Avengers, debuts Black Panther (T'Challa) and Spider-Man (Peter Parker), directly setting up Infinity War.",
-        postCredits: "Steve Rogers brings Bucky to Wakanda to be placed in cryogenic sleep.",
-        charactersIntroduced: ["Black Panther (T'Challa)", "Spider-Man (Peter Parker)", "Helmut Zemo"],
-        prerequisites: ["mcu-age-of-ultron"]
+        streamUrl:
+          "https://www.hotstar.com/in/movies/captain-america-civil-war/1660000036",
+        poster:
+          "https://image.tmdb.org/t/p/w500/rAGiDXAfB9nxYkvXT4AnQv95NkM.jpg",
+        synopsis:
+          "Political pressure over collateral damage splits the Avengers into opposing factions led by Captain America and Iron Man.",
+        reason:
+          "Shatters the Avengers, debuts Black Panther (T'Challa) and Spider-Man (Peter Parker), directly setting up Infinity War.",
+        postCredits:
+          "Steve Rogers brings Bucky to Wakanda to be placed in cryogenic sleep.",
+        charactersIntroduced: [
+          "Black Panther (T'Challa)",
+          "Spider-Man (Peter Parker)",
+          "Helmut Zemo",
+        ],
+        prerequisites: ["mcu-age-of-ultron"],
       },
       {
         id: "mcu-doctor-strange",
@@ -169,13 +273,23 @@ export const FRANCHISES = {
         runtimeMinutes: 115,
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/doctor-strange/1660000039",
-        poster: "https://image.tmdb.org/t/p/w500/uGBVj3bEbCoZbDjjl9wMgrghcyx.jpg",
-        synopsis: "After a car crash destroys his hands, brilliant neurosurgeon Stephen Strange learns mystic arts at Kamar-Taj and discovers the Multiverse.",
-        reason: "Introduces Mystic Arts, the Multiverse, the Time Stone (Eye of Agamotto), and the Dark Dimension.",
-        postCredits: "Doctor Strange meets with Thor to discuss Loki and the search for Odin.",
-        charactersIntroduced: ["Doctor Strange", "Wong", "The Ancient One", "Dormammu"],
-        prerequisites: []
+        streamUrl:
+          "https://www.hotstar.com/in/movies/doctor-strange/1660000039",
+        poster:
+          "https://image.tmdb.org/t/p/w500/uGBVj3bEbCoZbDjjl9wMgrghcyx.jpg",
+        synopsis:
+          "After a car crash destroys his hands, brilliant neurosurgeon Stephen Strange learns mystic arts at Kamar-Taj and discovers the Multiverse.",
+        reason:
+          "Introduces Mystic Arts, the Multiverse, the Time Stone (Eye of Agamotto), and the Dark Dimension.",
+        postCredits:
+          "Doctor Strange meets with Thor to discuss Loki and the search for Odin.",
+        charactersIntroduced: [
+          "Doctor Strange",
+          "Wong",
+          "The Ancient One",
+          "Dormammu",
+        ],
+        prerequisites: [],
       },
       {
         id: "mcu-ragnarok",
@@ -188,12 +302,16 @@ export const FRANCHISES = {
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
         streamUrl: "https://www.hotstar.com/in/movies/thor-ragnarok/1660000045",
-        poster: "https://image.tmdb.org/t/p/w500/rzRwTcFvttcN1ZpX2xv4UmYqqSd.jpg",
-        synopsis: "Imprisoned on the garbage planet Sakaar, Thor must battle Hulk in a gladiatorial arena to save Asgard from Hela, the goddess of death.",
-        reason: "Destroys Asgard, pairs Thor with Hulk and Valkyrie, and its ending directly transitions into the opening minutes of Infinity War.",
-        postCredits: "Thor and Loki's refugee ship is intercepted by Thanos' gigantic warship.",
+        poster:
+          "https://image.tmdb.org/t/p/w500/rzRwTcFvttcN1ZpX2xv4UmYqqSd.jpg",
+        synopsis:
+          "Imprisoned on the garbage planet Sakaar, Thor must battle Hulk in a gladiatorial arena to save Asgard from Hela, the goddess of death.",
+        reason:
+          "Destroys Asgard, pairs Thor with Hulk and Valkyrie, and its ending directly transitions into the opening minutes of Infinity War.",
+        postCredits:
+          "Thor and Loki's refugee ship is intercepted by Thanos' gigantic warship.",
         charactersIntroduced: ["Hela", "Valkyrie", "Grandmaster", "Korg"],
-        prerequisites: ["mcu-age-of-ultron", "mcu-doctor-strange"]
+        prerequisites: ["mcu-age-of-ultron", "mcu-doctor-strange"],
       },
       {
         id: "mcu-infinity-war",
@@ -205,13 +323,23 @@ export const FRANCHISES = {
         runtimeMinutes: 149,
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/avengers-infinity-war/1660000016",
-        poster: "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
-        synopsis: "Thanos embarks on a relentless quest across the cosmos to collect all six Infinity Stones. The fractured Avengers make a desperate stand.",
-        reason: "The ultimate climax of the Infinity Saga: Thanos collects all 6 stones and executes 'The Snap', erasing 50% of all life.",
-        postCredits: "Nick Fury transmits a distress beacon with Captain Marvel's star insignia as he turns to dust.",
+        streamUrl:
+          "https://www.hotstar.com/in/movies/avengers-infinity-war/1660000016",
+        poster:
+          "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+        synopsis:
+          "Thanos embarks on a relentless quest across the cosmos to collect all six Infinity Stones. The fractured Avengers make a desperate stand.",
+        reason:
+          "The ultimate climax of the Infinity Saga: Thanos collects all 6 stones and executes 'The Snap', erasing 50% of all life.",
+        postCredits:
+          "Nick Fury transmits a distress beacon with Captain Marvel's star insignia as he turns to dust.",
         charactersIntroduced: ["Black Order"],
-        prerequisites: ["mcu-civil-war", "mcu-guardians1", "mcu-ragnarok", "mcu-doctor-strange"]
+        prerequisites: [
+          "mcu-civil-war",
+          "mcu-guardians1",
+          "mcu-ragnarok",
+          "mcu-doctor-strange",
+        ],
       },
       {
         id: "mcu-endgame",
@@ -223,13 +351,18 @@ export const FRANCHISES = {
         runtimeMinutes: 181,
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/avengers-endgame/1260013556",
-        poster: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
-        synopsis: "Five years after the Blip, the surviving Avengers execute a temporal 'Time Heist' through the Quantum Realm to undo Thanos' devastation.",
-        reason: "Conclusion of the Infinity Saga. Tony Stark's sacrifice and the creation of alternate branch timelines.",
-        postCredits: "Metallic clanging echoes of Tony Stark forging the Mark I armor in the cave.",
+        streamUrl:
+          "https://www.hotstar.com/in/movies/avengers-endgame/1260013556",
+        poster:
+          "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
+        synopsis:
+          "Five years after the Blip, the surviving Avengers execute a temporal 'Time Heist' through the Quantum Realm to undo Thanos' devastation.",
+        reason:
+          "Conclusion of the Infinity Saga. Tony Stark's sacrifice and the creation of alternate branch timelines.",
+        postCredits:
+          "Metallic clanging echoes of Tony Stark forging the Mark I armor in the cave.",
         charactersIntroduced: ["Morgan Stark", "Old Steve Rogers"],
-        prerequisites: ["mcu-infinity-war"]
+        prerequisites: ["mcu-infinity-war"],
       },
       {
         id: "mcu-wandavision",
@@ -242,12 +375,20 @@ export const FRANCHISES = {
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
         streamUrl: "https://www.hotstar.com/in/shows/wandavision/1260051344",
-        poster: "https://image.tmdb.org/t/p/w500/glKDHgHQ009f9bCtwap6Y07UmWB.jpg",
-        synopsis: "Wanda Maximoff traps the town of Westview in a magical sitcom hex to live out an idealized suburban life with a resurrected Vision.",
-        reason: "Wanda awakens as the Scarlet Witch, studies the Darkhold, leading directly to Multiverse of Madness.",
-        postCredits: "Wanda's astral projection reads the Darkhold and hears her sons screaming across the multiverse.",
-        charactersIntroduced: ["Agatha Harkness", "Billy & Tommy Maximoff", "Monica Rambeau"],
-        prerequisites: ["mcu-endgame"]
+        poster:
+          "https://image.tmdb.org/t/p/w500/glKDHgHQ009f9bCtwap6Y07UmWB.jpg",
+        synopsis:
+          "Wanda Maximoff traps the town of Westview in a magical sitcom hex to live out an idealized suburban life with a resurrected Vision.",
+        reason:
+          "Wanda awakens as the Scarlet Witch, studies the Darkhold, leading directly to Multiverse of Madness.",
+        postCredits:
+          "Wanda's astral projection reads the Darkhold and hears her sons screaming across the multiverse.",
+        charactersIntroduced: [
+          "Agatha Harkness",
+          "Billy & Tommy Maximoff",
+          "Monica Rambeau",
+        ],
+        prerequisites: ["mcu-endgame"],
       },
       {
         id: "mcu-loki-s1",
@@ -260,12 +401,21 @@ export const FRANCHISES = {
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
         streamUrl: "https://www.hotstar.com/in/shows/loki/1260063451",
-        poster: "https://image.tmdb.org/t/p/w500/kEl2t3OhXc39gDaoMuRXTgkmHpL.jpg",
-        synopsis: "The 2012 variant of Loki is captured by the TVA and uncovers the secret ruler behind the Sacred Timeline.",
-        reason: "Introduces the TVA, the Sacred Timeline, Multiversal Incursions, Sylvie, and He Who Remains. The timeline fractures.",
-        postCredits: "Loki arrives back at the TVA only to find a giant statue of Kang.",
-        charactersIntroduced: ["Mobius", "Sylvie", "He Who Remains / Kang", "Miss Minutes"],
-        prerequisites: ["mcu-endgame"]
+        poster:
+          "https://image.tmdb.org/t/p/w500/kEl2t3OhXc39gDaoMuRXTgkmHpL.jpg",
+        synopsis:
+          "The 2012 variant of Loki is captured by the TVA and uncovers the secret ruler behind the Sacred Timeline.",
+        reason:
+          "Introduces the TVA, the Sacred Timeline, Multiversal Incursions, Sylvie, and He Who Remains. The timeline fractures.",
+        postCredits:
+          "Loki arrives back at the TVA only to find a giant statue of Kang.",
+        charactersIntroduced: [
+          "Mobius",
+          "Sylvie",
+          "He Who Remains / Kang",
+          "Miss Minutes",
+        ],
+        prerequisites: ["mcu-endgame"],
       },
       {
         id: "mcu-spiderman-nwh",
@@ -278,12 +428,20 @@ export const FRANCHISES = {
         tier: "Essential",
         streamingOn: "Netflix / Disney+ Hotstar",
         streamUrl: "https://www.netflix.com/title/81445778",
-        poster: "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
-        synopsis: "Peter Parker asks Doctor Strange for a memory spell that goes awry, pulling villains and Spider-Men from other realities.",
-        reason: "Bridges legacy Sony universes (Tobey Maguire, Andrew Garfield), proves multiversal convergence, and resets Peter Parker's life.",
-        postCredits: "Eddie Brock/Venom leaves behind a sentient black symbiote drop on the bar counter.",
-        charactersIntroduced: ["Tobey Maguire Peter Parker", "Andrew Garfield Peter Parker", "Matt Murdock (MCU debut)"],
-        prerequisites: ["mcu-endgame", "mcu-doctor-strange"]
+        poster:
+          "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+        synopsis:
+          "Peter Parker asks Doctor Strange for a memory spell that goes awry, pulling villains and Spider-Men from other realities.",
+        reason:
+          "Bridges legacy Sony universes (Tobey Maguire, Andrew Garfield), proves multiversal convergence, and resets Peter Parker's life.",
+        postCredits:
+          "Eddie Brock/Venom leaves behind a sentient black symbiote drop on the bar counter.",
+        charactersIntroduced: [
+          "Tobey Maguire Peter Parker",
+          "Andrew Garfield Peter Parker",
+          "Matt Murdock (MCU debut)",
+        ],
+        prerequisites: ["mcu-endgame", "mcu-doctor-strange"],
       },
       {
         id: "mcu-multiverse-madness",
@@ -295,13 +453,26 @@ export const FRANCHISES = {
         runtimeMinutes: 126,
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/doctor-strange-in-the-multiverse-of-madness/1260103750",
-        poster: "https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg",
-        synopsis: "Doctor Strange protects America Chavez, a teenager capable of opening portals across the multiverse, from a corrupted Scarlet Witch.",
-        reason: "Establishes Multiversal Incursions (universes colliding and destroying each other) and debuts Clea.",
-        postCredits: "Clea appears from the Dark Dimension: 'You caused an incursion, and we're going to fix it.'",
-        charactersIntroduced: ["America Chavez", "Reed Richards (Illuminati)", "Clea"],
-        prerequisites: ["mcu-doctor-strange", "mcu-wandavision", "mcu-spiderman-nwh"]
+        streamUrl:
+          "https://www.hotstar.com/in/movies/doctor-strange-in-the-multiverse-of-madness/1260103750",
+        poster:
+          "https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg",
+        synopsis:
+          "Doctor Strange protects America Chavez, a teenager capable of opening portals across the multiverse, from a corrupted Scarlet Witch.",
+        reason:
+          "Establishes Multiversal Incursions (universes colliding and destroying each other) and debuts Clea.",
+        postCredits:
+          "Clea appears from the Dark Dimension: 'You caused an incursion, and we're going to fix it.'",
+        charactersIntroduced: [
+          "America Chavez",
+          "Reed Richards (Illuminati)",
+          "Clea",
+        ],
+        prerequisites: [
+          "mcu-doctor-strange",
+          "mcu-wandavision",
+          "mcu-spiderman-nwh",
+        ],
       },
       {
         id: "mcu-loki-s2",
@@ -314,12 +485,16 @@ export const FRANCHISES = {
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
         streamUrl: "https://www.hotstar.com/in/shows/loki/1260063451",
-        poster: "https://image.tmdb.org/t/p/w500/voHUmluhfGuMT2hkssYQYgq317.jpg",
-        synopsis: "Loki masters his time-slipping ability and makes the ultimate personal sacrifice to prevent the collapse of all infinite timelines.",
-        reason: "Loki ascends as the 'God of Stories' holding the multiversal branches together like Yggdrasil. The structural anchor for Doomsday and Secret Wars.",
-        postCredits: "The TVA monitors all multiversal branches and Kang variants.",
+        poster:
+          "https://image.tmdb.org/t/p/w500/voHUmluhfGuMT2hkssYQYgq317.jpg",
+        synopsis:
+          "Loki masters his time-slipping ability and makes the ultimate personal sacrifice to prevent the collapse of all infinite timelines.",
+        reason:
+          "Loki ascends as the 'God of Stories' holding the multiversal branches together like Yggdrasil. The structural anchor for Doomsday and Secret Wars.",
+        postCredits:
+          "The TVA monitors all multiversal branches and Kang variants.",
         charactersIntroduced: ["O.B.", "God Loki / God of Stories"],
-        prerequisites: ["mcu-loki-s1"]
+        prerequisites: ["mcu-loki-s1"],
       },
       {
         id: "mcu-deadpool-wolverine",
@@ -331,13 +506,23 @@ export const FRANCHISES = {
         runtimeMinutes: 128,
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/deadpool-wolverine/1271318465",
-        poster: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
-        synopsis: "Wade Wilson is recruited by the TVA and teams up with a despondent Wolverine to save his home universe from timeline pruning.",
-        reason: "Integrates the 20th Century Fox Marvel universe into MCU canon, explores The Void and Anchor Beings.",
-        postCredits: "Deadpool shows unedited archival TVA footage proving Johnny Storm insulted Cassandra Nova.",
-        charactersIntroduced: ["Wolverine (Hugh Jackman MCU)", "Cassandra Nova", "Blade", "Gambit"],
-        prerequisites: ["mcu-loki-s2"]
+        streamUrl:
+          "https://www.hotstar.com/in/movies/deadpool-wolverine/1271318465",
+        poster:
+          "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
+        synopsis:
+          "Wade Wilson is recruited by the TVA and teams up with a despondent Wolverine to save his home universe from timeline pruning.",
+        reason:
+          "Integrates the 20th Century Fox Marvel universe into MCU canon, explores The Void and Anchor Beings.",
+        postCredits:
+          "Deadpool shows unedited archival TVA footage proving Johnny Storm insulted Cassandra Nova.",
+        charactersIntroduced: [
+          "Wolverine (Hugh Jackman MCU)",
+          "Cassandra Nova",
+          "Blade",
+          "Gambit",
+        ],
+        prerequisites: ["mcu-loki-s2"],
       },
       {
         id: "mcu-thunderbolts",
@@ -350,12 +535,16 @@ export const FRANCHISES = {
         tier: "Essential",
         streamingOn: "Theatrical / Disney+ Hotstar",
         streamUrl: "https://www.hotstar.com",
-        poster: "https://image.tmdb.org/t/p/w500/m1b9Fq8XkZ6Y6Z6Y6Z6Y6Z6Y6Z6.jpg",
-        synopsis: "An irreverent team of MCU antiheroes and former assassins are sent on a covert mission, encountering the godlike Sentry.",
-        reason: "Assembles Yelena Belova, Bucky Barnes, US Agent, and introduces Sentry/Void, setting up Earth's tactical landscape.",
-        postCredits: "Valentina Allegra de Fontaine warns that multiversal destabilization has reached critical point.",
+        poster:
+          "https://image.tmdb.org/t/p/w500/m1b9Fq8XkZ6Y6Z6Y6Z6Y6Z6Y6Z6.jpg",
+        synopsis:
+          "An irreverent team of MCU antiheroes and former assassins are sent on a covert mission, encountering the godlike Sentry.",
+        reason:
+          "Assembles Yelena Belova, Bucky Barnes, US Agent, and introduces Sentry/Void, setting up Earth's tactical landscape.",
+        postCredits:
+          "Valentina Allegra de Fontaine warns that multiversal destabilization has reached critical point.",
         charactersIntroduced: ["Sentry / Void", "Yelena Belova (Leader)"],
-        prerequisites: ["mcu-winter-soldier", "mcu-civil-war"]
+        prerequisites: ["mcu-winter-soldier", "mcu-civil-war"],
       },
       {
         id: "mcu-fantastic-four",
@@ -369,11 +558,20 @@ export const FRANCHISES = {
         streamingOn: "Theatrical / Disney+ Hotstar",
         streamUrl: "https://www.hotstar.com",
         poster: "https://image.tmdb.org/t/p/w500/4t06h4n0n9u5.jpg",
-        synopsis: "Marvel's First Family balances superhero family life with defending their retro-futuristic Earth from the cosmic devourer Galactus.",
-        reason: "Introduces Earth's first family before multiversal collapse forces them into Earth-616, colliding directly with Doctor Doom.",
-        postCredits: "A cosmic rift opens as a hooded figure in emerald armor and iron mask observes the collapse of realities.",
-        charactersIntroduced: ["Reed Richards", "Sue Storm", "Johnny Storm", "Ben Grimm", "Galactus"],
-        prerequisites: ["mcu-multiverse-madness"]
+        synopsis:
+          "Marvel's First Family balances superhero family life with defending their retro-futuristic Earth from the cosmic devourer Galactus.",
+        reason:
+          "Introduces Earth's first family before multiversal collapse forces them into Earth-616, colliding directly with Doctor Doom.",
+        postCredits:
+          "A cosmic rift opens as a hooded figure in emerald armor and iron mask observes the collapse of realities.",
+        charactersIntroduced: [
+          "Reed Richards",
+          "Sue Storm",
+          "Johnny Storm",
+          "Ben Grimm",
+          "Galactus",
+        ],
+        prerequisites: ["mcu-multiverse-madness"],
       },
       {
         id: "mcu-doomsday",
@@ -386,12 +584,25 @@ export const FRANCHISES = {
         tier: "Essential",
         streamingOn: "Theatrical Release (2026)",
         streamUrl: "https://www.hotstar.com",
-        poster: "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
-        synopsis: "The Multiverse faces total annihilation as multiversal incursions accelerate. Robert Downey Jr. debuts as Victor von Doom (Doctor Doom).",
-        reason: "The major culmination of the Multiverse Saga: Earth-616 heroes, Fantastic Four, Thunderbolts, and Multiversal variants unite against Doctor Doom.",
-        postCredits: "Doom breaches the Citadel of Time, seizing divine multiversal power as the remnants of fractured realities coalesce into Battleworld.",
-        charactersIntroduced: ["Victor von Doom (Doctor Doom - RDJ)", "Battleworld"],
-        prerequisites: ["mcu-loki-s2", "mcu-multiverse-madness", "mcu-deadpool-wolverine", "mcu-thunderbolts", "mcu-fantastic-four"]
+        poster:
+          "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+        synopsis:
+          "The Multiverse faces total annihilation as multiversal incursions accelerate. Robert Downey Jr. debuts as Victor von Doom (Doctor Doom).",
+        reason:
+          "The major culmination of the Multiverse Saga: Earth-616 heroes, Fantastic Four, Thunderbolts, and Multiversal variants unite against Doctor Doom.",
+        postCredits:
+          "Doom breaches the Citadel of Time, seizing divine multiversal power as the remnants of fractured realities coalesce into Battleworld.",
+        charactersIntroduced: [
+          "Victor von Doom (Doctor Doom - RDJ)",
+          "Battleworld",
+        ],
+        prerequisites: [
+          "mcu-loki-s2",
+          "mcu-multiverse-madness",
+          "mcu-deadpool-wolverine",
+          "mcu-thunderbolts",
+          "mcu-fantastic-four",
+        ],
       },
       {
         id: "mcu-secret-wars",
@@ -404,14 +615,17 @@ export const FRANCHISES = {
         tier: "Essential",
         streamingOn: "Theatrical Release (2027)",
         streamUrl: "https://www.hotstar.com",
-        poster: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
-        synopsis: "Heroes and villains from across every Marvel universe ever created fight for survival on Battleworld in the definitive cosmic endgame to reset the multiverse.",
-        reason: "The ultimate climax of the Multiverse Saga and all 25+ years of Marvel cinema.",
+        poster:
+          "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
+        synopsis:
+          "Heroes and villains from across every Marvel universe ever created fight for survival on Battleworld in the definitive cosmic endgame to reset the multiverse.",
+        reason:
+          "The ultimate climax of the Multiverse Saga and all 25+ years of Marvel cinema.",
         postCredits: "The birth of a unified, soft-rebooted Marvel Universe.",
         charactersIntroduced: ["God Emperor Doom", "Beyonder"],
-        prerequisites: ["mcu-doomsday"]
-      }
-    ]
+        prerequisites: ["mcu-doomsday"],
+      },
+    ],
   },
 
   starwars: {
@@ -421,10 +635,25 @@ export const FRANCHISES = {
     icon: "Sparkles",
     themeColor: "blue",
     presetTargets: [
-      { id: "sw-ahsoka", title: "Ahsoka (Season 1)", year: 2023, type: "Series" },
-      { id: "sw-mando-s3", title: "The Mandalorian (Season 3)", year: 2023, type: "Series" },
-      { id: "sw-ep6", title: "Episode VI: Return of the Jedi", year: 1983, type: "Movie" },
-      { id: "sw-andor", title: "Andor (Complete)", year: 2022, type: "Series" }
+      {
+        id: "sw-ahsoka",
+        title: "Ahsoka (Season 1)",
+        year: 2023,
+        type: "Series",
+      },
+      {
+        id: "sw-mando-s3",
+        title: "The Mandalorian (Season 3)",
+        year: 2023,
+        type: "Series",
+      },
+      {
+        id: "sw-ep6",
+        title: "Episode VI: Return of the Jedi",
+        year: 1983,
+        type: "Movie",
+      },
+      { id: "sw-andor", title: "Andor (Complete)", year: 2022, type: "Series" },
     ],
     nodes: [
       {
@@ -435,11 +664,15 @@ export const FRANCHISES = {
         chronoYear: "32 BBY",
         tier: "Supplementary",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/star-wars-the-phantom-menace/1660000042",
-        poster: "https://image.tmdb.org/t/p/w500/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg",
-        synopsis: "Two Jedi knights discover a young boy named Anakin Skywalker who is exceptionally strong with the Force on the desert world of Tatooine.",
-        reason: "Anakin's discovery, introduction of Obi-Wan Kenobi, Darth Maul, and the emergence of the Sith.",
-        prerequisites: []
+        streamUrl:
+          "https://www.hotstar.com/in/movies/star-wars-the-phantom-menace/1660000042",
+        poster:
+          "https://image.tmdb.org/t/p/w500/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg",
+        synopsis:
+          "Two Jedi knights discover a young boy named Anakin Skywalker who is exceptionally strong with the Force on the desert world of Tatooine.",
+        reason:
+          "Anakin's discovery, introduction of Obi-Wan Kenobi, Darth Maul, and the emergence of the Sith.",
+        prerequisites: [],
       },
       {
         id: "sw-ep2",
@@ -449,11 +682,15 @@ export const FRANCHISES = {
         chronoYear: "22 BBY",
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/star-wars-attack-of-the-clones/1660000043",
-        poster: "https://image.tmdb.org/t/p/w500/o76Zhh8gpjN50xjhK1Pwhc04yC7.jpg",
-        synopsis: "Anakin falls in love with Padmé Amidala while Obi-Wan uncovers a secret clone army engineered for the Galactic Republic.",
-        reason: "Outbreak of the Clone Wars, Anakin's path toward the dark side, and Palpatine's rise.",
-        prerequisites: ["sw-ep1"]
+        streamUrl:
+          "https://www.hotstar.com/in/movies/star-wars-attack-of-the-clones/1660000043",
+        poster:
+          "https://image.tmdb.org/t/p/w500/o76Zhh8gpjN50xjhK1Pwhc04yC7.jpg",
+        synopsis:
+          "Anakin falls in love with Padmé Amidala while Obi-Wan uncovers a secret clone army engineered for the Galactic Republic.",
+        reason:
+          "Outbreak of the Clone Wars, Anakin's path toward the dark side, and Palpatine's rise.",
+        prerequisites: ["sw-ep1"],
       },
       {
         id: "sw-clone-wars-siege",
@@ -463,11 +700,15 @@ export const FRANCHISES = {
         chronoYear: "19 BBY",
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/shows/star-wars-the-clone-wars/1260014234",
-        poster: "https://image.tmdb.org/t/p/w500/e1nWfnnCVqxS2LeTO3dwGyAsG2V.jpg",
-        synopsis: "Ahsoka Tano leads Republic forces to liberate Mandalore from Darth Maul right as Order 66 is executed.",
-        reason: "Ahsoka's defining crucible, her relationship with Captain Rex, and her survival of Order 66.",
-        prerequisites: ["sw-ep2"]
+        streamUrl:
+          "https://www.hotstar.com/in/shows/star-wars-the-clone-wars/1260014234",
+        poster:
+          "https://image.tmdb.org/t/p/w500/e1nWfnnCVqxS2LeTO3dwGyAsG2V.jpg",
+        synopsis:
+          "Ahsoka Tano leads Republic forces to liberate Mandalore from Darth Maul right as Order 66 is executed.",
+        reason:
+          "Ahsoka's defining crucible, her relationship with Captain Rex, and her survival of Order 66.",
+        prerequisites: ["sw-ep2"],
       },
       {
         id: "sw-ep3",
@@ -477,11 +718,15 @@ export const FRANCHISES = {
         chronoYear: "19 BBY",
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/star-wars-revenge-of-the-sith/1660000046",
-        poster: "https://image.tmdb.org/t/p/w500/xfSAoB4CW7xAE0q9aYXcfflNuJR.jpg",
-        synopsis: "Seduced by Chancellor Palpatine's promises of power to save Padmé, Anakin Skywalker turns to the dark side as Darth Vader.",
-        reason: "Fall of the Jedi Order, rise of the Galactic Empire, birth of Luke and Leia.",
-        prerequisites: ["sw-ep2", "sw-clone-wars-siege"]
+        streamUrl:
+          "https://www.hotstar.com/in/movies/star-wars-revenge-of-the-sith/1660000046",
+        poster:
+          "https://image.tmdb.org/t/p/w500/xfSAoB4CW7xAE0q9aYXcfflNuJR.jpg",
+        synopsis:
+          "Seduced by Chancellor Palpatine's promises of power to save Padmé, Anakin Skywalker turns to the dark side as Darth Vader.",
+        reason:
+          "Fall of the Jedi Order, rise of the Galactic Empire, birth of Luke and Leia.",
+        prerequisites: ["sw-ep2", "sw-clone-wars-siege"],
       },
       {
         id: "sw-rebels-twilight",
@@ -491,11 +736,14 @@ export const FRANCHISES = {
         chronoYear: "1 BBY",
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/shows/star-wars-rebels/1260014235",
+        streamUrl:
+          "https://www.hotstar.com/in/shows/star-wars-rebels/1260014235",
         poster: "https://image.tmdb.org/t/p/w500/spsT1K8bY9sDqKz1qB0UjG5k9.jpg",
-        synopsis: "Ezra Bridger discovers the mystical World Between Worlds to save Ahsoka and later sacrifices himself to exile Grand Admiral Thrawn.",
-        reason: "Crucial prerequisite for Ahsoka: introduces the Ghost crew (Hera, Sabine), the World Between Worlds, and Thrawn's disappearance.",
-        prerequisites: ["sw-clone-wars-siege"]
+        synopsis:
+          "Ezra Bridger discovers the mystical World Between Worlds to save Ahsoka and later sacrifices himself to exile Grand Admiral Thrawn.",
+        reason:
+          "Crucial prerequisite for Ahsoka: introduces the Ghost crew (Hera, Sabine), the World Between Worlds, and Thrawn's disappearance.",
+        prerequisites: ["sw-clone-wars-siege"],
       },
       {
         id: "sw-andor",
@@ -506,10 +754,13 @@ export const FRANCHISES = {
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
         streamUrl: "https://www.hotstar.com/in/shows/andor/1260103751",
-        poster: "https://image.tmdb.org/t/p/w500/59SVNw1ox5QIOXHQaoVV89A6Ywa.jpg",
-        synopsis: "Cassian Andor embarks on a path to discover how one man can ignite the spark of a galactic revolution against Imperial tyranny.",
-        reason: "Groundbreaking espionage narrative setting up Rogue One and the Rebellion's formation.",
-        prerequisites: []
+        poster:
+          "https://image.tmdb.org/t/p/w500/59SVNw1ox5QIOXHQaoVV89A6Ywa.jpg",
+        synopsis:
+          "Cassian Andor embarks on a path to discover how one man can ignite the spark of a galactic revolution against Imperial tyranny.",
+        reason:
+          "Groundbreaking espionage narrative setting up Rogue One and the Rebellion's formation.",
+        prerequisites: [],
       },
       {
         id: "sw-rogue-one",
@@ -519,11 +770,15 @@ export const FRANCHISES = {
         chronoYear: "0 BBY",
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/rogue-one-a-star-wars-story/1660000047",
-        poster: "https://image.tmdb.org/t/p/w500/i0YWsqql097GH9fl27TYkybhSYu.jpg",
-        synopsis: "A rogue band of resistance fighters undertake a daring heist to steal the plans for the Empire's ultimate weapon: the Death Star.",
-        reason: "Direct prequel to A New Hope; explains how the Death Star vulnerability was planted.",
-        prerequisites: ["sw-andor"]
+        streamUrl:
+          "https://www.hotstar.com/in/movies/rogue-one-a-star-wars-story/1660000047",
+        poster:
+          "https://image.tmdb.org/t/p/w500/i0YWsqql097GH9fl27TYkybhSYu.jpg",
+        synopsis:
+          "A rogue band of resistance fighters undertake a daring heist to steal the plans for the Empire's ultimate weapon: the Death Star.",
+        reason:
+          "Direct prequel to A New Hope; explains how the Death Star vulnerability was planted.",
+        prerequisites: ["sw-andor"],
       },
       {
         id: "sw-ep4",
@@ -533,11 +788,14 @@ export const FRANCHISES = {
         chronoYear: "0 BBY",
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/star-wars-a-new-hope/1660000048",
-        poster: "https://image.tmdb.org/t/p/w500/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg",
-        synopsis: "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee, and two droids to rescue Princess Leia.",
+        streamUrl:
+          "https://www.hotstar.com/in/movies/star-wars-a-new-hope/1660000048",
+        poster:
+          "https://image.tmdb.org/t/p/w500/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg",
+        synopsis:
+          "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee, and two droids to rescue Princess Leia.",
         reason: "The foundational core of the Star Wars mythos.",
-        prerequisites: ["sw-rogue-one"]
+        prerequisites: ["sw-rogue-one"],
       },
       {
         id: "sw-ep5",
@@ -547,11 +805,15 @@ export const FRANCHISES = {
         chronoYear: "3 ABY",
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/star-wars-the-empire-strikes-back/1660000049",
-        poster: "https://image.tmdb.org/t/p/w500/7BuH8itoSrLExs2BmSsM92Q12iP.jpg",
-        synopsis: "After the Rebels are overpowered, Luke begins Jedi training with Yoda, while his friends are pursued by Darth Vader.",
-        reason: "Master Yoda's teachings on the Force, Cloud City duel, and the legendary revelation: 'I am your father.'",
-        prerequisites: ["sw-ep4"]
+        streamUrl:
+          "https://www.hotstar.com/in/movies/star-wars-the-empire-strikes-back/1660000049",
+        poster:
+          "https://image.tmdb.org/t/p/w500/7BuH8itoSrLExs2BmSsM92Q12iP.jpg",
+        synopsis:
+          "After the Rebels are overpowered, Luke begins Jedi training with Yoda, while his friends are pursued by Darth Vader.",
+        reason:
+          "Master Yoda's teachings on the Force, Cloud City duel, and the legendary revelation: 'I am your father.'",
+        prerequisites: ["sw-ep4"],
       },
       {
         id: "sw-ep6",
@@ -561,11 +823,13 @@ export const FRANCHISES = {
         chronoYear: "4 ABY",
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/movies/star-wars-return-of-the-jedi/1660000050",
+        streamUrl:
+          "https://www.hotstar.com/in/movies/star-wars-return-of-the-jedi/1660000050",
         poster: "https://image.tmdb.org/t/p/w500/mDCBQNhR6R0PVF2V8a5kC2V.jpg",
-        synopsis: "Luke leads a mission to rescue Han Solo before facing Darth Vader and the Emperor above Endor.",
+        synopsis:
+          "Luke leads a mission to rescue Han Solo before facing Darth Vader and the Emperor above Endor.",
         reason: "Redemption of Anakin Skywalker and liberation of the galaxy.",
-        prerequisites: ["sw-ep5"]
+        prerequisites: ["sw-ep5"],
       },
       {
         id: "sw-mando-s1-s2",
@@ -575,11 +839,15 @@ export const FRANCHISES = {
         chronoYear: "9 ABY",
         tier: "Essential",
         streamingOn: "Disney+ Hotstar",
-        streamUrl: "https://www.hotstar.com/in/shows/the-mandalorian/1260021071",
-        poster: "https://image.tmdb.org/t/p/w500/eU1i6eHXlzMOlEq0ku1R07Y87io.jpg",
-        synopsis: "A lone Mandalorian bounty hunter travels the outer reaches of the galaxy, defending a Force-sensitive child named Grogu.",
-        reason: "Launches the Mandoverse, re-introduces Ahsoka Tano in live action, and features Luke Skywalker.",
-        prerequisites: ["sw-ep6"]
+        streamUrl:
+          "https://www.hotstar.com/in/shows/the-mandalorian/1260021071",
+        poster:
+          "https://image.tmdb.org/t/p/w500/eU1i6eHXlzMOlEq0ku1R07Y87io.jpg",
+        synopsis:
+          "A lone Mandalorian bounty hunter travels the outer reaches of the galaxy, defending a Force-sensitive child named Grogu.",
+        reason:
+          "Launches the Mandoverse, re-introduces Ahsoka Tano in live action, and features Luke Skywalker.",
+        prerequisites: ["sw-ep6"],
       },
       {
         id: "sw-ahsoka",
@@ -591,23 +859,41 @@ export const FRANCHISES = {
         streamingOn: "Disney+ Hotstar",
         streamUrl: "https://www.hotstar.com/in/shows/ahsoka/1260148786",
         poster: "https://image.tmdb.org/t/p/w500/laCJxobHoPVaLQTKxc14Y2zgp.jpg",
-        synopsis: "Former Jedi Knight Ahsoka Tano investigates an emerging threat to the vulnerable New Republic: the return of Grand Admiral Thrawn from an extra-galactic exile.",
-        reason: "The nexus of Clone Wars, Rebels, and the Mandoverse, introducing the Peridea galaxy and Nightsisters.",
-        prerequisites: ["sw-rebels-twilight", "sw-mando-s1-s2"]
-      }
-    ]
+        synopsis:
+          "Former Jedi Knight Ahsoka Tano investigates an emerging threat to the vulnerable New Republic: the return of Grand Admiral Thrawn from an extra-galactic exile.",
+        reason:
+          "The nexus of Clone Wars, Rebels, and the Mandoverse, introducing the Peridea galaxy and Nightsisters.",
+        prerequisites: ["sw-rebels-twilight", "sw-mando-s1-s2"],
+      },
+    ],
   },
 
   anime_naruto: {
     id: "anime_naruto",
     name: "Naruto & Naruto Shippuden",
-    tagline: "From Genin Ninja to the Savior of the Shinobi World (Zero Filler Path)",
+    tagline:
+      "From Genin Ninja to the Savior of the Shinobi World (Zero Filler Path)",
     icon: "Flame",
     themeColor: "amber",
     presetTargets: [
-      { id: "naruto-war-finale", title: "Fourth Shinobi World War Climax", year: 2017, type: "Series Arc" },
-      { id: "naruto-pain-arc", title: "Pain's Assault on the Hidden Leaf", year: 2010, type: "Series Arc" },
-      { id: "naruto-the-last", title: "The Last: Naruto the Movie", year: 2014, type: "Movie" }
+      {
+        id: "naruto-war-finale",
+        title: "Fourth Shinobi World War Climax",
+        year: 2017,
+        type: "Series Arc",
+      },
+      {
+        id: "naruto-pain-arc",
+        title: "Pain's Assault on the Hidden Leaf",
+        year: 2010,
+        type: "Series Arc",
+      },
+      {
+        id: "naruto-the-last",
+        title: "The Last: Naruto the Movie",
+        year: 2014,
+        type: "Movie",
+      },
     ],
     nodes: [
       {
@@ -619,9 +905,11 @@ export const FRANCHISES = {
         streamingOn: "Crunchyroll / Netflix",
         streamUrl: "https://www.crunchyroll.com/series/GYXQN975R/naruto",
         poster: "https://image.tmdb.org/t/p/w500/x26G2tD8nZ9xY8.jpg",
-        synopsis: "Team 7 (Naruto, Sasuke, Sakura, Kakashi) guards bridge builder Tazuna, battling Zabuza and Haku.",
-        reason: "Establishes Naruto's ninja way, Kakashi's Sharingan, and Sasuke's awakening.",
-        prerequisites: []
+        synopsis:
+          "Team 7 (Naruto, Sasuke, Sakura, Kakashi) guards bridge builder Tazuna, battling Zabuza and Haku.",
+        reason:
+          "Establishes Naruto's ninja way, Kakashi's Sharingan, and Sasuke's awakening.",
+        prerequisites: [],
       },
       {
         id: "naruto-chunin-exams",
@@ -632,9 +920,11 @@ export const FRANCHISES = {
         streamingOn: "Crunchyroll / Netflix",
         streamUrl: "https://www.crunchyroll.com/series/GYXQN975R/naruto",
         poster: "https://image.tmdb.org/t/p/w500/yV9nKq3f3k0L.jpg",
-        synopsis: "Genin from across the nations clash in the Forest of Death as Orochimaru infiltrates the exam to kidnap Sasuke.",
-        reason: "Introduces Rock Lee, Gaara, Jiraiya, Rasengan training, Orochimaru, and Nine-Tails power release.",
-        prerequisites: ["naruto-land-of-waves"]
+        synopsis:
+          "Genin from across the nations clash in the Forest of Death as Orochimaru infiltrates the exam to kidnap Sasuke.",
+        reason:
+          "Introduces Rock Lee, Gaara, Jiraiya, Rasengan training, Orochimaru, and Nine-Tails power release.",
+        prerequisites: ["naruto-land-of-waves"],
       },
       {
         id: "naruto-sasuke-retrieval",
@@ -645,9 +935,11 @@ export const FRANCHISES = {
         streamingOn: "Crunchyroll / Netflix",
         streamUrl: "https://www.crunchyroll.com/series/GYXQN975R/naruto",
         poster: "https://image.tmdb.org/t/p/w500/z0T0K1p2q5X.jpg",
-        synopsis: "Sasuke defects to Orochimaru for power. Shikamaru leads the Leaf Genin to bring him back, leading to the legendary Valley of the End clash.",
-        reason: "The defining emotional feud of Part 1. Note: Episodes 136-219 are non-canon filler and 100% skippable.",
-        prerequisites: ["naruto-chunin-exams"]
+        synopsis:
+          "Sasuke defects to Orochimaru for power. Shikamaru leads the Leaf Genin to bring him back, leading to the legendary Valley of the End clash.",
+        reason:
+          "The defining emotional feud of Part 1. Note: Episodes 136-219 are non-canon filler and 100% skippable.",
+        prerequisites: ["naruto-chunin-exams"],
       },
       {
         id: "naruto-shippuden-kazekage",
@@ -656,11 +948,14 @@ export const FRANCHISES = {
         year: 2007,
         tier: "Essential",
         streamingOn: "Crunchyroll",
-        streamUrl: "https://www.crunchyroll.com/series/GYXQN975R/naruto-shippuden",
+        streamUrl:
+          "https://www.crunchyroll.com/series/GYXQN975R/naruto-shippuden",
         poster: "https://image.tmdb.org/t/p/w500/kV27j3Nz48ChL.jpg",
-        synopsis: "Following a 2.5-year time skip, the Akatsuki begin hunting the Tailed Beasts, abducting Gaara.",
-        reason: "Older Team 7, Sakura vs Sasori, Asuma's sacrifice, and Naruto creates the Wind Style: Rasenshuriken.",
-        prerequisites: ["naruto-sasuke-retrieval"]
+        synopsis:
+          "Following a 2.5-year time skip, the Akatsuki begin hunting the Tailed Beasts, abducting Gaara.",
+        reason:
+          "Older Team 7, Sakura vs Sasori, Asuma's sacrifice, and Naruto creates the Wind Style: Rasenshuriken.",
+        prerequisites: ["naruto-sasuke-retrieval"],
       },
       {
         id: "naruto-itachi-pursuit",
@@ -669,11 +964,14 @@ export const FRANCHISES = {
         year: 2008,
         tier: "Essential",
         streamingOn: "Crunchyroll",
-        streamUrl: "https://www.crunchyroll.com/series/GYXQN975R/naruto-shippuden",
+        streamUrl:
+          "https://www.crunchyroll.com/series/GYXQN975R/naruto-shippuden",
         poster: "https://image.tmdb.org/t/p/w500/7aQk3k0L9q.jpg",
-        synopsis: "Sasuke tracks down his brother Itachi for revenge, while Jiraiya infiltrates the Rain Village to confront Pain.",
-        reason: "Jiraiya's tragic last stand and the heartbreaking truth behind the Uchiha Clan Massacre.",
-        prerequisites: ["naruto-shippuden-kazekage"]
+        synopsis:
+          "Sasuke tracks down his brother Itachi for revenge, while Jiraiya infiltrates the Rain Village to confront Pain.",
+        reason:
+          "Jiraiya's tragic last stand and the heartbreaking truth behind the Uchiha Clan Massacre.",
+        prerequisites: ["naruto-shippuden-kazekage"],
       },
       {
         id: "naruto-pain-arc",
@@ -682,11 +980,14 @@ export const FRANCHISES = {
         year: 2010,
         tier: "Essential",
         streamingOn: "Crunchyroll",
-        streamUrl: "https://www.crunchyroll.com/series/GYXQN975R/naruto-shippuden",
+        streamUrl:
+          "https://www.crunchyroll.com/series/GYXQN975R/naruto-shippuden",
         poster: "https://image.tmdb.org/t/p/w500/4kL2t3OhXc39gDao.jpg",
-        synopsis: "Pain launches an all-out assault that pulverizes the Hidden Leaf Village. Naruto returns as a Sage to defend his home.",
-        reason: "Naruto's Sage Mode and earning the village's adoration as their hero.",
-        prerequisites: ["naruto-itachi-pursuit"]
+        synopsis:
+          "Pain launches an all-out assault that pulverizes the Hidden Leaf Village. Naruto returns as a Sage to defend his home.",
+        reason:
+          "Naruto's Sage Mode and earning the village's adoration as their hero.",
+        prerequisites: ["naruto-itachi-pursuit"],
       },
       {
         id: "naruto-war-finale",
@@ -695,13 +996,17 @@ export const FRANCHISES = {
         year: 2016,
         tier: "Essential",
         streamingOn: "Crunchyroll",
-        streamUrl: "https://www.crunchyroll.com/series/GYXQN975R/naruto-shippuden",
-        poster: "https://image.tmdb.org/t/p/w500/kEl2t3OhXc39gDaoMuRXTgkmHpL.jpg",
-        synopsis: "Reanimated legendary shinobi clash, Madara Uchiha descends, Kaguya awakens, and Naruto & Sasuke fight their final duel.",
-        reason: "The grand climax of the 700-chapter saga with filler episodes stripped.",
-        prerequisites: ["naruto-pain-arc"]
-      }
-    ]
+        streamUrl:
+          "https://www.crunchyroll.com/series/GYXQN975R/naruto-shippuden",
+        poster:
+          "https://image.tmdb.org/t/p/w500/kEl2t3OhXc39gDaoMuRXTgkmHpL.jpg",
+        synopsis:
+          "Reanimated legendary shinobi clash, Madara Uchiha descends, Kaguya awakens, and Naruto & Sasuke fight their final duel.",
+        reason:
+          "The grand climax of the 700-chapter saga with filler episodes stripped.",
+        prerequisites: ["naruto-pain-arc"],
+      },
+    ],
   },
 
   dragonball: {
@@ -711,8 +1016,18 @@ export const FRANCHISES = {
     icon: "Zap",
     themeColor: "orange",
     presetTargets: [
-      { id: "db-super-hero", title: "Dragon Ball Super: Super Hero", year: 2022, type: "Movie" },
-      { id: "db-super-broly", title: "Dragon Ball Super: Broly", year: 2018, type: "Movie" }
+      {
+        id: "db-super-hero",
+        title: "Dragon Ball Super: Super Hero",
+        year: 2022,
+        type: "Movie",
+      },
+      {
+        id: "db-super-broly",
+        title: "Dragon Ball Super: Broly",
+        year: 2018,
+        type: "Movie",
+      },
     ],
     nodes: [
       {
@@ -724,9 +1039,11 @@ export const FRANCHISES = {
         streamingOn: "Crunchyroll",
         streamUrl: "https://www.crunchyroll.com/series/G69P4429Y/dragon-ball-z",
         poster: "https://image.tmdb.org/t/p/w500/dZyL3oYm0a1Z.jpg",
-        synopsis: "Raditz arrives revealing Goku's alien heritage, followed by the invasion of Prince Vegeta and Nappa.",
-        reason: "Origin of Saiyan lore, Goku's Kaio-ken & Spirit Bomb, and Goku & Vegeta's rivalry.",
-        prerequisites: []
+        synopsis:
+          "Raditz arrives revealing Goku's alien heritage, followed by the invasion of Prince Vegeta and Nappa.",
+        reason:
+          "Origin of Saiyan lore, Goku's Kaio-ken & Spirit Bomb, and Goku & Vegeta's rivalry.",
+        prerequisites: [],
       },
       {
         id: "dbz-frieza",
@@ -737,9 +1054,11 @@ export const FRANCHISES = {
         streamingOn: "Crunchyroll",
         streamUrl: "https://www.crunchyroll.com/series/G69P4429Y/dragon-ball-z",
         poster: "https://image.tmdb.org/t/p/w500/x26G2tD8nZ9xY8.jpg",
-        synopsis: "The Z-Fighters travel to planet Namek to find the original Dragon Balls, confronting galactic tyrant Frieza.",
-        reason: "Goku transforms into the legendary Super Saiyan for the first time.",
-        prerequisites: ["dbz-saiyan"]
+        synopsis:
+          "The Z-Fighters travel to planet Namek to find the original Dragon Balls, confronting galactic tyrant Frieza.",
+        reason:
+          "Goku transforms into the legendary Super Saiyan for the first time.",
+        prerequisites: ["dbz-saiyan"],
       },
       {
         id: "dbz-cell",
@@ -750,9 +1069,11 @@ export const FRANCHISES = {
         streamingOn: "Crunchyroll",
         streamUrl: "https://www.crunchyroll.com/series/G69P4429Y/dragon-ball-z",
         poster: "https://image.tmdb.org/t/p/w500/7aQk3k0L9q.jpg",
-        synopsis: "Future Trunks warns of lethal Androids. The bio-organic monstrosity Cell hosts a tournament with Earth's fate on the line.",
-        reason: "Gohan ascends to Super Saiyan 2 and defeats Cell with the Father-Son Kamehameha.",
-        prerequisites: ["dbz-frieza"]
+        synopsis:
+          "Future Trunks warns of lethal Androids. The bio-organic monstrosity Cell hosts a tournament with Earth's fate on the line.",
+        reason:
+          "Gohan ascends to Super Saiyan 2 and defeats Cell with the Father-Son Kamehameha.",
+        prerequisites: ["dbz-frieza"],
       },
       {
         id: "db-battle-gods",
@@ -762,10 +1083,13 @@ export const FRANCHISES = {
         tier: "Essential",
         streamingOn: "Crunchyroll",
         streamUrl: "https://www.crunchyroll.com/series/G69P4429Y/dragon-ball-z",
-        poster: "https://image.tmdb.org/t/p/w500/kEl2t3OhXc39gDaoMuRXTgkmHpL.jpg",
-        synopsis: "Beerus, the God of Destruction, awakens seeking the prophesied 'Super Saiyan God'.",
-        reason: "Introduces God ki, Lord Beerus, Whis, and launches the entire modern Dragon Ball Super era.",
-        prerequisites: ["dbz-cell"]
+        poster:
+          "https://image.tmdb.org/t/p/w500/kEl2t3OhXc39gDaoMuRXTgkmHpL.jpg",
+        synopsis:
+          "Beerus, the God of Destruction, awakens seeking the prophesied 'Super Saiyan God'.",
+        reason:
+          "Introduces God ki, Lord Beerus, Whis, and launches the entire modern Dragon Ball Super era.",
+        prerequisites: ["dbz-cell"],
       },
       {
         id: "db-super-broly",
@@ -774,11 +1098,14 @@ export const FRANCHISES = {
         year: 2018,
         tier: "Essential",
         streamingOn: "Crunchyroll",
-        streamUrl: "https://www.crunchyroll.com/series/GR19V7816/dragon-ball-super",
-        poster: "https://image.tmdb.org/t/p/w500/f03YksEfxMAhn9aq7b5vGLx05xT.jpg",
-        synopsis: "Frieza recruits Broly, an exiled mutant Saiyan with boundless primal fury, to wage war against Goku and Vegeta on Earth.",
+        streamUrl:
+          "https://www.crunchyroll.com/series/GR19V7816/dragon-ball-super",
+        poster:
+          "https://image.tmdb.org/t/p/w500/f03YksEfxMAhn9aq7b5vGLx05xT.jpg",
+        synopsis:
+          "Frieza recruits Broly, an exiled mutant Saiyan with boundless primal fury, to wage war against Goku and Vegeta on Earth.",
         reason: "Canonizes Broly into the official storyline with Gogeta Blue.",
-        prerequisites: ["db-battle-gods"]
+        prerequisites: ["db-battle-gods"],
       },
       {
         id: "db-super-hero",
@@ -787,12 +1114,16 @@ export const FRANCHISES = {
         year: 2022,
         tier: "Essential",
         streamingOn: "Crunchyroll",
-        streamUrl: "https://www.crunchyroll.com/series/GR19V7816/dragon-ball-super",
-        poster: "https://image.tmdb.org/t/p/w500/wKiOkZTN9lUUUNZLmtnwubZYONg.jpg",
-        synopsis: "The Red Ribbon Army creates androids Gamma 1 & Gamma 2. Piccolo and Gohan step up to defend Earth.",
-        reason: "Piccolo unlocks Orange Piccolo and Gohan ascends to Gohan Beast to crush Cell Max.",
-        prerequisites: ["db-super-broly"]
-      }
-    ]
-  }
+        streamUrl:
+          "https://www.crunchyroll.com/series/GR19V7816/dragon-ball-super",
+        poster:
+          "https://image.tmdb.org/t/p/w500/wKiOkZTN9lUUUNZLmtnwubZYONg.jpg",
+        synopsis:
+          "The Red Ribbon Army creates androids Gamma 1 & Gamma 2. Piccolo and Gohan step up to defend Earth.",
+        reason:
+          "Piccolo unlocks Orange Piccolo and Gohan ascends to Gohan Beast to crush Cell Max.",
+        prerequisites: ["db-super-broly"],
+      },
+    ],
+  },
 };

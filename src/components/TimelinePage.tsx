@@ -4,7 +4,6 @@ import { ArrowLeft, Search, Sparkles, Filter, Tv2, ExternalLink } from 'lucide-r
 import { BranchTimeline } from './BranchTimeline';
 import { WatchNode } from './NodeDetailModal';
 import { UniverseOption } from '../types';
-import { playHudClick } from '../utils/soundEffects';
 
 interface TimelinePageProps {
   watchOrderData: {
@@ -41,7 +40,6 @@ export const TimelinePage: React.FC<TimelinePageProps> = ({
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      playHudClick();
       onSearchSubmit(searchQuery.trim());
       setSearchQuery("");
     }
@@ -65,7 +63,6 @@ export const TimelinePage: React.FC<TimelinePageProps> = ({
           <div className="flex items-center gap-4">
             <button
               onClick={() => {
-                playHudClick();
                 onBackToHero();
               }}
               className="flex items-center gap-2 px-3 py-1.5 bg-white/[0.04] hover:bg-red-950/30 border border-white/10 hover:border-red-500/50 rounded-xl text-xs font-mono text-slate-300 hover:text-white transition-all group cursor-pointer"

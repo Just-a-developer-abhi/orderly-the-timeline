@@ -7,7 +7,6 @@ import {
   ArrowRight,
   Sparkles
 } from 'lucide-react';
-import { playHudClick, playTargetAcquiredSound } from '../utils/soundEffects';
 
 interface CinematicVideoIntroProps {
   onComplete: () => void;
@@ -21,6 +20,9 @@ export const CinematicVideoIntro: React.FC<CinematicVideoIntroProps> = ({ onComp
     const video = videoRef.current;
     if (!video) return;
 
+    video.volume = 0.85;
+    video.muted = false;
+
     video.play().catch(() => {
       video.muted = true;
       setIsMuted(true);
@@ -29,12 +31,10 @@ export const CinematicVideoIntro: React.FC<CinematicVideoIntroProps> = ({ onComp
   }, []);
 
   const handleVideoEnded = () => {
-    playTargetAcquiredSound();
     onComplete();
   };
 
   const toggleMute = () => {
-    playHudClick();
     const video = videoRef.current;
     if (!video) return;
     video.muted = !isMuted;
@@ -42,7 +42,6 @@ export const CinematicVideoIntro: React.FC<CinematicVideoIntroProps> = ({ onComp
   };
 
   const handleEnter = () => {
-    playHudClick();
     onComplete();
   };
 

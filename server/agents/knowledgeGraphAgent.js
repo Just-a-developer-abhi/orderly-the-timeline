@@ -8,30 +8,45 @@ import { FRANCHISES } from "../data/franchises.js";
  * - Character Arc Tracking (Every canonical appearance of a character)
  * - Phase Bounds (All releases in a specific Phase or Saga)
  */
-export async function runKnowledgeGraphAgent({ franchiseId, targetId, parsedQuery }) {
+export async function runKnowledgeGraphAgent({
+  franchiseId,
+  targetId,
+  parsedQuery,
+}) {
   const startTime = Date.now();
   const reasoning = [];
 
   const franchise = FRANCHISES[franchiseId] || FRANCHISES.mcu;
-  const nodeMap = new Map(franchise.nodes.map(n => [n.id, n]));
+  const nodeMap = new Map(franchise.nodes.map((n) => [n.id, n]));
 
-  reasoning.push(`[Graph Init] Initializing Knowledge Graph for "${franchise.name}" with ${franchise.nodes.length} canonical nodes.`);
+  reasoning.push(
+    `[Graph Init] Initializing Knowledge Graph for "${franchise.name}" with ${franchise.nodes.length} canonical nodes.`,
+  );
 
   const direction = parsedQuery?.direction || "backward";
-  const anchorNode = parsedQuery?.anchorNode || (parsedQuery?.anchorId ? nodeMap.get(parsedQuery.anchorId) : null);
-  const targetNode = parsedQuery?.targetNode || (targetId ? nodeMap.get(targetId) : null);
+  const anchorNode =
+    parsedQuery?.anchorNode ||
+    (parsedQuery?.anchorId ? nodeMap.get(parsedQuery.anchorId) : null);
+  const targetNode =
+    parsedQuery?.targetNode || (targetId ? nodeMap.get(targetId) : null);
 
   let selectedNodes = [];
 
   // CASE 1: FORWARD PROGRESSION ("What should I watch AFTER X?")
   if (direction === "after" && anchorNode) {
-    reasoning.push(`[Forward Progression Engine] Locating anchor node "${anchorNode.title}" (${anchorNode.year}).`);
-    const anchorIndex = franchise.nodes.findIndex(n => n.id === anchorNode.id);
+    reasoning.push(
+      `[Forward Progression Engine] Locating anchor node "${anchorNode.title}" (${anchorNode.year}).`,
+    );
+    const anchorIndex = franchise.nodes.findIndex(
+      (n) => n.id === anchorNode.id,
+    );
 
     if (anchorIndex !== -1) {
       // Gather all media strictly released AFTER the anchor node
       const afterNodes = franchise.nodes.slice(anchorIndex + 1);
-      reasoning.push(`[Forward DAG Slice] Discovered ${afterNodes.length} releases following "${anchorNode.title}".`);
+      reasoning.push(
+        `[Forward DAG Slice] Discovered ${afterNodes.length} releases following "${anchorNode.title}".`,
+      );
       selectedNodes = afterNodes;
     } else {
       selectedNodes = franchise.nodes;
@@ -52,20 +67,28 @@ export async function runKnowledgeGraphAgent({ franchiseId, targetId, parsedQuer
         anchorTitle: anchorNode.title,
         nodesFound: selectedNodes.length,
         reasoning,
-        confidence: 0.99
-      }
+        confidence: 0.99,
+      },
     };
   }
 
   // CASE 2: CHARACTER ARC ("All Spider-Man / Loki / Ahsoka / Goku movies")
   if (parsedQuery?.characterName) {
     const charName = parsedQuery.characterName.toLowerCase();
-    reasoning.push(`[Character Arc Scanner] Filtering nodes featuring "${parsedQuery.characterName}".`);
-    
-    selectedNodes = franchise.nodes.filter(node => {
+    reasoning.push(
+      `[Character Arc Scanner] Filtering nodes featuring "${parsedQuery.characterName}".`,
+    );
+
+    selectedNodes = franchise.nodes.filter((node) => {
       const titleMatch = node.title.toLowerCase().includes(charName);
-      const castMatch = node.charactersIntroduced && node.charactersIntroduced.some(c => c.toLowerCase().includes(charName));
-      const synopsisMatch = (node.synopsis || "").toLowerCase().includes(charName);
+      const castMatch =
+        node.charactersIntroduced &&
+        node.charactersIntroduced.some((c) =>
+          c.toLowerCase().includes(charName),
+        );
+      const synopsisMatch = (node.synopsis || "")
+        .toLowerCase()
+        .includes(charName);
       const reasonMatch = (node.reason || "").toLowerCase().includes(charName);
       return titleMatch || castMatch || synopsisMatch || reasonMatch;
     });
@@ -86,16 +109,20 @@ export async function runKnowledgeGraphAgent({ franchiseId, targetId, parsedQuer
           character: parsedQuery.characterName,
           nodesFound: selectedNodes.length,
           reasoning,
-          confidence: 0.99
-        }
+          confidence: 0.99,
+        },
       };
     }
   }
 
   // CASE 3: PHASE BOUNDS ("Phase 2 MCU")
   if (parsedQuery?.phaseName) {
-    reasoning.push(`[Phase Boundary Extraction] Isolating releases in "${parsedQuery.phaseName}".`);
-    selectedNodes = franchise.nodes.filter(n => n.phase === parsedQuery.phaseName);
+    reasoning.push(
+      `[Phase Boundary Extraction] Isolating releases in "${parsedQuery.phaseName}".`,
+    );
+    selectedNodes = franchise.nodes.filter(
+      (n) => n.phase === parsedQuery.phaseName,
+    );
     if (selectedNodes.length > 0) {
       return {
         direction: "phase",
@@ -111,15 +138,17 @@ export async function runKnowledgeGraphAgent({ franchiseId, targetId, parsedQuer
           traversalType: "PHASE_BOUNDARY_ISOLATION",
           nodesFound: selectedNodes.length,
           reasoning,
-          confidence: 0.99
-        }
+          confidence: 0.99,
+        },
       };
     }
   }
 
   // CASE 4: BACKWARD PREREQUISITE DAG (Default / Target-focused)
   const rootTarget = targetNode || franchise.nodes[franchise.nodes.length - 1];
-  reasoning.push(`[Target Root] Starting recursive DAG dependency traversal from root node: "${rootTarget.title}" (${rootTarget.id}).`);
+  reasoning.push(
+    `[Target Root] Starting recursive DAG dependency traversal from root node: "${rootTarget.title}" (${rootTarget.id}).`,
+  );
 
   const visitedIds = new Set();
   const traversalQueue = [rootTarget.id];
@@ -143,7 +172,9 @@ export async function runKnowledgeGraphAgent({ franchiseId, targetId, parsedQuer
     }
   }
 
-  reasoning.push(`[Graph Subgraph Extracted] Successfully resolved ${visitedIds.size} prerequisite nodes leading to "${rootTarget.title}".`);
+  reasoning.push(
+    `[Graph Subgraph Extracted] Successfully resolved ${visitedIds.size} prerequisite nodes leading to "${rootTarget.title}".`,
+  );
 
   return {
     direction: "backward",
@@ -159,7 +190,7 @@ export async function runKnowledgeGraphAgent({ franchiseId, targetId, parsedQuer
       nodesEvaluated: franchise.nodes.length,
       subgraphSize: visitedIds.size,
       reasoning,
-      confidence: 0.99
-    }
+      confidence: 0.99,
+    },
   };
 }

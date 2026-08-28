@@ -6,7 +6,6 @@ import { TimelinePage } from './components/TimelinePage';
 import { WatchNode } from './components/NodeDetailModal';
 import { UniverseOption } from './types';
 import { fetchUniverses, generateWatchOrder } from './services/api';
-import { playTargetAcquiredSound } from './utils/soundEffects';
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
@@ -86,7 +85,6 @@ export default function App() {
         if (res.data.mode) {
           setSelectedMode(res.data.mode);
         }
-        playTargetAcquiredSound();
       }
     } catch (err) {
       console.error("Pipeline execution failed:", err);

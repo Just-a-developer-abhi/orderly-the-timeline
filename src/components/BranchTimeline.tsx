@@ -14,7 +14,6 @@ import {
   Users 
 } from 'lucide-react';
 import { WatchNode, NodeDetailModal } from './NodeDetailModal';
-import { playHudClick } from '../utils/soundEffects';
 
 interface BranchTimelineProps {
   nodes: WatchNode[];
@@ -190,10 +189,9 @@ export const BranchTimeline: React.FC<BranchTimelineProps> = ({
           <button
             key={m.id}
             onClick={() => {
-              playHudClick();
               onModeChange(m.id);
             }}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all border ${
+            className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer border ${
               selectedMode === m.id
                 ? "bg-red-600/20 border-red-500/80 text-white shadow-[0_0_12px_rgba(226,26,34,0.3)]"
                 : "bg-white/[0.03] border-white/10 text-slate-400 hover:text-white"
@@ -367,10 +365,9 @@ export const BranchTimeline: React.FC<BranchTimelineProps> = ({
                           {/* Mark Watched Toggle */}
                           <button
                             onClick={() => {
-                              playHudClick();
                               onToggleWatched(node.id);
                             }}
-                            className={`p-1.5 rounded-lg border text-xs font-mono transition-all flex items-center gap-1 ${
+                            className={`p-1.5 rounded-lg border text-xs font-mono transition-all flex items-center gap-1 cursor-pointer ${
                               isWatched
                                 ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400"
                                 : "bg-white/[0.03] border-white/10 text-slate-400 hover:text-white"
@@ -383,10 +380,9 @@ export const BranchTimeline: React.FC<BranchTimelineProps> = ({
                           {/* Dossier Brief */}
                           <button
                             onClick={() => {
-                              playHudClick();
                               setSelectedModalNode(node);
                             }}
-                            className="text-[11px] font-mono text-slate-400 hover:text-white underline underline-offset-2 ml-auto"
+                            className="text-[11px] font-mono text-slate-400 hover:text-white underline underline-offset-2 ml-auto cursor-pointer"
                           >
                             Lore details
                           </button>

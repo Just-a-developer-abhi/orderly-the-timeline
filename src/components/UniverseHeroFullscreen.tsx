@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ArrowRight, Sparkles, ChevronDown } from 'lucide-react';
-import { playHudClick } from '../utils/soundEffects';
 import { UniverseOption } from '../types';
 
 interface UniverseHeroFullscreenProps {
@@ -31,39 +30,70 @@ const UNIVERSE_CONFIGS: Record<string, {
     name: "Marvel Cinematic Universe",
     shortName: "Marvel",
     images: [
-      "/assets/Images/Spiderman/Spiderman1.jpeg",
-      "/assets/Images/Spiderman/Spiderman2.jpeg",
-      "/assets/Images/Spiderman/Spiderman3.jpeg",
-      "/assets/Images/Spiderman/Spiderman4.jpeg"
+      "/assets/Images/Spiderman/spiderman1.jpg",
+      "/assets/Images/Spiderman/spiderman2.jpg",
+      "/assets/Images/Spiderman/spiderman3.jpg",
+      "/assets/Images/Spiderman/spiderman4.jpeg",
+      "/assets/Images/Spiderman/Marvel3.jpg"
     ],
     stages: [
       {
-        badge: "Watch it in Right order",
+        badge: "Watch it in Right order • Phase 1 to 6",
         titleLine1: "NEVER WATCH",
         titleLine2: "OUT OF ORDER",
-        leftSub: "The sacred Marvel Cinematic Universe & Spider-Man timeline directory.",
+        leftSub: "The sacred Marvel Cinematic Universe & Spider-Man multiversal timeline directory.",
         rightTag: "CANONICAL GENESIS",
-        rightText: "From Tony Stark's cave origin in 2008 to multiversal incursion points.",
+        rightText: "From Tony Stark's cave origin in 2008 to the fracturing of the Sacred Timeline.",
         rightAction: "Explore Avengers: Doomsday",
         targetId: "mcu-doomsday"
+      },
+      {
+        badge: "Phase 6 Incursions • The Doom Variant Theory",
+        titleLine1: "THE INVASION",
+        titleLine2: "OF DOOMSDAY",
+        leftSub: "Robert Downey Jr. returns as Victor Von Doom. Universes collide as multiversal incursions accelerate.",
+        rightTag: "MULTIVERSE COLLAPSE",
+        rightText: "Is Doom a Tony Stark variant from an incursion-ravaged Earth, or the absolute ruler of Latveria?",
+        rightAction: "Explore Doomsday Path →",
+        targetId: "mcu-doomsday"
+      },
+      {
+        badge: "Battleworld Nexus • Phase 6 Climax",
+        titleLine1: "SECRET WARS",
+        titleLine2: "BATTLEWORLD",
+        leftSub: "The ultimate collision of all Marvel realities. Avengers, X-Men, Spider-Men, and Fantastic Four collide.",
+        rightTag: "OMEGA CONVERGENCE",
+        rightText: "From Loki's timeline tree at the End of Time to the Void and the death of the multiverse.",
+        rightAction: "Explore Secret Wars →",
+        targetId: "mcu-secret-wars"
+      },
+      {
+        badge: "Spider-Man Saga • Multiverse Web",
+        titleLine1: "THE WEB OF",
+        titleLine2: "ALL REALITIES",
+        leftSub: "Peter Parker's memory wiped from the world, the left-behind Venom symbiote, and the road to Spider-Man 4.",
+        rightTag: "SYMBIOTE & STREET",
+        rightText: "Kingpin rules New York while Peter operates in the shadows. The multiverse still remembers his sacrifice.",
+        rightAction: "Explore Spider-Man Arc →",
+        targetId: "mcu-spiderman-nwh"
+      },
+      {
+        badge: "Mutants & Fantastic Four • First Steps",
+        titleLine1: "MUTANT DAWN &",
+        titleLine2: "THE FIRST STEPS",
+        leftSub: "The X-Men cross dimensional barriers as Marvel's First Family arrives from their retro-futuristic 1960s universe.",
+        rightTag: "ANCHOR BEINGS",
+        rightText: "The TVA monitors timeline decay as Wolverine, Deadpool, and Galactus herald the rebirth of the cosmos.",
+        rightAction: "Explore Deadpool & Wolverine →",
+        targetId: "mcu-deadpool-wolverine"
       },
       {
         badge: "Zero Filler • Surgical Pruning",
         titleLine1: "PRUNED TO",
         titleLine2: "PERFECTION",
-        leftSub: "Recursive DAG algorithm strips filler and reveals mandatory canon paths.",
-        rightTag: "DEPENDENCY MATRIX",
-        rightText: "Every post-credit scene, character debut, and multiversal convergence mapped.",
-        rightAction: "Explore Secret Wars",
-        targetId: "mcu-secret-wars"
-      },
-      {
-        badge: "Multiverse Nexus • Phase 6",
-        titleLine1: "THE INVASION",
-        titleLine2: "OF DOOMSDAY",
-        leftSub: "Robert Downey Jr. returns as Doctor Doom. The Sacred Timeline fractures.",
-        rightTag: "CLIMAX TARGET",
-        rightText: "Ready for Battleworld? Navigate the complete prerequisite watch path.",
+        leftSub: "Autonomous DAG traversal strips 100+ hours of filler and calculates mandatory narrative arcs.",
+        rightTag: "DEPENDENCY ENGINE",
+        rightText: "Every post-credit scene, Infinity Stone movement, and Kang/Doom breadcrumb mapped seamlessly.",
         rightAction: "Open Full Watch Path →",
         targetId: "mcu-doomsday"
       }
@@ -74,10 +104,9 @@ const UNIVERSE_CONFIGS: Record<string, {
     name: "Star Wars Canon",
     shortName: "Star Wars",
     images: [
-      "/assets/Images/Starwars/SW2.jpeg",
-      "/assets/Images/Starwars/SW3.jpeg",
-      "/assets/Images/Starwars/SW4.jpeg",
-      "/assets/Images/Starwars/SW5.jpeg"
+      "/assets/Images/Starwars/Darth Vader 4K Wallpaper.jpg",
+      "/assets/Images/Starwars/Darth Vader Lightsaber Wallpaper 4K.jpg",
+      "/assets/Images/Starwars/Sith Lightsaber Wallpaper 4K.jpg"
     ],
     stages: [
       {
@@ -109,6 +138,16 @@ const UNIVERSE_CONFIGS: Record<string, {
         rightText: "Pruned essential watch path directly to Ahsoka and the New Republic era.",
         rightAction: "Open Ahsoka Watch Path →",
         targetId: "sw-ahsoka"
+      },
+      {
+        badge: "Zero-Filler Purge • Full Galactic Canon",
+        titleLine1: "THE CHOSEN",
+        titleLine2: "ONE LEGACY",
+        leftSub: "From Anakin Skywalker's rise and fall to the redemption of Darth Vader.",
+        rightTag: "FORCE CONVERGENCE",
+        rightText: "Streamlined essential viewing order with zero unnecessary side filler.",
+        rightAction: "Explore Star Wars Path →",
+        targetId: "sw-ahsoka"
       }
     ]
   },
@@ -117,10 +156,11 @@ const UNIVERSE_CONFIGS: Record<string, {
     name: "Naruto & Shippuden",
     shortName: "Naruto",
     images: [
-      "/assets/Images/Naruto/Naruto.jpeg",
-      "/assets/Images/Naruto/Naruto1.jpeg",
-      "/assets/Images/Naruto/Naruto2.jpeg",
-      "/assets/Images/Naruto/Naruto3.jpeg"
+      "/assets/Images/Naruto/Naruto1.png",
+      "/assets/Images/Naruto/Naruto2.png",
+      "/assets/Images/Naruto/Naruo3.jpg",
+      "/assets/Images/Naruto/Naruto4.png",
+      "/assets/Images/Naruto/Naruto5.jpg"
     ],
     stages: [
       {
@@ -144,6 +184,16 @@ const UNIVERSE_CONFIGS: Record<string, {
         targetId: "naruto-pain-arc"
       },
       {
+        badge: "Akatsuki Assault • Jiraiya's Will of Fire",
+        titleLine1: "THE PATH OF",
+        titleLine2: "PAIN & DESTINY",
+        leftSub: "Sage Mode awakening, the destruction of Konoha, and Naruto's meeting with Minato.",
+        rightTag: "PROPHESIED HERO",
+        rightText: "Nagato's philosophy of true peace and the tragic burden of the Six Paths.",
+        rightAction: "Explore Pain Arc →",
+        targetId: "naruto-pain-arc"
+      },
+      {
         badge: "Fourth Great Ninja War",
         titleLine1: "VALLEY OF THE",
         titleLine2: "END CLIMAX",
@@ -151,6 +201,16 @@ const UNIVERSE_CONFIGS: Record<string, {
         rightTag: "TARGET CLIMAX",
         rightText: "The streamlined 17-hour canon watch path straight to the finale.",
         rightAction: "Open Naruto Watch Path →",
+        targetId: "naruto-war-finale"
+      },
+      {
+        badge: "Seventh Hokage • The Final Legacy",
+        titleLine1: "WILL OF FIRE",
+        titleLine2: "IMMORTALIZED",
+        leftSub: "From the lonely swing outside the academy to the greatest shinobi in history.",
+        rightTag: "ULTIMATE CANON",
+        rightText: "The definitive guide to every canon battle without a single filler episode.",
+        rightAction: "Open Full Naruto Path →",
         targetId: "naruto-war-finale"
       }
     ]
@@ -160,10 +220,10 @@ const UNIVERSE_CONFIGS: Record<string, {
     name: "Dragon Ball Z & Super",
     shortName: "DBZ",
     images: [
-      "/assets/Images/DBZ/DBZ.jpeg",
-      "/assets/Images/DBZ/DBZ2.jpeg",
-      "/assets/Images/DBZ/DBZ3.jpeg",
-      "/assets/Images/DBZ/DBZ4.jpeg"
+      "/assets/Images/DBZ/DBZ1.jpg",
+      "/assets/Images/DBZ/DBZ2.jpg",
+      "/assets/Images/DBZ/DBZ3.jpg",
+      "/assets/Images/DBZ/DBZ4.png"
     ],
     stages: [
       {
@@ -184,6 +244,16 @@ const UNIVERSE_CONFIGS: Record<string, {
         rightTag: "GOD KI EVOLUTION",
         rightText: "Canon movies and essential Super arcs streamlined for maximum impact.",
         rightAction: "Explore Broly Movie",
+        targetId: "db-super-broly"
+      },
+      {
+        badge: "Legendary Super Saiyan • Broly Nexus",
+        titleLine1: "FRACTURING",
+        titleLine2: "DIMENSIONS",
+        leftSub: "Gogeta Blue vs Broly in a reality-shattering clash that redefined dragon ball animation.",
+        rightTag: "MAXIMUM POWER",
+        rightText: "Canon Toriyama narrative integrating Planet Vegeta lore directly with modern Super.",
+        rightAction: "Explore Broly Movie →",
         targetId: "db-super-broly"
       },
       {
@@ -208,141 +278,159 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
   onSelectTarget,
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [turnProgress, setTurnProgress] = useState(0); // 0.0 to 1.0
-  const [activeStageIndex, setActiveStageIndex] = useState(0);
-  const targetProgressRef = useRef(0);
-  const animationFrameRef = useRef<number | null>(null);
+  const [step, setStep] = useState(0);
 
-  // Wheel and touch gesture listener with smooth reduced sensitivity & dwell buffer
+  const config = UNIVERSE_CONFIGS[selectedFranchiseId] || UNIVERSE_CONFIGS.mcu;
+  const images = config.images;
+  const numImages = images.length;
+  const numStages = config.stages.length;
+
+  // Maximum scroll steps:
+  // Step 0: Image 0, Stage 0
+  // Step 1: Image 1, Stage 0 (on 2 scroll -> image changes)
+  // Step 2: Image 1, Stage 1 (on next 2 scroll -> text changes)
+  // Step 3: Image 2, Stage 1 (on next 2 scroll -> image changes)
+  // Step 4: Image 2, Stage 2 (on next 2 scroll -> text changes)
+  // Step 5: Image 3, Stage 2...
+  const maxSteps = Math.max((numImages - 1) * 2, (numStages - 1) * 2);
+
+  // Reset step whenever franchise changes
+  useEffect(() => {
+    setStep(0);
+  }, [selectedFranchiseId]);
+
+  // Derived alternating image & stage indices
+  const activeImageIndex = Math.min(numImages - 1, Math.floor((step + 1) / 2));
+  const activeStageIndex = Math.min(numStages - 1, Math.floor(step / 2));
+  const currentStage = config.stages[activeStageIndex] || config.stages[0];
+
+  const stepRef = useRef(step);
+  useEffect(() => {
+    stepRef.current = step;
+  }, [step]);
+
+  const scrollAccumulatorRef = useRef(0);
+  const lastStepTimeRef = useRef(0);
+  const decayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Responsive Bidirectional 2-Scroll Step Listener
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      // Reduced sensitivity: ~4x slower so images stay for multiple scrolls
-      const delta = e.deltaY * 0.00035;
-      targetProgressRef.current = Math.max(0, Math.min(1, targetProgressRef.current + delta));
+      const now = Date.now();
+      const currentStep = stepRef.current;
+
+      // 1. Boundary check: Prevent accumulation when already at top or bottom edge
+      if (currentStep >= maxSteps && e.deltaY > 0) {
+        scrollAccumulatorRef.current = 0;
+        return;
+      }
+      if (currentStep <= 0 && e.deltaY < 0) {
+        scrollAccumulatorRef.current = 0;
+        return;
+      }
+
+      // 2. Immediate Direction Reversal Reset: Don't fight old momentum when reversing scroll direction
+      if (
+        (e.deltaY > 0 && scrollAccumulatorRef.current < 0) ||
+        (e.deltaY < 0 && scrollAccumulatorRef.current > 0)
+      ) {
+        scrollAccumulatorRef.current = 0;
+      }
+
+      // 3. Accumulate with threshold clamping
+      const STEP_THRESHOLD = 130;
+      const COOLDOWN_MS = 200;
+
+      scrollAccumulatorRef.current = Math.max(
+        -STEP_THRESHOLD * 1.5,
+        Math.min(STEP_THRESHOLD * 1.5, scrollAccumulatorRef.current + e.deltaY)
+      );
+
+      // Fast decay when user pauses scrolling
+      if (decayTimeoutRef.current) clearTimeout(decayTimeoutRef.current);
+      decayTimeoutRef.current = setTimeout(() => {
+        scrollAccumulatorRef.current = 0;
+      }, 180);
+
+      // 4. Trigger step change once threshold reached and cooldown satisfied
+      if (now - lastStepTimeRef.current > COOLDOWN_MS) {
+        if (scrollAccumulatorRef.current >= STEP_THRESHOLD) {
+          setStep((prev) => Math.min(maxSteps, prev + 1));
+          scrollAccumulatorRef.current = 0;
+          lastStepTimeRef.current = now;
+        } else if (scrollAccumulatorRef.current <= -STEP_THRESHOLD) {
+          setStep((prev) => Math.max(0, prev - 1));
+          scrollAccumulatorRef.current = 0;
+          lastStepTimeRef.current = now;
+        }
+      }
     };
 
     let touchStartY = 0;
     const handleTouchStart = (e: TouchEvent) => {
       touchStartY = e.touches[0].clientY;
     };
-    const handleTouchMove = (e: TouchEvent) => {
-      // Reduced touch delta
-      const delta = (touchStartY - e.touches[0].clientY) * 0.0008;
-      touchStartY = e.touches[0].clientY;
-      targetProgressRef.current = Math.max(0, Math.min(1, targetProgressRef.current + delta));
+    const handleTouchEnd = (e: TouchEvent) => {
+      const touchEndY = e.changedTouches[0].clientY;
+      const diffY = touchStartY - touchEndY;
+      const TOUCH_THRESHOLD = 40;
+      if (Math.abs(diffY) > TOUCH_THRESHOLD) {
+        if (diffY > 0) {
+          setStep((prev) => Math.min(maxSteps, prev + 1));
+        } else {
+          setStep((prev) => Math.max(0, prev - 1));
+        }
+      }
     };
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchmove', handleTouchMove);
-
-    // Smooth lerp loop with weighted inertia
-    const animate = () => {
-      setTurnProgress((prev) => {
-        const next = prev + (targetProgressRef.current - prev) * 0.08;
-        const stage = next < 0.38 ? 0 : next < 0.72 ? 1 : 2;
-        setActiveStageIndex(stage);
-        return next;
-      });
-      animationFrameRef.current = requestAnimationFrame(animate);
-    };
-    animate();
+    window.addEventListener('touchend', handleTouchEnd);
 
     return () => {
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+      window.removeEventListener('touchend', handleTouchEnd);
+      if (decayTimeoutRef.current) clearTimeout(decayTimeoutRef.current);
     };
-  }, []);
+  }, [maxSteps]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      playHudClick();
       onSearchSubmit(searchQuery.trim());
     }
   };
 
-  const config = UNIVERSE_CONFIGS[selectedFranchiseId] || UNIVERSE_CONFIGS.mcu;
-  const currentStage = config.stages[activeStageIndex] || config.stages[0];
-  const images = config.images;
-  const numImages = images.length;
-
-  // Dwell / Plateau function so images stay 100% visible for a couple of scrolls
-  // u is continuous index in [0, numImages - 1]
-  const u = turnProgress * (numImages - 1);
-  const activeImageIdx = Math.floor(u);
-  const frac = u - activeImageIdx;
-
-  // Dwell calculation:
-  // frac in [0, 0.40] -> Dwell solidly on activeImageIdx
-  // frac in [0.40, 0.70] -> Smooth cosine crossfade to activeImageIdx + 1
-  // frac in [0.70, 1.0] -> Dwell solidly on activeImageIdx + 1
-  const getImageOpacity = (index: number) => {
-    if (index === activeImageIdx) {
-      if (frac <= 0.40) return 1;
-      if (frac >= 0.70) return 0;
-      // Cosine ease out
-      const t = (frac - 0.40) / 0.30;
-      return 0.5 * (1 + Math.cos(t * Math.PI));
-    }
-    if (index === activeImageIdx + 1) {
-      if (frac <= 0.40) return 0;
-      if (frac >= 0.70) return 1;
-      // Cosine ease in
-      const t = (frac - 0.40) / 0.30;
-      return 0.5 * (1 - Math.cos(t * Math.PI));
-    }
-    return 0;
-  };
-
-  const yawAngle = (1 - turnProgress) * -12;
-
   return (
     <div className="relative w-full h-screen bg-black text-white overflow-hidden flex flex-col justify-between select-none">
       
-      {/* Infinite Pure Black Vignette Background */}
-      <div className="absolute inset-0 bg-[#000000]" />
-      
-      {/* Subtle Ambient Red Atmospheric Rim */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] h-[85vh] bg-red-950/15 rounded-full blur-[160px] pointer-events-none" />
+      {/* FULLSCREEN EDGE-TO-EDGE CHARACTER CANVAS */}
+      <div className="absolute inset-0 z-0 w-full h-full pointer-events-none overflow-hidden">
+        {images.map((imgSrc, i) => {
+          const isCurrent = i === activeImageIndex;
 
-      {/* FULLSCREEN INFINITE CHARACTER CANVAS (Dwells solidly on each image before slow subtle transition) */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-        <div 
-          className="relative w-full h-full max-w-7xl max-h-screen flex items-center justify-center perspective-1000"
-          style={{
-            transform: `rotateY(${yawAngle}deg)`,
-            transition: "transform 0.2s ease-out"
-          }}
-        >
-          {images.map((imgSrc, i) => {
-            const opacity = getImageOpacity(i);
-
-            return (
-              <div
-                key={imgSrc}
-                style={{ 
-                  opacity,
-                  visibility: opacity > 0.01 ? 'visible' : 'hidden'
-                }}
-                className="absolute inset-0 flex items-center justify-center transition-opacity duration-300"
-              >
-                <img
-                  src={imgSrc}
-                  alt={`${config.name} frame ${i + 1}`}
-                  className="w-full h-full object-contain filter contrast-125 brightness-100 drop-shadow-[0_0_40px_rgba(226,26,34,0.25)]"
-                />
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Soft edge fade blending seamlessly into pure black */}
-        <div className="absolute inset-0 bg-radial-vignette opacity-75 pointer-events-none" />
+          return (
+            <div
+              key={imgSrc}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${
+                isCurrent ? "opacity-100 z-1" : "opacity-0 z-0 pointer-events-none"
+              }`}
+            >
+              <img
+                src={imgSrc}
+                alt={`${config.name} frame ${i + 1}`}
+                className="w-full h-full object-cover object-center filter contrast-105 brightness-100"
+              />
+            </div>
+          );
+        })}
       </div>
+
+      {/* Subtle Top & Bottom Gradient Overlays for Elegance and Contrast */}
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/80 via-black/30 to-transparent pointer-events-none z-10" />
+      <div className="absolute inset-x-0 bottom-0 h-64 sm:h-80 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none z-10" />
 
       {/* TOP NAVIGATION BAR (As Specified in Reference Image) */}
       <header className="relative z-30 w-full px-6 sm:px-10 pt-6 flex items-center justify-between">
@@ -363,10 +451,9 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
                 <button
                   key={key}
                   onClick={() => {
-                    playHudClick();
                     onFranchiseChange(key);
                   }}
-                  className={`px-3.5 py-1 rounded-full text-xs font-mono transition-all ${
+                  className={`px-3.5 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
                     isSelected
                       ? "bg-white/10 text-white border border-white/20 shadow-md font-semibold"
                       : "text-slate-500 hover:text-slate-300"
@@ -393,7 +480,7 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
             {searchQuery && (
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-1 bg-red-600 rounded-full text-white"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-1 bg-red-600 rounded-full text-white cursor-pointer"
               >
                 <ArrowRight className="w-2.5 h-2.5" />
               </button>
@@ -403,10 +490,10 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
 
       </header>
 
-      {/* CENTER INTERACTIVE CONTENT: UPPER LEFT & LOWER RIGHT (Marked 'HERE' in Reference Mockup) */}
+      {/* CENTER INTERACTIVE CONTENT: UPPER LEFT & LOWER RIGHT */}
       <div className="relative z-20 w-full h-full max-w-7xl mx-auto px-6 sm:px-10 flex flex-col justify-between py-12 pointer-events-none">
         
-        {/* UPPER LEFT CONTENT AREA (Marked 'HERE' in Reference Mockup) */}
+        {/* UPPER LEFT CONTENT AREA */}
         <div className="max-w-md pt-4 sm:pt-8 text-left pointer-events-auto">
           <AnimatePresence mode="wait">
             <motion.div
@@ -438,7 +525,7 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
           </AnimatePresence>
         </div>
 
-        {/* LOWER RIGHT CONTENT AREA (Marked 'HERE' in Reference Mockup) */}
+        {/* LOWER RIGHT CONTENT AREA */}
         <div className="max-w-sm ml-auto pb-6 text-right pointer-events-auto">
           <AnimatePresence mode="wait">
             <motion.div
@@ -459,7 +546,6 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
 
               <button
                 onClick={() => {
-                  playHudClick();
                   onSelectTarget(currentStage.targetId, selectedFranchiseId);
                 }}
                 className="mt-2 inline-flex items-center gap-2 px-4 py-2 bg-red-600/20 hover:bg-red-600 text-white border border-red-500/50 rounded-xl text-xs font-mono tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(226,26,34,0.3)] group cursor-pointer"
@@ -476,16 +562,16 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
       {/* BOTTOM SCROLL / TURN HINT */}
       <footer className="relative z-30 w-full pb-6 flex items-center justify-between px-6 sm:px-10 text-[10px] font-mono text-slate-500 uppercase tracking-widest">
         <div>
-          FRAME: 0{Math.min(numImages, activeImageIdx + 1)} // 0{numImages}
+          FRAME: 0{activeImageIndex + 1} // 0{numImages}
         </div>
 
         <div className="flex items-center gap-2 text-slate-400">
-          <span>Scroll slowly to shift frames</span>
+          <span>Scroll slowly to shift frames & text</span>
           <ChevronDown className="w-3 h-3 text-red-500 animate-bounce" />
         </div>
 
         <div>
-          STAGE: {activeStageIndex + 1} / 3
+          STAGE: {activeStageIndex + 1} / {numStages}
         </div>
       </footer>
 

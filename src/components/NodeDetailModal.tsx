@@ -15,7 +15,6 @@ import {
   ExternalLink,
   ArrowUpRight
 } from 'lucide-react';
-import { playHudClick } from '../utils/soundEffects';
 
 export interface WatchNode {
   order: number;
@@ -80,10 +79,9 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
           {/* Close Button */}
           <button
             onClick={() => {
-              playHudClick();
               onClose();
             }}
-            className="absolute top-5 right-5 p-2 rounded-full bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white transition-all z-10"
+            className="absolute top-5 right-5 p-2 rounded-full bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white transition-all z-10 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -190,10 +188,9 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
             <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
               <button
                 onClick={() => {
-                  playHudClick();
                   onToggleWatched(node.id);
                 }}
-                className={`px-5 py-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all border ${
+                className={`px-5 py-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all border cursor-pointer ${
                   isWatched
                     ? "bg-emerald-500/20 border-emerald-500 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
                     : "bg-white/10 hover:bg-white/20 border-white/20 text-white"
