@@ -87,23 +87,3 @@ npm run dev
 npm run build
 ```
 
----
-
-## 🚢 How to Deploy
-
-### Option A: Vercel (Recommended - 1 Click)
-1. Push this repository to GitHub.
-2. Go to [vercel.com](https://vercel.com) and click **"Add New Project"**.
-3. Import your GitHub repository.
-4. Click **"Deploy"** (Vercel automatically detects `vercel.json` and builds Vite).
-
-### Option B: Netlify
-1. Connect your repository on [netlify.com](https://netlify.com).
-2. Set Build Command: `npm run build`
-3. Set Publish Directory: `dist`
-4. Click **"Deploy Site"**.
-
-### Option C: Render / Railway (Full-stack API)
-1. Connect your repository on [render.com](https://render.com) or [railway.app](https://railway.app).
-2. Set Build Command: `npm install && npm run build`
-3. Set Start Command: `npm start`
