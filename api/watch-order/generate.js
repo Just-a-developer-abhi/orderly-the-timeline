@@ -1,7 +1,7 @@
-import { FRANCHISES } from "../server/data/franchises.js";
-import { runQueryParserAgent } from "../server/agents/queryParserAgent.js";
-import { runKnowledgeGraphAgent } from "../server/agents/knowledgeGraphAgent.js";
-import { runPathOptimizerAgent } from "../server/agents/pathOptimizerAgent.js";
+import { FRANCHISES } from "../../server/data/franchises.js";
+import { runQueryParserAgent } from "../../server/agents/queryParserAgent.js";
+import { runKnowledgeGraphAgent } from "../../server/agents/knowledgeGraphAgent.js";
+import { runPathOptimizerAgent } from "../../server/agents/pathOptimizerAgent.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -18,20 +18,20 @@ export default async function handler(req, res) {
       targetId,
       franchiseId,
       mode,
-      maxHours
+      maxHours,
     });
 
     // Step 2: Franchise Knowledge Graph Agent
     const graphData = await runKnowledgeGraphAgent({
       franchiseId: parsedQuery.franchiseId,
       targetId: parsedQuery.targetId,
-      parsedQuery
+      parsedQuery,
     });
 
     // Step 3: Path Optimizer Agent
     const optimizedResult = await runPathOptimizerAgent({
       parsedQuery,
-      graphData
+      graphData,
     });
 
     const pipelineTotalLatency = Date.now() - pipelineStartTime;
@@ -44,15 +44,15 @@ export default async function handler(req, res) {
         agents: [
           parsedQuery.telemetry,
           graphData.telemetry,
-          optimizedResult.telemetry
-        ]
-      }
+          optimizedResult.telemetry,
+        ],
+      },
     });
   } catch (error) {
     console.error("Vercel Serverless Agent Pipeline Error:", error);
     return res.status(500).json({
       success: false,
-      error: error.message || "Failed to execute watch order agent workflow"
+      error: error.message || "Failed to execute watch order agent workflow",
     });
   }
 }

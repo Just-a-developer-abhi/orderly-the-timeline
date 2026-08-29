@@ -6,7 +6,8 @@
 export async function runPathOptimizerAgent({ parsedQuery, graphData }) {
   const startTime = Date.now();
   const reasoning = [];
-  const { mode, maxHours, direction, anchorNode, characterName, phaseName } = parsedQuery;
+  const { mode, maxHours, direction, anchorNode, characterName, phaseName } =
+    parsedQuery;
   const { rawNodes, subgraphNodes, targetNode } = graphData;
 
   const currentFranchiseId = parsedQuery.franchiseId || "mcu";
@@ -16,10 +17,11 @@ export async function runPathOptimizerAgent({ parsedQuery, graphData }) {
     mcu: "/assets/Images/posters/marvel-poster.jpeg",
     starwars: "/assets/Images/posters/starwars-poster.jpeg",
     anime_naruto: "/assets/Images/posters/naruto-poster.jpeg",
-    dragonball: "/assets/Images/posters/dbz-poster.jpeg"
+    dragonball: "/assets/Images/posters/dbz-poster.jpeg",
   };
 
-  const defaultPoster = MASTER_POSTERS[currentFranchiseId] || MASTER_POSTERS.mcu;
+  const defaultPoster =
+    MASTER_POSTERS[currentFranchiseId] || MASTER_POSTERS.mcu;
 
   let finalNodes = [];
   let displayTitle = targetNode.title;
@@ -28,13 +30,15 @@ export async function runPathOptimizerAgent({ parsedQuery, graphData }) {
   // 1. FORWARD PROGRESSION (What to watch AFTER X)
   if (direction === "after" && anchorNode) {
     displayTitle = `Next Releases After ${anchorNode.title} (${anchorNode.year})`;
-    agentAdvice = `Having completed "${anchorNode.title}" (${anchorNode.year}), your chronological sequel journey continues with the following releases starting immediately with "${subgraphNodes[0]?.title || 'the next chapter'}".`;
-    reasoning.push(`[Forward Path Sequencing] Curating releases immediately following "${anchorNode.title}".`);
+    agentAdvice = `Having completed "${anchorNode.title}" (${anchorNode.year}), your chronological sequel journey continues with the following releases starting immediately with "${subgraphNodes[0]?.title || "the next chapter"}".`;
+    reasoning.push(
+      `[Forward Path Sequencing] Curating releases immediately following "${anchorNode.title}".`,
+    );
 
     if (mode === "fast-track") {
-      finalNodes = subgraphNodes.filter(n => n.tier !== "Skippable");
+      finalNodes = subgraphNodes.filter((n) => n.tier !== "Skippable");
     } else if (mode === "zero-filler") {
-      finalNodes = subgraphNodes.filter(n => n.tier !== "Skippable");
+      finalNodes = subgraphNodes.filter((n) => n.tier !== "Skippable");
     } else {
       finalNodes = subgraphNodes;
     }
@@ -43,7 +47,7 @@ export async function runPathOptimizerAgent({ parsedQuery, graphData }) {
     if (finalNodes.length > 14) {
       finalNodes = finalNodes.slice(0, 14);
     }
-  } 
+  }
   // 2. CHARACTER ARC
   else if (direction === "character_arc" && characterName) {
     displayTitle = `${characterName}: Complete Canonical Arc`;
@@ -59,49 +63,112 @@ export async function runPathOptimizerAgent({ parsedQuery, graphData }) {
   // 4. BACKWARD PREREQUISITE DAG (Default)
   else {
     displayTitle = targetNode.title;
-    agentAdvice = `Here is your optimized prerequisite watch order leading directly to "${targetNode.title}".`;
-    const subgraphIdSet = new Set(subgraphNodes.map(n => n.id));
+    const subgraphIdSet = new Set(subgraphNodes.map((n) => n.id));
+    const targetIndex = rawNodes.findIndex((n) => n.id === targetNode.id);
 
     if (mode === "fast-track") {
-      reasoning.push(`[Pruning Algorithm] Pruning non-essential branches and supplementary filler.`);
-      finalNodes = rawNodes.filter(node => {
+      reasoning.push(
+        `[Pruning Algorithm] Pruning non-essential branches and supplementary filler.`,
+      );
+      finalNodes = rawNodes.filter((node) => {
+        if (node.id === targetNode.id) return true;
         if (!subgraphIdSet.has(node.id)) return false;
+        // Keep strictly Essential tier
+        return node.tier === "Essential";
+      });
+      const pruned = rawNodes.length - finalNodes.length;
+      agentAdvice = `⚡ Fast-Track Mode: Pruned ${pruned} supplementary series & side quests. Showing only ${finalNodes.length} strictly essential narrative milestones leading directly to "${targetNode.title}".`;
+    } else if (mode === "zero-filler") {
+      reasoning.push(
+        `[Filler Stripper] Removing all non-canon filler arcs and skippables.`,
+      );
+      finalNodes = rawNodes.filter((node, idx) => {
+        // Keep strictly canon / non-skippable nodes on the mainline
         if (node.tier === "Skippable") return false;
+        if (
+          idx > targetIndex &&
+          node.id !== targetNode.id &&
+          !subgraphIdSet.has(node.id)
+        )
+          return false;
         return true;
       });
-    } else if (mode === "zero-filler") {
-      reasoning.push(`[Filler Stripper] Removing all non-canon filler arcs.`);
-      finalNodes = rawNodes.filter(node => {
-        const isBeforeOrAtTarget = rawNodes.indexOf(node) <= rawNodes.indexOf(targetNode);
-        return isBeforeOrAtTarget && node.tier !== "Skippable";
+      agentAdvice = `🎯 Zero-Filler Mode: Stripped non-canon episodes, filler missions, and skippable spin-offs. Showing ${finalNodes.length} pure canon storylines leading to "${targetNode.title}".`;
+    } else if (mode === "chronological") {
+      reasoning.push(
+        `[Chronological In-Universe Timeline] Sorting by in-world storyline chronology.`,
+      );
+      const eligibleNodes = rawNodes.filter(
+        (node, idx) =>
+          idx <= targetIndex ||
+          node.id === targetNode.id ||
+          subgraphIdSet.has(node.id),
+      );
+      // Sort strictly by in-universe chronoYear
+      finalNodes = [...eligibleNodes].sort((a, b) => {
+        const getChronoVal = (node) => {
+          if (!node.chronoYear) return node.year;
+          const match = node.chronoYear.match(/(\d{4})/);
+          if (match) return parseInt(match[1], 10);
+          if (
+            node.chronoYear.includes("End of Time") ||
+            node.chronoYear.includes("Multiverse")
+          )
+            return 3000;
+          if (node.chronoYear.includes("Battleworld")) return 3500;
+          return node.year;
+        };
+        return getChronoVal(a) - getChronoVal(b);
       });
+      agentAdvice = `⏳ Chronological In-Universe Mode: Re-ordered ${finalNodes.length} releases strictly by in-universe storyline date (from 1942 Captain America to ${targetNode.title}).`;
+    } else if (mode === "all") {
+      reasoning.push(
+        `[Complete Universe Catalog] Displaying all media in the franchise.`,
+      );
+      displayTitle = `${parsedQuery.franchiseName} (Complete Catalog)`;
+      finalNodes = rawNodes;
+      agentAdvice = `🌌 Complete Universe Catalog: Browsing all ${rawNodes.length} canonical movies, series, and specials across the ${parsedQuery.franchiseName}.`;
     } else {
-      reasoning.push(`[Full Lore Compilation] Retaining all canonical media leading to target.`);
-      finalNodes = rawNodes.filter(node => {
-        const targetIndex = rawNodes.findIndex(n => n.id === targetNode.id);
-        const nodeIndex = rawNodes.findIndex(n => n.id === node.id);
-        return nodeIndex <= targetIndex;
-      });
+      // mode === "full-lore"
+      reasoning.push(
+        `[Full Lore Compilation] Retaining all canonical media leading to target plus multiversal legacy.`,
+      );
+      finalNodes = rawNodes.filter(
+        (node, idx) =>
+          idx <= targetIndex ||
+          node.id === targetNode.id ||
+          subgraphIdSet.has(node.id) ||
+          node.phase === "X-Men Legacy",
+      );
+      agentAdvice = `📚 Full Canon Lore Mode: Retaining all ${finalNodes.length} canonical movies, series, specials, and multiverse legacy chapters leading up to "${targetNode.title}".`;
     }
 
-    if (!finalNodes.some(n => n.id === targetNode.id)) {
+    // CRITICAL: In prerequisite modes, the targetNode must ALWAYS be the final, culminating node.
+    if (targetNode && mode !== "all") {
+      finalNodes = finalNodes.filter((n) => n.id !== targetNode.id);
       finalNodes.push(targetNode);
     }
   }
 
   // Calculate total runtime
   let totalMinutes = 0;
-  finalNodes.forEach(node => {
+  finalNodes.forEach((node) => {
     totalMinutes += node.runtimeMinutes || (node.type === "Series" ? 240 : 130);
   });
 
   const estimatedHours = Math.round((totalMinutes / 60) * 10) / 10;
-  reasoning.push(`[Watch Time Metrics] Total estimated watch time: ${estimatedHours} hours (${finalNodes.length} nodes).`);
+  reasoning.push(
+    `[Watch Time Metrics] Total estimated watch time: ${estimatedHours} hours (${finalNodes.length} nodes).`,
+  );
 
   // Optional hour budget constraint handling
   if (maxHours && estimatedHours > maxHours) {
-    reasoning.push(`[Constraint Check] Estimated ${estimatedHours}h exceeds budget of ${maxHours}h. Applying aggressive critical-only trimming.`);
-    finalNodes = finalNodes.filter(n => n.tier === "Essential" || n.id === targetNode.id);
+    reasoning.push(
+      `[Constraint Check] Estimated ${estimatedHours}h exceeds budget of ${maxHours}h. Applying aggressive critical-only trimming.`,
+    );
+    finalNodes = finalNodes.filter(
+      (n) => n.tier === "Essential" || n.id === targetNode.id,
+    );
   }
 
   // Format node output
@@ -116,16 +183,27 @@ export async function runPathOptimizerAgent({ parsedQuery, graphData }) {
       chronoYear: node.chronoYear || `${node.year}`,
       phase: node.phase || undefined,
       tier: node.tier,
-      runtimeMinutes: node.runtimeMinutes || (node.type === "Series" ? 240 : 130),
-      streamingOn: node.streamingOn || (currentFranchiseId === "anime_naruto" || currentFranchiseId === "dragonball" ? "Crunchyroll" : "Disney+ Hotstar"),
-      streamUrl: node.streamUrl || (currentFranchiseId === "anime_naruto" || currentFranchiseId === "dragonball" ? "https://www.crunchyroll.com" : "https://www.hotstar.com"),
+      runtimeMinutes:
+        node.runtimeMinutes || (node.type === "Series" ? 240 : 130),
+      streamingOn:
+        node.streamingOn ||
+        (currentFranchiseId === "anime_naruto" ||
+        currentFranchiseId === "dragonball"
+          ? "Crunchyroll"
+          : "Disney+ Hotstar"),
+      streamUrl:
+        node.streamUrl ||
+        (currentFranchiseId === "anime_naruto" ||
+        currentFranchiseId === "dragonball"
+          ? "https://www.crunchyroll.com"
+          : "https://www.hotstar.com"),
       poster: node.poster || defaultPoster,
       synopsis: node.synopsis,
       reason: node.reason,
       postCredits: node.postCredits || null,
       charactersIntroduced: node.charactersIntroduced || [],
       prerequisites: node.prerequisites || [],
-      isTarget: node.id === targetNode.id
+      isTarget: node.id === targetNode.id,
     };
   });
 
@@ -151,7 +229,7 @@ export async function runPathOptimizerAgent({ parsedQuery, graphData }) {
       finalNodeCount: formattedNodes.length,
       estimatedHours,
       reasoning,
-      confidence: 0.99
-    }
+      confidence: 0.99,
+    },
   };
 }

@@ -117,7 +117,7 @@ const UNIVERSE_CONFIGS: Record<string, {
         rightTag: "GALACTIC TIMELINE",
         rightText: "Experience the complete Skywalker legacy without missing key animated lore.",
         rightAction: "Explore Ahsoka Timeline",
-        targetId: "sw-ahsoka"
+        targetId: "sw-ahsoka-s1"
       },
       {
         badge: "The Clone Wars & Rebels Nexus",
@@ -137,7 +137,7 @@ const UNIVERSE_CONFIGS: Record<string, {
         rightTag: "TARGET CLIMAX",
         rightText: "Pruned essential watch path directly to Ahsoka and the New Republic era.",
         rightAction: "Open Ahsoka Watch Path →",
-        targetId: "sw-ahsoka"
+        targetId: "sw-ahsoka-s1"
       },
       {
         badge: "Zero-Filler Purge • Full Galactic Canon",
@@ -147,7 +147,7 @@ const UNIVERSE_CONFIGS: Record<string, {
         rightTag: "FORCE CONVERGENCE",
         rightText: "Streamlined essential viewing order with zero unnecessary side filler.",
         rightAction: "Explore Star Wars Path →",
-        targetId: "sw-ahsoka"
+        targetId: "sw-ep6"
       }
     ]
   },
@@ -170,8 +170,8 @@ const UNIVERSE_CONFIGS: Record<string, {
         leftSub: "From Genin in Hidden Leaf Village to the Savior of the Ninja World.",
         rightTag: "LEAF VILLAGE ORIGIN",
         rightText: "Land of Waves, Chunin Exams, and the legendary Valley of the End.",
-        rightAction: "Explore War Finale",
-        targetId: "naruto-war-finale"
+        rightAction: "Explore Final Battle",
+        targetId: "naruto-final-battle"
       },
       {
         badge: "Zero-Filler Purge Activated",
@@ -180,8 +180,8 @@ const UNIVERSE_CONFIGS: Record<string, {
         leftSub: "Watch only the true manga canon arcs and Jiraiya's defining narrative.",
         rightTag: "AKATSUKI CONFLICT",
         rightText: "Pain's Assault, Five Kage Summit, and the truth of the Uchiha Clan.",
-        rightAction: "Explore Pain Arc",
-        targetId: "naruto-pain-arc"
+        rightAction: "Explore Pain Assault",
+        targetId: "naruto-pain-assault"
       },
       {
         badge: "Akatsuki Assault • Jiraiya's Will of Fire",
@@ -191,7 +191,7 @@ const UNIVERSE_CONFIGS: Record<string, {
         rightTag: "PROPHESIED HERO",
         rightText: "Nagato's philosophy of true peace and the tragic burden of the Six Paths.",
         rightAction: "Explore Pain Arc →",
-        targetId: "naruto-pain-arc"
+        targetId: "naruto-pain-assault"
       },
       {
         badge: "Fourth Great Ninja War",
@@ -199,19 +199,19 @@ const UNIVERSE_CONFIGS: Record<string, {
         titleLine2: "END CLIMAX",
         leftSub: "Madara descends, Kaguya awakens, and Naruto & Sasuke fight their final duel.",
         rightTag: "TARGET CLIMAX",
-        rightText: "The streamlined 17-hour canon watch path straight to the finale.",
+        rightText: "The streamlined canon watch path straight to the finale.",
         rightAction: "Open Naruto Watch Path →",
-        targetId: "naruto-war-finale"
+        targetId: "naruto-final-battle"
       },
       {
-        badge: "Seventh Hokage • The Final Legacy",
+        badge: "Two Blue Vortex • Next Generation",
         titleLine1: "WILL OF FIRE",
         titleLine2: "IMMORTALIZED",
-        leftSub: "From the lonely swing outside the academy to the greatest shinobi in history.",
+        leftSub: "From the lonely swing outside the academy to Boruto: Two Blue Vortex.",
         rightTag: "ULTIMATE CANON",
-        rightText: "The definitive guide to every canon battle without a single filler episode.",
-        rightAction: "Open Full Naruto Path →",
-        targetId: "naruto-war-finale"
+        rightText: "The definitive guide to every canon battle up to the modern timeskip era.",
+        rightAction: "Open Boruto Path →",
+        targetId: "boruto-two-blue-vortex"
       }
     ]
   },
@@ -234,7 +234,7 @@ const UNIVERSE_CONFIGS: Record<string, {
         rightTag: "SUPER SAIYAN DAWN",
         rightText: "Goku, Vegeta, and the legendary transformations that defined anime history.",
         rightAction: "Explore Super Hero",
-        targetId: "db-super-hero"
+        targetId: "dbs-super-hero"
       },
       {
         badge: "God Ki & Ultra Instinct",
@@ -243,8 +243,8 @@ const UNIVERSE_CONFIGS: Record<string, {
         leftSub: "Lord Beerus, Whis, Golden Frieza, and the 8-universe Battle Royale.",
         rightTag: "GOD KI EVOLUTION",
         rightText: "Canon movies and essential Super arcs streamlined for maximum impact.",
-        rightAction: "Explore Broly Movie",
-        targetId: "db-super-broly"
+        rightAction: "Explore Tournament of Power",
+        targetId: "dbs-tournament-of-power"
       },
       {
         badge: "Legendary Super Saiyan • Broly Nexus",
@@ -254,7 +254,7 @@ const UNIVERSE_CONFIGS: Record<string, {
         rightTag: "MAXIMUM POWER",
         rightText: "Canon Toriyama narrative integrating Planet Vegeta lore directly with modern Super.",
         rightAction: "Explore Broly Movie →",
-        targetId: "db-super-broly"
+        targetId: "dbs-broly-canon"
       },
       {
         badge: "Beast Unleashed",
@@ -264,7 +264,7 @@ const UNIVERSE_CONFIGS: Record<string, {
         rightTag: "TARGET CLIMAX",
         rightText: "The definitive Dragon Ball Super watch journey directly to Super Hero.",
         rightAction: "Open DBZ Watch Path →",
-        targetId: "db-super-hero"
+        targetId: "dbs-super-hero"
       }
     ]
   }

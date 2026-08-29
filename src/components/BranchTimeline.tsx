@@ -11,7 +11,9 @@ import {
   Layers, 
   ArrowUpRight, 
   Shield, 
-  Users 
+  Users,
+  Search,
+  Filter
 } from 'lucide-react';
 import { WatchNode, NodeDetailModal } from './NodeDetailModal';
 
@@ -55,11 +57,11 @@ const CardPoster: React.FC<{
     fKey = timelineFranchiseId;
   } else if (nodeId.startsWith("sw-")) {
     fKey = "starwars";
-  } else if (nodeId.startsWith("naruto-")) {
+  } else if (nodeId.startsWith("naruto-") || nodeId.startsWith("boruto-")) {
     fKey = "anime_naruto";
-  } else if (nodeId.startsWith("db-")) {
+  } else if (nodeId.startsWith("db-") || nodeId.startsWith("dbz-") || nodeId.startsWith("dbs-")) {
     fKey = "dragonball";
-  } else if (nodeId.startsWith("mcu-")) {
+  } else if (nodeId.startsWith("mcu-") || nodeId.startsWith("fox-")) {
     fKey = "mcu";
   } else if (universeName) {
     const uLower = universeName.toLowerCase();
@@ -98,8 +100,8 @@ const CardPoster: React.FC<{
         </div>
       )}
       {hasError && (
-        <div className="absolute bottom-1 right-1 bg-black/80 text-[8px] font-mono text-yellow-400 px-1 rounded border border-white/10">
-          CANON
+        <div className="absolute bottom-1 right-1 bg-black/80 px-1 py-0.5 rounded text-[8px] font-mono text-slate-400">
+          Archived
         </div>
       )}
     </div>
@@ -117,7 +119,9 @@ export const BranchTimeline: React.FC<BranchTimelineProps> = ({
   onToggleWatched,
   onModeChange
 }) => {
-  const [selectedModalNode, setSelectedModalNode] = React.useState<WatchNode | null>(null);
+  const [selectedModalNode, setSelectedModalNode] = useState<WatchNode | null>(null);
+  const [selectedPhaseFilter, setSelectedPhaseFilter] = useState<string>("ALL");
+  const [inPageSearch, setInPageSearch] = useState<string>("");
 
   const totalCount = nodes.length;
   const watchedCount = nodes.filter(n => watchedIds.has(n.id)).length;
@@ -125,8 +129,29 @@ export const BranchTimeline: React.FC<BranchTimelineProps> = ({
     nodes.filter(n => !watchedIds.has(n.id)).reduce((sum, n) => sum + (n.runtimeMinutes || 130), 0) / 60 * 10
   ) / 10;
 
+  // Extract available unique phases/sagas
+  const availablePhases = Array.from(
+    new Set(nodes.map(n => n.phase).filter(Boolean))
+  ) as string[];
+
+  // Filter nodes by phase and in-page keyword search
+  const filteredNodes = nodes.filter(n => {
+    if (selectedPhaseFilter !== "ALL" && n.phase !== selectedPhaseFilter) {
+      return false;
+    }
+    if (inPageSearch.trim()) {
+      const q = inPageSearch.toLowerCase();
+      const titleMatch = n.title.toLowerCase().includes(q);
+      const charMatch = n.charactersIntroduced && n.charactersIntroduced.some(c => c.toLowerCase().includes(q));
+      const synopsisMatch = (n.synopsis || "").toLowerCase().includes(q);
+      const reasonMatch = (n.reason || "").toLowerCase().includes(q);
+      return titleMatch || charMatch || synopsisMatch || reasonMatch;
+    }
+    return true;
+  });
+
   return (
-    <section className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-12">
+    <section className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 py-10 space-y-8">
       
       {/* Timeline Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-white/[0.08] pb-6">
@@ -177,40 +202,98 @@ export const BranchTimeline: React.FC<BranchTimelineProps> = ({
         </motion.div>
       )}
 
-      {/* Mode Filter Tabs */}
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs font-mono text-slate-500 uppercase mr-1">Filter Path:</span>
-        {[
-          { id: "fast-track", label: "Fast-Track (Essential)" },
-          { id: "full-lore", label: "Full Canon Lore" },
-          { id: "chronological", label: "Chronological" },
-          { id: "zero-filler", label: "Zero Filler" }
-        ].map((m) => (
-          <button
-            key={m.id}
-            onClick={() => {
-              onModeChange(m.id);
-            }}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer border ${
-              selectedMode === m.id
-                ? "bg-red-600/20 border-red-500/80 text-white shadow-[0_0_12px_rgba(226,26,34,0.3)]"
-                : "bg-white/[0.03] border-white/10 text-slate-400 hover:text-white"
-            }`}
-          >
-            {m.label}
-          </button>
-        ))}
+      {/* Mode Filter Tabs & In-Page Filter Row */}
+      <div className="space-y-4">
+        
+        {/* Mode Buttons */}
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs font-mono text-slate-500 uppercase mr-1 flex items-center gap-1">
+              <Filter className="w-3 h-3 text-red-400" />
+              <span>Strategy:</span>
+            </span>
+            {[
+              { id: "fast-track", label: "⚡ Fast-Track (Essential)" },
+              { id: "zero-filler", label: "🎯 Zero Filler (Canon)" },
+              { id: "full-lore", label: "📚 Full Canon Lore" },
+              { id: "chronological", label: "⏳ Chronological" },
+              { id: "all", label: "🌌 All Universe Releases" }
+            ].map((m) => (
+              <button
+                key={m.id}
+                onClick={() => {
+                  onModeChange(m.id);
+                }}
+                className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer border ${
+                  selectedMode === m.id
+                    ? "bg-red-600/20 border-red-500 text-white shadow-[0_0_12px_rgba(226,26,34,0.3)] font-semibold"
+                    : "bg-white/[0.03] border-white/10 text-slate-400 hover:text-white hover:border-white/20"
+                }`}
+              >
+                {m.label}
+              </button>
+            ))}
+          </div>
+
+          {/* In-Page Quick Filter */}
+          <div className="relative w-full sm:w-56">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-500 pointer-events-none" />
+            <input
+              type="text"
+              value={inPageSearch}
+              onChange={(e) => setInPageSearch(e.target.value)}
+              placeholder="Filter character or movie..."
+              className="w-full bg-black/60 border border-white/10 focus:border-red-500/80 rounded-full py-1.5 pl-8 pr-3 text-xs text-white placeholder-slate-500 outline-none font-mono"
+            />
+          </div>
+        </div>
+
+        {/* Phase / Saga Filter Chips (when available) */}
+        {availablePhases.length > 1 && (
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 text-xs font-mono">
+            <span className="text-[10px] text-slate-500 uppercase shrink-0 mr-1">
+              Phases:
+            </span>
+            <button
+              onClick={() => setSelectedPhaseFilter("ALL")}
+              className={`px-2.5 py-0.5 rounded-md text-[11px] whitespace-nowrap transition-all cursor-pointer border ${
+                selectedPhaseFilter === "ALL"
+                  ? "bg-white/15 border-white/30 text-white font-bold"
+                  : "bg-white/[0.02] border-white/5 text-slate-400 hover:text-white"
+              }`}
+            >
+              All ({nodes.length})
+            </button>
+            {availablePhases.map((phase) => {
+              const count = nodes.filter(n => n.phase === phase).length;
+              return (
+                <button
+                  key={phase}
+                  onClick={() => setSelectedPhaseFilter(phase)}
+                  className={`px-2.5 py-0.5 rounded-md text-[11px] whitespace-nowrap transition-all cursor-pointer border ${
+                    selectedPhaseFilter === phase
+                      ? "bg-red-600/30 border-red-500 text-white font-bold"
+                      : "bg-white/[0.02] border-white/5 text-slate-400 hover:text-white"
+                  }`}
+                >
+                  {phase} ({count})
+                </button>
+              );
+            })}
+          </div>
+        )}
+
       </div>
 
       {/* The Central Vertical Timeline Tree (Leaf Branch Flow) */}
-      <div className="relative w-full py-8">
+      <div className="relative w-full py-6">
         
         {/* Central Vertical Timeline Line */}
         <div className="absolute top-0 bottom-0 left-6 lg:left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-red-600 via-red-900/60 to-red-600/30 shadow-[0_0_10px_rgba(226,26,34,0.3)]" />
 
         {/* Nodes List */}
         <div className="space-y-12 sm:space-y-16">
-          {nodes.map((node, index) => {
+          {filteredNodes.map((node, index) => {
             const isLeft = index % 2 === 0;
             const isWatched = watchedIds.has(node.id);
 
@@ -299,93 +382,110 @@ export const BranchTimeline: React.FC<BranchTimelineProps> = ({
                       {/* Text Details */}
                       <div className="flex-1 space-y-2 text-left">
                         
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="font-mono text-[10px] text-slate-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/10">
-                            #{node.order} • {node.type}
-                          </span>
-                          <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded uppercase ${
-                            node.tier === "Essential" 
-                              ? "bg-red-500/15 text-red-400 border border-red-500/40" 
-                              : "bg-yellow-500/10 text-yellow-300 border border-yellow-500/30"
+                        {/* Top Badges: Tier, Type & Chrono */}
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider font-semibold border ${
+                            node.tier === "Essential"
+                              ? "bg-red-500/10 text-red-400 border-red-500/30"
+                              : node.tier === "Supplementary"
+                              ? "bg-purple-500/10 text-purple-400 border-purple-500/30"
+                              : "bg-slate-500/10 text-slate-400 border-slate-500/30"
                           }`}>
                             {node.tier}
                           </span>
+
+                          <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-white/[0.05] border border-white/10 text-slate-300">
+                            {node.type}
+                          </span>
+
                           {node.phase && (
-                            <span className="text-[10px] font-mono text-slate-500">
+                            <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-blue-500/10 border border-blue-500/30 text-blue-300">
                               {node.phase}
+                            </span>
+                          )}
+
+                          {node.chronoYear && (
+                            <span className="text-[10px] font-mono text-slate-400 flex items-center gap-1 ml-auto">
+                              <Calendar className="w-2.5 h-2.5" />
+                              <span>Timeline: {node.chronoYear}</span>
                             </span>
                           )}
                         </div>
 
-                        <h3 
-                          onClick={() => setSelectedModalNode(node)}
-                          className="font-cinematic font-bold text-lg sm:text-xl text-white hover:text-red-400 transition-colors cursor-pointer leading-snug"
-                        >
+                        {/* Title & Order Number */}
+                        <h3 className="font-cinematic font-bold text-lg sm:text-xl text-white group-hover:text-red-400 transition-colors">
+                          <span className="text-red-500 font-mono mr-2 text-sm sm:text-base">
+                            #{node.order}
+                          </span>
                           {node.title}
                         </h3>
 
-                        <p className="text-xs text-slate-300 font-sans font-light line-clamp-2 leading-relaxed">
-                          {node.reason}
+                        {/* Synopsis & Key Relevance */}
+                        <p className="text-xs sm:text-sm text-slate-300 font-sans font-light leading-relaxed line-clamp-3">
+                          {node.reason || node.synopsis}
                         </p>
 
-                        {/* Character Pills */}
+                        {/* Introduced Characters Tags */}
                         {node.charactersIntroduced && node.charactersIntroduced.length > 0 && (
-                          <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                            <span className="text-[10px] font-mono text-slate-500 flex items-center gap-1">
-                              <Users className="w-3 h-3 text-red-400" />
-                              <span>Key Cast:</span>
+                          <div className="pt-1 flex flex-wrap items-center gap-1">
+                            <span className="text-[9px] font-mono text-slate-500 uppercase mr-1">
+                              Debuts:
                             </span>
-                            {node.charactersIntroduced.slice(0, 3).map((char, cIdx) => (
-                              <span
-                                key={cIdx}
-                                className="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 text-[10px] font-mono text-slate-300"
-                              >
-                                {char}
+                            {node.charactersIntroduced.slice(0, 4).map((c, i) => (
+                              <span key={i} className="px-1.5 py-0.5 bg-white/[0.03] border border-white/5 rounded text-[9px] font-mono text-slate-400">
+                                {c}
                               </span>
                             ))}
+                            {node.charactersIntroduced.length > 4 && (
+                              <span className="text-[9px] font-mono text-slate-500">
+                                +{node.charactersIntroduced.length - 4} more
+                              </span>
+                            )}
                           </div>
                         )}
 
-                        {/* Interactive Actions Row */}
-                        <div className="pt-2 flex flex-wrap items-center gap-2.5">
+                        {/* Action Buttons */}
+                        <div className="pt-2 flex flex-wrap items-center gap-2 border-t border-white/[0.06]">
                           
-                          {/* Clickable Streaming Button (Redirects to Disney+ Hotstar or Netflix) */}
-                          <a
-                            href={node.streamUrl || "https://www.hotstar.com"}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-600/20 hover:bg-red-600 text-white border border-red-500/50 rounded-lg text-[11px] font-mono font-semibold transition-all shadow group/btn"
-                          >
-                            <Tv2 className="w-3.5 h-3.5 text-red-400 group-hover/btn:text-white" />
-                            <span>Watch on {node.streamingOn.split(' ')[0]}</span>
-                            <ArrowUpRight className="w-3 h-3 text-slate-400 group-hover/btn:text-white" />
-                          </a>
-
                           {/* Mark Watched Toggle */}
                           <button
-                            onClick={() => {
-                              onToggleWatched(node.id);
-                            }}
-                            className={`p-1.5 rounded-lg border text-xs font-mono transition-all flex items-center gap-1 cursor-pointer ${
+                            onClick={() => onToggleWatched(node.id)}
+                            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono transition-all cursor-pointer border ${
                               isWatched
-                                ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400"
-                                : "bg-white/[0.03] border-white/10 text-slate-400 hover:text-white"
+                                ? "bg-emerald-500/20 border-emerald-500 text-emerald-300 font-bold"
+                                : "bg-white/[0.03] border-white/10 text-slate-400 hover:text-white hover:bg-white/[0.06]"
                             }`}
-                            title={isWatched ? "Archived" : "Mark as watched"}
                           >
-                            {isWatched ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Circle className="w-4 h-4" />}
+                            {isWatched ? (
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                            ) : (
+                              <Circle className="w-3.5 h-3.5" />
+                            )}
+                            <span>{isWatched ? "Watched" : "Mark as Watched"}</span>
                           </button>
 
-                          {/* Dossier Brief */}
+                          {/* View Deep Lore Modal */}
                           <button
-                            onClick={() => {
-                              setSelectedModalNode(node);
-                            }}
-                            className="text-[11px] font-mono text-slate-400 hover:text-white underline underline-offset-2 ml-auto cursor-pointer"
+                            onClick={() => setSelectedModalNode(node)}
+                            className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-mono bg-white/[0.04] hover:bg-red-950/40 border border-white/10 hover:border-red-500/50 text-slate-300 hover:text-white transition-all cursor-pointer"
                           >
-                            Lore details
+                            <span>Lore & Post-Credits</span>
+                            <ArrowUpRight className="w-3 h-3 text-red-400" />
                           </button>
+
+                          {/* Stream Link (if provided) */}
+                          {node.streamUrl && (
+                            <a
+                              href={node.streamUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="ml-auto flex items-center gap-1 text-[11px] font-mono text-slate-400 hover:text-red-400 transition-colors"
+                            >
+                              <Tv2 className="w-3 h-3" />
+                              <span>{node.streamingOn || "Stream"}</span>
+                              <ExternalLink className="w-2.5 h-2.5" />
+                            </a>
+                          )}
 
                         </div>
 
@@ -403,13 +503,15 @@ export const BranchTimeline: React.FC<BranchTimelineProps> = ({
 
       </div>
 
-      {/* Node Detail Dossier Modal */}
-      <NodeDetailModal
-        node={selectedModalNode}
-        isWatched={selectedModalNode ? watchedIds.has(selectedModalNode.id) : false}
-        onToggleWatched={(id) => onToggleWatched(id)}
-        onClose={() => setSelectedModalNode(null)}
-      />
+      {/* Deep Lore Modal popup */}
+      {selectedModalNode && (
+        <NodeDetailModal
+          node={selectedModalNode}
+          onClose={() => setSelectedModalNode(null)}
+          isWatched={watchedIds.has(selectedModalNode.id)}
+          onToggleWatched={(id) => onToggleWatched(id)}
+        />
+      )}
 
     </section>
   );

@@ -195,6 +195,18 @@ export default function App() {
                   onSearchSubmit={handleSearchSubmit}
                   onToggleWatched={handleToggleWatched}
                   onModeChange={handleModeChange}
+                  onFranchiseChange={(id) => {
+                    setSelectedFranchiseId(id);
+                    const univ = universes.find(u => u.id === id);
+                    const defaultTarget = univ?.presetTargets?.[0]?.id;
+                    if (defaultTarget) {
+                      setSelectedTargetId(defaultTarget);
+                      executePipeline({ franchiseId: id, targetId: defaultTarget, mode: selectedMode });
+                    } else {
+                      executePipeline({ franchiseId: id, mode: selectedMode });
+                    }
+                  }}
+                  onSelectTarget={handleSelectTarget}
                 />
               </motion.div>
             )
