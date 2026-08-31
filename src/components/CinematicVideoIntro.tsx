@@ -15,19 +15,48 @@ interface CinematicVideoIntroProps {
 export const CinematicVideoIntro: React.FC<CinematicVideoIntroProps> = ({ onComplete }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(false);
+  const [showTitleOverlay, setShowTitleOverlay] = useState(true);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    video.volume = 0.85;
+    video.volume = 0.9;
     video.muted = false;
 
-    video.play().catch(() => {
-      video.muted = true;
-      setIsMuted(true);
-      video.play().catch(console.error);
-    });
+    const tryPlay = async () => {
+      try {
+        await video.play();
+        setIsMuted(false);
+      } catch {
+        // If modern browser restricts unmuted autoplay before interaction,
+        // start playback and immediately unmute on the very first touch/click
+        video.muted = true;
+        setIsMuted(true);
+        video.play().catch(console.error);
+
+        const unmuteOnInteraction = () => {
+          if (videoRef.current) {
+            videoRef.current.muted = false;
+            setIsMuted(false);
+          }
+          window.removeEventListener('pointerdown', unmuteOnInteraction);
+          window.removeEventListener('keydown', unmuteOnInteraction);
+        };
+
+        window.addEventListener('pointerdown', unmuteOnInteraction, { once: true });
+        window.addEventListener('keydown', unmuteOnInteraction, { once: true });
+      }
+    };
+
+    tryPlay();
+
+    // Fade out overlay text after 2.5 seconds as video's built-in ORDERLY animation appears
+    const timer = setTimeout(() => {
+      setShowTitleOverlay(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const handleVideoEnded = () => {
@@ -69,16 +98,12 @@ export const CinematicVideoIntro: React.FC<CinematicVideoIntroProps> = ({ onComp
 
       {/* Top Header Minimal Controls */}
       <div className="relative z-30 w-full max-w-7xl px-6 pt-6 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="font-cinematic font-bold text-xs tracking-[0.3em] text-slate-300 uppercase">
-            MARVEL STUDIOS
-          </span>
-        </div>
+        <div />
 
         <div className="flex items-center gap-3">
           <button
             onClick={toggleMute}
-            className="p-2.5 bg-black/40 hover:bg-white/10 border border-white/15 rounded-full text-slate-300 hover:text-white backdrop-blur-md transition-all"
+            className="p-2.5 bg-black/40 hover:bg-white/10 border border-white/15 rounded-full text-slate-300 hover:text-white backdrop-blur-md transition-all cursor-pointer"
             title={isMuted ? "Unmute Audio" : "Mute Audio"}
           >
             {isMuted ? (
@@ -90,21 +115,29 @@ export const CinematicVideoIntro: React.FC<CinematicVideoIntroProps> = ({ onComp
         </div>
       </div>
 
-      {/* Center Ambient Presence */}
+      {/* Center Ambient Presence (Fades out after 2.5s once video's title appears) */}
       <div className="relative z-20 pointer-events-none text-center px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="space-y-1"
-        >
-          <div className="text-[10px] font-mono tracking-[0.35em] text-slate-400 uppercase">
-            THE ARCHIVAL MULTIVERSE DIRECTORY
-          </div>
-          <h1 className="font-cinematic font-black text-3xl sm:text-5xl text-white tracking-[0.25em] uppercase">
-            ORDERLY
-          </h1>
-        </motion.div>
+        <AnimatePresence>
+          {showTitleOverlay && (
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10, filter: "blur(6px)" }}
+              transition={{ 
+                duration: 0.8,
+                ease: "easeInOut"
+              }}
+              className="space-y-1"
+            >
+              <div className="text-[10px] font-mono tracking-[0.35em] text-slate-400 uppercase">
+                THE ARCHIVAL MULTIVERSE DIRECTORY
+              </div>
+              <h1 className="font-cinematic font-black text-3xl sm:text-5xl text-white tracking-[0.25em] uppercase">
+                ORDERLY
+              </h1>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Bottom Subtle Enter CTA (No progressbar, clean & elegant) */}

@@ -240,5 +240,53 @@ export const SAW_DATA = {
       ],
       prerequisites: ["saw-6"],
     },
+    {
+      id: "saw-jigsaw",
+      title: "Jigsaw",
+      type: "Movie",
+      year: 2017,
+      chronoYear: "2003 (Game 0) / 2017 (Present Investigation)",
+      phase: "The Next Generation",
+      runtimeMinutes: 92,
+      tier: "Recommended",
+      streamingOn: "Lionsgate Play",
+      poster: "https://image.tmdb.org/t/p/w500/dPtLh3q51bL3m0h2q1l9y4A.jpg",
+      synopsis:
+        "Bodies turn up around the city, each having met a gruesome demise. All evidence points to one suspect: John Kramer, a man who has been dead for over a decade. Pathologist Logan Nelson is revealed as Kramer's first forgotten apprentice.",
+      reason:
+        "Reveals the barn game occurred before Saw 1; introduces Logan Nelson as the apprentice who helped build the original Reverse Bear Trap.",
+      postCredits:
+        "Logan slices Halloran's neck with laser collars and walks out: 'I speak for the dead.'",
+      charactersIntroduced: [
+        "Logan Nelson (First Apprentice)",
+        "Detective Halloran",
+        "Eleanor Bonneville",
+      ],
+      prerequisites: ["saw-3d"],
+    },
+    {
+      id: "saw-spiral",
+      title: "Spiral: From the Book of Saw",
+      type: "Movie",
+      year: 2021,
+      chronoYear: "2021",
+      phase: "The Next Generation",
+      runtimeMinutes: 93,
+      tier: "Recommended",
+      streamingOn: "Lionsgate Play",
+      poster: "https://image.tmdb.org/t/p/w500/dPtLh3q51bL3m0h2q1l9y4A.jpg",
+      synopsis:
+        "Working in the shadow of an esteemed police veteran, brash Detective Zeke Banks and his rookie partner William Schenk take charge of a grisly investigation into corrupt police murders that are eerily reminiscent of the city's gruesome past.",
+      reason:
+        "Copycat Jigsaw copy killer targets corrupt cops in Metro Police Department; introduces William Schenk as the Spiral Killer.",
+      postCredits:
+        "SWAT team shoots Marcus Banks while the Spiral killer escapes through the elevator.",
+      charactersIntroduced: [
+        "Detective Zeke Banks",
+        "Marcus Banks (Samuel L. Jackson)",
+        "William Schenk (The Spiral Copycat)",
+      ],
+      prerequisites: ["saw-jigsaw"],
+    },
   ],
 };

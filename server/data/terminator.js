@@ -30,7 +30,7 @@ export const TERMINATOR_DATA = {
       type: "Movie",
     },
     {
-      id: "term-sarah-connor-s2",
+      id: "term-sarah-connor-s1-2",
       title: "The Sarah Connor Chronicles (Series Finale)",
       year: 2009,
       type: "Series",

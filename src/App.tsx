@@ -5,7 +5,7 @@ import { UniverseHeroFullscreen } from './components/UniverseHeroFullscreen';
 import { TimelinePage } from './components/TimelinePage';
 import { WatchNode } from './components/NodeDetailModal';
 import { UniverseOption } from './types';
-import { fetchUniverses, generateWatchOrder } from './services/api';
+import { fetchUniverses, fetchAllCanonicalNodes, generateWatchOrder } from './services/api';
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
@@ -109,15 +109,34 @@ export default function App() {
   };
 
   const handleSelectTarget = (targetId: string, franchiseId?: string) => {
-    const fId = franchiseId || selectedFranchiseId;
+    let fId = franchiseId;
+    if (!fId) {
+      const allNodes = fetchAllCanonicalNodes();
+      const match = allNodes.find(n => n.id === targetId);
+      if (match) fId = match.franchiseId;
+    }
+    fId = fId || selectedFranchiseId;
+
     setSelectedTargetId(targetId);
-    if (franchiseId) setSelectedFranchiseId(franchiseId);
+    setSelectedFranchiseId(fId);
     executePipeline({
       franchiseId: fId,
       targetId,
       mode: selectedMode
     }).then(() => {
       setCurrentView("timeline");
+    });
+  };
+
+  const handleFranchiseChange = (id: string) => {
+    setSelectedFranchiseId(id);
+    const univ = universes.find(u => u.id === id);
+    const defaultTarget = univ?.presetTargets?.[0]?.id || "";
+    setSelectedTargetId(defaultTarget);
+    executePipeline({
+      franchiseId: id,
+      targetId: defaultTarget,
+      mode: selectedMode
     });
   };
 
@@ -167,10 +186,7 @@ export default function App() {
               <UniverseHeroFullscreen
                 universes={universes}
                 selectedFranchiseId={selectedFranchiseId}
-                onFranchiseChange={(id) => {
-                  setSelectedFranchiseId(id);
-                  executePipeline({ franchiseId: id, mode: selectedMode });
-                }}
+                onFranchiseChange={handleFranchiseChange}
                 onSearchSubmit={handleSearchSubmit}
                 onSelectTarget={handleSelectTarget}
               />
@@ -195,17 +211,7 @@ export default function App() {
                   onSearchSubmit={handleSearchSubmit}
                   onToggleWatched={handleToggleWatched}
                   onModeChange={handleModeChange}
-                  onFranchiseChange={(id) => {
-                    setSelectedFranchiseId(id);
-                    const univ = universes.find(u => u.id === id);
-                    const defaultTarget = univ?.presetTargets?.[0]?.id;
-                    if (defaultTarget) {
-                      setSelectedTargetId(defaultTarget);
-                      executePipeline({ franchiseId: id, targetId: defaultTarget, mode: selectedMode });
-                    } else {
-                      executePipeline({ franchiseId: id, mode: selectedMode });
-                    }
-                  }}
+                  onFranchiseChange={handleFranchiseChange}
                   onSelectTarget={handleSelectTarget}
                 />
               </motion.div>

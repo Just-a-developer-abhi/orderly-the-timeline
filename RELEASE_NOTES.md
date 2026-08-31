@@ -6,9 +6,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
-## [Unreleased]
-- High-resolution hero image collections for the 20 newly added universes.
-- User custom list export & cross-device progress sync.
+## [v2.3.2] — 2026-08-31
+### 📜 Scrollability & Event Capture Fixes
+- **Independent Dropdown & Modal Scrolling**:
+  - Fixed the window wheel/touch listener in `UniverseHeroFullscreen.tsx` which was previously executing `e.preventDefault()` globally and blocking mousewheel / trackpad scrolling inside floating menus.
+  - Added target inspection (`data-scrollable="true"`, `.overflow-y-auto`, `.custom-scrollbar`) to allow native smooth scrolling inside:
+    - **Top-Left Universe Dropdown** (`UniversesDropdown.tsx`)
+    - **Fullscreen Multiverse Directory** (`MultiverseDirectoryModal.tsx`)
+    - **Search Command Palette & Autocomplete** (`SearchCommandPalette.tsx`)
+    - **Node Detail Modal** (`NodeDetailModal.tsx`)
+- **Enhanced Custom Scrollbars & Overscroll Containment**:
+  - Added `overscroll-contain` and explicit cross-browser scrollbar CSS rules in `src/index.css` for clean dark cinematic scrollbars.
+
+---
+
+## [v2.3.1] — 2026-08-31
+### 🐛 Bug Fixes & Top-Left Dropdown Enhancements
+- **Top-Left Universes Dropdown (`UniversesDropdown.tsx`)**:
+  - Replaced the previous 4-item pill bar with an interactive, compact, scrollable dropdown on the top-left navigation.
+  - Houses all **24 universes** in smaller, clickable cards with real-time in-dropdown search and category filtering (`All 24`, `Western 12`, `Anime 12`).
+- **Complete 24-Universe Export Registration**:
+  - Fixed `server/data/franchises.js` export mapping so all 20 new universe modules are aggregated and loaded by `fetchUniverses()`.
+- **Target Selection & True Universe Auto-Detection**:
+  - Upgraded `queryParserAgent.js` and `App.tsx` so clicking on any target or movie card in the right search autocomplete palette automatically resolves its true franchise without falling back to the previous/default universe.
+  - Synchronized all preset target IDs in `walkingdead.js`, `terminator.js`, and `saw.js` with their canonical node IDs.
+
+---
+
+## [v2.2.1] — 2026-08-31
+### 🎨 Polish & UX Enhancements
+- **Audio Enabled by Default**: Video intro audio is now set to **ON by default** (`muted: false`, `volume: 0.90`) with an automatic instant-unmute listener on the first user interaction if browser autoplay security policies initially restrict sound.
+- **Cinematic Intro Branding**: Removed `"MARVEL STUDIOS"` label from the top-left corner of the video intro screen.
+- **Dynamic Title Overlay Fadeout**: Implemented a 2.5-second automatic graceful fadeout with `AnimatePresence` for the central HTML `"ORDERLY"` title overlay, allowing the video's built-in animated typography to seamlessly take over while preserving the initial overlay as a failsafe on slow networks/devices.
 
 ---
 

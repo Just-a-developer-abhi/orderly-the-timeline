@@ -13,13 +13,13 @@ export const WALKINGDEAD_DATA = {
       type: "Series",
     },
     {
-      id: "twd-daryl-dixon-s2",
+      id: "twd-daryl-dixon-s1-2",
       title: "Daryl Dixon (Season 2: The Book of Carol)",
       year: 2024,
       type: "Series",
     },
     {
-      id: "twd-dead-city-s2",
+      id: "twd-dead-city-s1-2",
       title: "Dead City (Season 2: Manhattan)",
       year: 2025,
       type: "Series",
