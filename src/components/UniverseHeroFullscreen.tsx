@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ArrowRight, Sparkles, ChevronDown } from 'lucide-react';
+import { Search, ArrowRight, Sparkles, ChevronDown, Compass, Layers } from 'lucide-react';
 import { UniverseOption } from '../types';
+import { MultiverseDirectoryModal } from './MultiverseDirectoryModal';
+import { SearchCommandPalette } from './SearchCommandPalette';
+import { UniversesDropdown } from './UniversesDropdown';
 
 interface UniverseHeroFullscreenProps {
   universes: UniverseOption[];
@@ -279,6 +282,7 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [step, setStep] = useState(0);
+  const [isDirectoryOpen, setIsDirectoryOpen] = useState(false);
 
   const matchedUniverse = universes.find((u) => u.id === selectedFranchiseId);
   const config = UNIVERSE_CONFIGS[selectedFranchiseId] || {
@@ -354,6 +358,19 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
   // Responsive Bidirectional 2-Scroll Step Listener
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
+      // Do not intercept scrolling if inside scrollable dropdowns, modals, or input elements
+      const target = e.target as HTMLElement | null;
+      if (
+        target?.closest('[data-scrollable="true"]') ||
+        target?.closest('.overflow-y-auto') ||
+        target?.closest('.overflow-auto') ||
+        target?.closest('.custom-scrollbar') ||
+        target?.closest('input') ||
+        target?.closest('textarea')
+      ) {
+        return;
+      }
+
       e.preventDefault();
       const now = Date.now();
       const currentStep = stepRef.current;
@@ -407,9 +424,27 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
 
     let touchStartY = 0;
     const handleTouchStart = (e: TouchEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (
+        target?.closest('[data-scrollable="true"]') ||
+        target?.closest('.overflow-y-auto') ||
+        target?.closest('.overflow-auto') ||
+        target?.closest('.custom-scrollbar')
+      ) {
+        return;
+      }
       touchStartY = e.touches[0].clientY;
     };
     const handleTouchEnd = (e: TouchEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (
+        target?.closest('[data-scrollable="true"]') ||
+        target?.closest('.overflow-y-auto') ||
+        target?.closest('.overflow-auto') ||
+        target?.closest('.custom-scrollbar')
+      ) {
+        return;
+      }
       const touchEndY = e.changedTouches[0].clientY;
       const diffY = touchStartY - touchEndY;
       const TOUCH_THRESHOLD = 40;
@@ -471,60 +506,43 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
       <div className="absolute inset-x-0 bottom-0 h-64 sm:h-80 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none z-10" />
 
       {/* TOP NAVIGATION BAR (As Specified in Reference Image) */}
-      <header className="relative z-30 w-full px-6 sm:px-10 pt-6 flex items-center justify-between">
+      <header className="relative z-30 w-full px-4 sm:px-10 pt-6 flex items-center justify-between gap-3 sm:gap-4">
         
-        {/* Top Left: Subtle Website Name & Rest of the Bar */}
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
+        {/* Top Left: Website Name & Multiverse Dropdown */}
+        <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+          <div className="flex items-center gap-2 shrink-0">
             <span className="font-cinematic font-bold text-sm sm:text-base tracking-[0.3em] text-white uppercase">
               ORDERLY
             </span>
           </div>
 
-          {/* Rest of the Bar: Dedicated Universe Switchers */}
-          <div className="hidden lg:flex items-center gap-1.5 border-l border-white/10 pl-5 overflow-x-auto no-scrollbar max-w-[45vw]">
-            {universes.map((u) => {
-              const isSelected = u.id === selectedFranchiseId;
-              const shortLabel = UNIVERSE_CONFIGS[u.id]?.shortName || u.name.split(' (')[0].split(' - ')[0];
-              return (
-                <button
-                  key={u.id}
-                  onClick={() => {
-                    onFranchiseChange(u.id);
-                  }}
-                  className={`px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer whitespace-nowrap shrink-0 ${
-                    isSelected
-                      ? "bg-white/15 text-white border border-white/30 shadow-md font-semibold"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.04]"
-                  }`}
-                >
-                  {shortLabel}
-                </button>
-              );
-            })}
-          </div>
+          {/* Top-Left Universes Dropdown (All 24 Universes, compact, scrollable cards) */}
+          <UniversesDropdown
+            universes={universes}
+            selectedFranchiseId={selectedFranchiseId}
+            onSelectUniverse={(id) => onFranchiseChange(id)}
+          />
+
+          {/* Full Multiverse Directory Modal Trigger */}
+          <button
+            onClick={() => setIsDirectoryOpen(true)}
+            className="hidden sm:flex items-center gap-1.5 px-3 py-2 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 rounded-full text-xs font-mono text-slate-300 hover:text-white transition-all cursor-pointer shrink-0"
+            title="Browse all 24 Universes & 325 Releases in Fullscreen Catalog"
+          >
+            <Compass className="w-3.5 h-3.5 text-red-400" />
+            <span className="hidden md:inline">Full Directory</span>
+          </button>
         </div>
 
-        {/* Top Right: Search Bar */}
-        <div className="flex items-center gap-3">
-          <form onSubmit={handleSearch} className="relative w-56 sm:w-80">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={`Search ${config.shortName} or target...`}
-              className="w-full bg-black/60 hover:bg-white/[0.06] focus:bg-black/90 border border-white/15 focus:border-red-500/80 rounded-full py-2 pl-9 pr-8 text-xs text-white placeholder-slate-500 outline-none transition-all font-mono backdrop-blur-md"
-            />
-            {searchQuery && (
-              <button
-                type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-1 bg-red-600 rounded-full text-white cursor-pointer"
-              >
-                <ArrowRight className="w-2.5 h-2.5" />
-              </button>
-            )}
-          </form>
+        {/* Top Right: Multiverse Search Command Palette */}
+        <div className="w-48 sm:w-80 md:w-96 shrink-0">
+          <SearchCommandPalette
+            universes={universes}
+            selectedFranchiseId={selectedFranchiseId}
+            onSearchSubmit={onSearchSubmit}
+            onSelectTarget={onSelectTarget}
+            onOpenDirectory={() => setIsDirectoryOpen(true)}
+          />
         </div>
 
       </header>
@@ -613,6 +631,16 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
           STAGE: {activeStageIndex + 1} / {numStages}
         </div>
       </footer>
+
+      {/* Multiverse Directory Modal */}
+      <MultiverseDirectoryModal
+        isOpen={isDirectoryOpen}
+        onClose={() => setIsDirectoryOpen(false)}
+        universes={universes}
+        selectedFranchiseId={selectedFranchiseId}
+        onSelectUniverse={(id) => onFranchiseChange(id)}
+        onSelectTarget={(targetId, franchiseId) => onSelectTarget(targetId, franchiseId)}
+      />
 
     </div>
   );

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Search, Sparkles, Filter, Tv2, ExternalLink, ChevronDown, Check } from 'lucide-react';
+import { ArrowLeft, Sparkles, Compass } from 'lucide-react';
 import { BranchTimeline } from './BranchTimeline';
 import { WatchNode } from './NodeDetailModal';
 import { UniverseOption } from '../types';
+import { MultiverseDirectoryModal } from './MultiverseDirectoryModal';
+import { SearchCommandPalette } from './SearchCommandPalette';
+import { UniversesDropdown } from './UniversesDropdown';
 
 interface TimelinePageProps {
   watchOrderData: {
@@ -40,29 +43,11 @@ export const TimelinePage: React.FC<TimelinePageProps> = ({
   onFranchiseChange,
   onSelectTarget
 }) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isDirectoryOpen, setIsDirectoryOpen] = useState(false);
 
   const effectiveFranchiseId = watchOrderData.franchiseId || selectedFranchiseId;
   const currentUniverse = universes.find(u => u.id === effectiveFranchiseId);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      onSearchSubmit(searchQuery.trim());
-      setSearchQuery("");
-      setIsSearchFocused(false);
-    }
-  };
-
-  // Filtered preset targets for search autocomplete
   const currentPresets = currentUniverse?.presetTargets || [];
-  const searchSuggestions = searchQuery.trim()
-    ? watchOrderData.nodes.filter(n => 
-        n.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (n.charactersIntroduced && n.charactersIntroduced.some(c => c.toLowerCase().includes(searchQuery.toLowerCase())))
-      ).slice(0, 6)
-    : [];
 
   return (
     <motion.div
@@ -74,10 +59,10 @@ export const TimelinePage: React.FC<TimelinePageProps> = ({
     >
       {/* Top Navigation Bar for Timeline View */}
       <header className="sticky top-0 z-40 w-full bg-[#030508]/95 backdrop-blur-xl border-b border-white/[0.08] px-4 sm:px-8 py-3">
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
+        <div className="max-w-6xl mx-auto flex items-center justify-between gap-3 sm:gap-4">
           
-          {/* Left: Back to Home Button & Orderly Logo */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          {/* Left: Back to Home Button, Orderly Logo & Universes Dropdown */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <button
               onClick={() => {
                 onBackToHero();
@@ -89,89 +74,41 @@ export const TimelinePage: React.FC<TimelinePageProps> = ({
               <span className="sm:hidden">Back</span>
             </button>
 
-            <span className="font-cinematic font-bold text-sm tracking-[0.25em] text-white uppercase hidden md:inline">
-              ORDERLY
-            </span>
+            {/* Top-Left Universes Dropdown (All 24 Universes) */}
+            <UniversesDropdown
+              universes={universes}
+              selectedFranchiseId={effectiveFranchiseId}
+              onSelectUniverse={(id) => {
+                if (onFranchiseChange) {
+                  onFranchiseChange(id);
+                }
+              }}
+            />
+
+            {/* Multiverse Directory Fullscreen Modal Trigger */}
+            <button
+              onClick={() => setIsDirectoryOpen(true)}
+              className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 bg-white/[0.03] hover:bg-white/10 border border-white/10 rounded-xl text-xs font-mono text-slate-300 hover:text-white transition-all cursor-pointer"
+              title="Open Full Multiverse Directory"
+            >
+              <Compass className="w-3.5 h-3.5 text-red-400" />
+              <span className="text-[11px]">Directory</span>
+            </button>
           </div>
 
-          {/* Center: Universe Switcher Pills */}
-          <div className="flex items-center gap-1 sm:gap-1.5 overflow-x-auto no-scrollbar py-1">
-            {universes.map((u) => {
-              const isActive = u.id === effectiveFranchiseId;
-              const shortLabel = u.id === "mcu" ? "Marvel" : u.id === "starwars" ? "Star Wars" : u.id === "anime_naruto" ? "Naruto" : "Dragon Ball";
-              return (
-                <button
-                  key={u.id}
-                  onClick={() => {
-                    if (onFranchiseChange && u.id !== effectiveFranchiseId) {
-                      onFranchiseChange(u.id);
-                    }
-                  }}
-                  className={`px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer whitespace-nowrap border ${
-                    isActive
-                      ? "bg-red-600/20 border-red-500 text-white shadow-[0_0_12px_rgba(226,26,34,0.3)] font-semibold"
-                      : "bg-white/[0.03] border-white/10 text-slate-400 hover:text-white hover:border-white/20"
-                  }`}
-                >
-                  <span>{shortLabel}</span>
-                  {u.totalNodes && (
-                    <span className={`ml-1.5 text-[10px] ${isActive ? "text-red-400 font-bold" : "text-slate-500"}`}>
-                      {u.totalNodes}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Right: Search Input */}
-          <div className="relative w-40 sm:w-64 shrink-0">
-            <form onSubmit={handleSearch} className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
-              <input
-                type="text"
-                value={searchQuery}
-                onFocus={() => setIsSearchFocused(true)}
-                onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search movie or arc..."
-                className="w-full bg-black/60 hover:bg-white/[0.06] focus:bg-black border border-white/15 focus:border-red-500/80 rounded-full py-1.5 pl-8 pr-3 text-xs text-white placeholder-slate-500 outline-none transition-all font-mono"
-              />
-            </form>
-
-            {/* Instant Search Suggestions Dropdown */}
-            {isSearchFocused && searchSuggestions.length > 0 && (
-              <div className="absolute right-0 mt-2 w-72 bg-[#090d14] border border-white/15 rounded-xl shadow-2xl overflow-hidden z-50 p-1.5 space-y-1">
-                <div className="text-[10px] font-mono text-slate-500 px-2 py-1 uppercase tracking-wider">
-                  Matching Releases
-                </div>
-                {searchSuggestions.map((node) => (
-                  <button
-                    key={node.id}
-                    onMouseDown={() => {
-                      if (onSelectTarget) {
-                        onSelectTarget(node.id, effectiveFranchiseId);
-                      }
-                      setSearchQuery("");
-                      setIsSearchFocused(false);
-                    }}
-                    className="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-white/10 flex items-center justify-between text-xs transition-colors group cursor-pointer"
-                  >
-                    <div className="truncate mr-2">
-                      <div className="font-semibold text-slate-200 group-hover:text-white truncate">
-                        {node.title}
-                      </div>
-                      <div className="text-[10px] font-mono text-slate-400">
-                        {node.year} • {node.type} {node.tier === "Essential" ? "• Essential" : ""}
-                      </div>
-                    </div>
-                    <span className="text-[10px] font-mono text-red-400 uppercase shrink-0">
-                      View
-                    </span>
-                  </button>
-                ))}
-              </div>
-            )}
+          {/* Right: Search Command Palette */}
+          <div className="w-48 sm:w-72 md:w-80 shrink-0">
+            <SearchCommandPalette
+              universes={universes}
+              selectedFranchiseId={effectiveFranchiseId}
+              onSearchSubmit={onSearchSubmit}
+              onSelectTarget={(tId, fId) => {
+                if (onSelectTarget) {
+                  onSelectTarget(tId, fId || effectiveFranchiseId);
+                }
+              }}
+              onOpenDirectory={() => setIsDirectoryOpen(true)}
+            />
           </div>
 
         </div>
@@ -229,11 +166,25 @@ export const TimelinePage: React.FC<TimelinePageProps> = ({
             <span className="font-cinematic font-bold text-white tracking-widest">ORDERLY</span>
             <span>• Archival Prerequisite Engine.</span>
           </div>
-          <div className="flex items-center gap-4 text-slate-500">
-            <span>Marvel • Star Wars • Naruto • Dragon Ball</span>
+          <div className="flex items-center gap-4 text-slate-400">
+            <span>24 Universes • 325 Canonical Releases</span>
           </div>
         </div>
       </footer>
+
+      {/* Multiverse Directory Modal */}
+      <MultiverseDirectoryModal
+        isOpen={isDirectoryOpen}
+        onClose={() => setIsDirectoryOpen(false)}
+        universes={universes}
+        selectedFranchiseId={effectiveFranchiseId}
+        onSelectUniverse={(id) => {
+          if (onFranchiseChange) onFranchiseChange(id);
+        }}
+        onSelectTarget={(targetId, franchiseId) => {
+          if (onSelectTarget) onSelectTarget(targetId, franchiseId || effectiveFranchiseId);
+        }}
+      />
 
     </motion.div>
   );

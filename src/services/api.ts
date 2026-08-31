@@ -26,6 +26,42 @@ export async function fetchUniverses() {
   }));
 }
 
+export function fetchAllCanonicalNodes() {
+  const allNodes: Array<{
+    id: string;
+    title: string;
+    type: string;
+    year: number;
+    phase?: string;
+    tier: string;
+    poster: string;
+    synopsis: string;
+    franchiseId: string;
+    franchiseName: string;
+    charactersIntroduced?: string[];
+  }> = [];
+
+  Object.values(FRANCHISES).forEach((f: any) => {
+    f.nodes.forEach((n: any) => {
+      allNodes.push({
+        id: n.id,
+        title: n.title,
+        type: n.type,
+        year: n.year,
+        phase: n.phase,
+        tier: n.tier,
+        poster: n.poster,
+        synopsis: n.synopsis,
+        franchiseId: f.id,
+        franchiseName: f.name,
+        charactersIntroduced: n.charactersIntroduced || []
+      });
+    });
+  });
+
+  return allNodes;
+}
+
 export async function generateWatchOrder(params: WatchOrderRequest) {
   const pipelineStartTime = Date.now();
 

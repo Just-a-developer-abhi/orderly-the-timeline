@@ -304,11 +304,45 @@ export async function runQueryParserAgent({
     }
   }
 
-  // Fallback to default target for franchise if not resolved
-  const franchise = FRANCHISES[detectedFranchiseKey] || FRANCHISES.mcu;
-  if (!detectedTargetId && !detectedAnchorId) {
+  // Fallback to default target for franchise if not resolved, and auto-correct universe if targetId belongs to another franchise
+  let franchise = FRANCHISES[detectedFranchiseKey];
+  if (!franchise) {
+    detectedFranchiseKey = "mcu";
+    franchise = FRANCHISES.mcu;
+  }
+
+  if (detectedTargetId) {
+    let targetExistsInFranchise = franchise.nodes.some(
+      (n) => n.id === detectedTargetId,
+    );
+    if (!targetExistsInFranchise) {
+      // Search all 24 franchises to find which one owns this target ID
+      for (const [fKey, fData] of Object.entries(FRANCHISES)) {
+        if (fData.nodes.some((n) => n.id === detectedTargetId)) {
+          detectedFranchiseKey = fKey;
+          franchise = fData;
+          targetExistsInFranchise = true;
+          reasoning.push(
+            `[Universe Auto-Switched] Target "${detectedTargetId}" resolved to "${fData.name}".`,
+          );
+          break;
+        }
+      }
+
+      if (!targetExistsInFranchise) {
+        const defaultPreset =
+          franchise.presetTargets?.[0] ||
+          franchise.nodes[franchise.nodes.length - 1];
+        detectedTargetId = defaultPreset.id;
+        reasoning.push(
+          `[Target Fallback] Resetting target to apex for "${franchise.name}": "${defaultPreset.title}".`,
+        );
+      }
+    }
+  } else if (!detectedAnchorId) {
     const defaultPreset =
-      franchise.presetTargets[0] || franchise.nodes[franchise.nodes.length - 1];
+      franchise.presetTargets?.[0] ||
+      franchise.nodes[franchise.nodes.length - 1];
     detectedTargetId = defaultPreset.id;
     reasoning.push(
       `[Target Fallback] Defaulting to apex target: "${defaultPreset.title}".`,

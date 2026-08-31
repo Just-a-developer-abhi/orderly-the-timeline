@@ -86,7 +86,12 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
             <X className="w-5 h-5" />
           </button>
 
-          <div className="p-6 sm:p-8 space-y-6 max-h-[85vh] overflow-y-auto">
+          <div 
+            data-scrollable="true"
+            onWheel={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
+            className="p-6 sm:p-8 space-y-6 max-h-[85vh] overflow-y-auto custom-scrollbar overscroll-contain"
+          >
             
             {/* Title & Canon Tags */}
             <div className="space-y-3">
