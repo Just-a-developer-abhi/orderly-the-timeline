@@ -1,20 +1,24 @@
 # ORDERLY — AI Watch-Order Multiverse Directory
 
 > **Never Watch Out of Order.**  
-> An interactive, highly visual web app powered by an autonomous Agentic Engine to navigate complex watch orders for massive cinematic universes and anime sagas (Marvel, Star Wars, Naruto, Dragon Ball Z).
+> An interactive, highly visual web app powered by an autonomous Agentic Engine to navigate complex watch orders for 24 massive cinematic universes and anime sagas (Marvel, Star Wars, Arrowverse, Walking Dead, Matrix, Terminator, Dune, Gundam, Evangelion, JoJo, and more).
+
+See [RELEASE_NOTES.md](./RELEASE_NOTES.md) for the complete version history, changelog, and roadmap.
 
 ---
 
 ## 🚀 Features
 
-- **Infinite Full-Screen Character Canvas**: Immersive, edge-to-edge visuals across Marvel, Star Wars, Naruto, and Dragon Ball Z with smooth scroll frame shifting.
+- **24 Cinematic & Anime Universes (325 Canonical Nodes)**: Explore interconnected timelines across Marvel, Star Wars, DC Arrowverse, The Walking Dead, The Matrix, Terminator, Planet of the Apes, Saw, Transformers, Dune, Buffyverse, Battlestar Galactica, Gundam UC, Toaru/Raildex, Evangelion, JoJo, FMA, SAO, Ghost in the Shell, Psycho-Pass, Detective Conan, Danganronpa, Naruto, and Dragon Ball Z.
+- **5 Multi-Strategy Watch Modes**: Switch instantly between *Fast-Track (Essential Only)*, *Zero-Filler*, *Full Canon Lore*, *Chronological In-Universe*, and *Complete Universe Catalog*.
+- **Infinite Full-Screen Character Canvas**: Immersive, edge-to-edge visuals with smooth 2-scroll step frame and text shifting.
 - **Conversational Watch Order Agent**:
-  - *"What should I watch after Avengers 2012?"* $\rightarrow$ Generates Phase 2 sequel progression.
+  - *"What should I watch after Avengers 2012?"* $\rightarrow$ Generates sequel progression.
   - *"What to watch before Doomsday?"* $\rightarrow$ Prunes essential prerequisite DAG tree.
-  - *"All Spider-Man movies in order"* $\rightarrow$ Isolates complete character arcs.
-  - *"Phase 2 Marvel"* $\rightarrow$ Bounds releases to specific phases.
-- **Central Alternating Branch Timeline**: Center glowing timeline with release year dots and leaf branch cards.
-- **Direct Streaming Integration**: Instant clickable links directing to Disney+ Hotstar, Netflix, and Crunchyroll.
+  - *"Crisis on Infinite Earths"* $\rightarrow$ Assembles multi-show crossover order.
+  - *"Railgun Sisters Arc"* $\rightarrow$ Isolates simultaneous timeline sequence.
+- **Central Alternating Branch Timeline**: Center glowing timeline with release year dots, leaf branch cards, and dynamic Phase/Saga filters.
+- **Direct Streaming Integration**: Instant clickable links directing to Disney+ Hotstar, Netflix, Max, and Crunchyroll.
 - **Isomorphic Architecture**: Runs both via Express Node.js backend and 100% offline client-side fallback.
 
 ---
