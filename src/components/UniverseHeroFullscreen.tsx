@@ -280,7 +280,45 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
   const [searchQuery, setSearchQuery] = useState("");
   const [step, setStep] = useState(0);
 
-  const config = UNIVERSE_CONFIGS[selectedFranchiseId] || UNIVERSE_CONFIGS.mcu;
+  const matchedUniverse = universes.find((u) => u.id === selectedFranchiseId);
+  const config = UNIVERSE_CONFIGS[selectedFranchiseId] || {
+    name: matchedUniverse?.name || "Universe Timeline",
+    shortName: matchedUniverse?.name?.split(" ")[0] || "Universe",
+    images: [
+      "/assets/Images/Spiderman/spiderman1.jpg",
+      "/assets/Images/Spiderman/spiderman2.jpg",
+      "/assets/Images/Spiderman/spiderman3.jpg",
+    ],
+    stages: [
+      {
+        badge: `${matchedUniverse?.name || "Canon Timeline"} • Essential Watch Order`,
+        titleLine1: "NEVER WATCH",
+        titleLine2: "OUT OF ORDER",
+        leftSub:
+          matchedUniverse?.tagline ||
+          "Canonical chronological and prerequisite release directory.",
+        rightTag: "CANONICAL TIMELINE",
+        rightText: `Optimized DAG watch paths and essential canon for ${matchedUniverse?.name || "this universe"}.`,
+        rightAction: `Explore ${matchedUniverse?.presetTargets?.[0]?.title?.slice(0, 24) || "Timeline"} →`,
+        targetId: matchedUniverse?.presetTargets?.[0]?.id || "",
+      },
+      {
+        badge: `${matchedUniverse?.name || "Canon Timeline"} • Climax & Spin-offs`,
+        titleLine1: "OPTIMIZED",
+        titleLine2: "CHRONOLOGY",
+        leftSub:
+          "Filter out filler, track interconnected spin-offs, and master the lore.",
+        rightTag: "CHRONOLOGICAL FLOW",
+        rightText:
+          "From foundational origin releases to modern crossover conclusions.",
+        rightAction: `Explore ${matchedUniverse?.presetTargets?.[1]?.title?.slice(0, 24) || "Target"} →`,
+        targetId:
+          matchedUniverse?.presetTargets?.[1]?.id ||
+          matchedUniverse?.presetTargets?.[0]?.id ||
+          "",
+      },
+    ],
+  };
   const images = config.images;
   const numImages = images.length;
   const numStages = config.stages.length;
@@ -444,22 +482,23 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
           </div>
 
           {/* Rest of the Bar: Dedicated Universe Switchers */}
-          <div className="hidden md:flex items-center gap-1.5 border-l border-white/10 pl-6">
-            {Object.entries(UNIVERSE_CONFIGS).map(([key, item]) => {
-              const isSelected = key === selectedFranchiseId;
+          <div className="hidden lg:flex items-center gap-1.5 border-l border-white/10 pl-5 overflow-x-auto no-scrollbar max-w-[45vw]">
+            {universes.map((u) => {
+              const isSelected = u.id === selectedFranchiseId;
+              const shortLabel = UNIVERSE_CONFIGS[u.id]?.shortName || u.name.split(' (')[0].split(' - ')[0];
               return (
                 <button
-                  key={key}
+                  key={u.id}
                   onClick={() => {
-                    onFranchiseChange(key);
+                    onFranchiseChange(u.id);
                   }}
-                  className={`px-3.5 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                  className={`px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                     isSelected
-                      ? "bg-white/10 text-white border border-white/20 shadow-md font-semibold"
-                      : "text-slate-500 hover:text-slate-300"
+                      ? "bg-white/15 text-white border border-white/30 shadow-md font-semibold"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.04]"
                   }`}
                 >
-                  {item.shortName}
+                  {shortLabel}
                 </button>
               );
             })}

@@ -56,7 +56,7 @@ export const CinematicVideoIntro: React.FC<CinematicVideoIntroProps> = ({ onComp
       <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-black">
         <video
           ref={videoRef}
-          src="/MCU.mp4"
+          src="/Intro2.mp4"
           className="w-full h-full object-cover sm:object-contain"
           playsInline
           onEnded={handleVideoEnded}
