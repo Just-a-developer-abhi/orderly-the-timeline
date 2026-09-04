@@ -119,51 +119,51 @@ export const MultiverseDirectoryModal: React.FC<MultiverseDirectoryModalProps> =
           data-scrollable="true"
           onWheel={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
-          className="relative z-10 w-full max-w-5xl max-h-[90vh] bg-[#07090e] border border-white/15 rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden text-slate-100"
+          className="relative z-10 w-full max-w-5xl max-h-[94vh] sm:max-h-[90vh] bg-[#07090e] border border-white/15 rounded-2xl sm:rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden text-slate-100"
         >
           {/* Header Banner */}
-          <div className="px-6 sm:px-8 pt-6 pb-4 border-b border-white/10 flex items-center justify-between gap-4 bg-gradient-to-r from-red-950/20 via-black to-slate-900/20 shrink-0">
+          <div className="px-4 sm:px-8 pt-5 sm:pt-6 pb-3.5 sm:pb-4 border-b border-white/10 flex items-center justify-between gap-3 sm:gap-4 bg-gradient-to-r from-red-950/20 via-black to-slate-900/20 shrink-0">
             <div>
-              <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-red-400">
+              <div className="flex items-center gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-red-400 flex-wrap">
                 <Sparkles className="w-3.5 h-3.5 text-red-500" />
                 <span>Multiverse Catalog</span>
                 <span className="text-slate-600">•</span>
                 <span className="text-slate-400">{universes.length} Universes</span>
-                <span className="text-slate-600">•</span>
-                <span className="text-slate-400">{totalReleases} Canonical Releases</span>
+                <span className="text-slate-600 hidden sm:inline">•</span>
+                <span className="text-slate-400 hidden sm:inline">{totalReleases} Canonical Releases</span>
               </div>
-              <h2 className="font-cinematic font-black text-2xl sm:text-3xl text-white tracking-wide uppercase mt-1">
+              <h2 className="font-cinematic font-black text-xl sm:text-3xl text-white tracking-wide uppercase mt-1">
                 Explore The Multiverse
               </h2>
             </div>
 
             <button
               onClick={onClose}
-              className="p-2.5 rounded-full bg-white/[0.04] hover:bg-white/15 border border-white/10 text-slate-400 hover:text-white transition-all cursor-pointer"
+              className="p-2 sm:p-2.5 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full bg-white/[0.04] hover:bg-white/15 border border-white/10 text-slate-400 hover:text-white transition-all cursor-pointer shrink-0"
               title="Close (ESC)"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
 
           {/* Search & Category Filter Controls */}
-          <div className="px-6 sm:px-8 py-3.5 bg-black/40 border-b border-white/[0.06] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shrink-0">
+          <div className="px-4 sm:px-8 py-3 bg-black/40 border-b border-white/[0.06] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-3 shrink-0">
             
             {/* Category Tabs */}
-            <div className="flex items-center gap-1.5 bg-white/[0.03] p-1 border border-white/10 rounded-xl">
+            <div className="flex items-center gap-1 bg-white/[0.03] p-1 border border-white/10 rounded-xl overflow-x-auto no-scrollbar">
               <button
                 onClick={() => setActiveCategory('all')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer whitespace-nowrap ${
                   activeCategory === 'all'
                     ? 'bg-red-600 text-white font-semibold shadow-md'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                All (24)
+                All ({universes.length})
               </button>
               <button
                 onClick={() => setActiveCategory('western')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer whitespace-nowrap ${
                   activeCategory === 'western'
                     ? 'bg-red-600 text-white font-semibold shadow-md'
                     : 'text-slate-400 hover:text-white'
@@ -173,7 +173,7 @@ export const MultiverseDirectoryModal: React.FC<MultiverseDirectoryModalProps> =
               </button>
               <button
                 onClick={() => setActiveCategory('anime')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer whitespace-nowrap ${
                   activeCategory === 'anime'
                     ? 'bg-red-600 text-white font-semibold shadow-md'
                     : 'text-slate-400 hover:text-white'
@@ -210,7 +210,7 @@ export const MultiverseDirectoryModal: React.FC<MultiverseDirectoryModalProps> =
             data-scrollable="true"
             onWheel={(e) => e.stopPropagation()}
             onTouchMove={(e) => e.stopPropagation()}
-            className="p-6 sm:p-8 overflow-y-auto flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 custom-scrollbar overscroll-contain"
+            className="p-3 sm:p-6 md:p-8 overflow-y-auto flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 custom-scrollbar overscroll-contain"
           >
             {filteredUniverses.map((u) => {
               const isSelected = u.id === selectedFranchiseId;

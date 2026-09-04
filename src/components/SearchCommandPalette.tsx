@@ -214,7 +214,7 @@ export const SearchCommandPalette: React.FC<SearchCommandPaletteProps> = ({
             data-scrollable="true"
             onWheel={(e) => e.stopPropagation()}
             onTouchMove={(e) => e.stopPropagation()}
-            className="absolute top-full mt-2 right-0 left-auto w-[92vw] sm:w-[540px] max-h-[480px] bg-[#07090f]/95 border border-white/20 rounded-2xl shadow-[0_15px_50px_rgba(0,0,0,0.9)] backdrop-blur-2xl z-50 overflow-hidden flex flex-col text-slate-200"
+            className="fixed inset-x-3 top-18 sm:absolute sm:inset-x-auto sm:top-full sm:right-0 sm:left-auto mt-2 w-auto sm:w-[540px] max-h-[82vh] sm:max-h-[480px] bg-[#07090f]/98 border border-white/20 rounded-2xl shadow-[0_15px_50px_rgba(0,0,0,0.9)] backdrop-blur-2xl z-50 overflow-hidden flex flex-col text-slate-200"
           >
             
             {/* Header info / Directory quick link */}

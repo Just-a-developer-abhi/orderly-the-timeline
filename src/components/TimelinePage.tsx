@@ -58,16 +58,16 @@ export const TimelinePage: React.FC<TimelinePageProps> = ({
       className="min-h-screen bg-[#030508] text-slate-100 flex flex-col font-sans selection:bg-red-600 selection:text-white"
     >
       {/* Top Navigation Bar for Timeline View */}
-      <header className="sticky top-0 z-40 w-full bg-[#030508]/95 backdrop-blur-xl border-b border-white/[0.08] px-4 sm:px-8 py-3">
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-3 sm:gap-4">
+      <header className="sticky top-0 z-40 w-full bg-[#030508]/95 backdrop-blur-xl border-b border-white/[0.08] px-3 sm:px-8 py-2.5 sm:py-3 safe-pt">
+        <div className="max-w-6xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Left: Back to Home Button, Orderly Logo & Universes Dropdown */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0 min-w-0">
             <button
               onClick={() => {
                 onBackToHero();
               }}
-              className="flex items-center gap-2 px-3 py-1.5 bg-white/[0.04] hover:bg-red-950/30 border border-white/10 hover:border-red-500/50 rounded-xl text-xs font-mono text-slate-300 hover:text-white transition-all group cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-white/[0.04] hover:bg-red-950/30 border border-white/10 hover:border-red-500/50 rounded-xl text-xs font-mono text-slate-300 hover:text-white transition-all group cursor-pointer shrink-0"
             >
               <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform text-red-400" />
               <span className="hidden sm:inline">Back to Home</span>
@@ -88,7 +88,7 @@ export const TimelinePage: React.FC<TimelinePageProps> = ({
             {/* Multiverse Directory Fullscreen Modal Trigger */}
             <button
               onClick={() => setIsDirectoryOpen(true)}
-              className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 bg-white/[0.03] hover:bg-white/10 border border-white/10 rounded-xl text-xs font-mono text-slate-300 hover:text-white transition-all cursor-pointer"
+              className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 bg-white/[0.03] hover:bg-white/10 border border-white/10 rounded-xl text-xs font-mono text-slate-300 hover:text-white transition-all cursor-pointer shrink-0"
               title="Open Full Multiverse Directory"
             >
               <Compass className="w-3.5 h-3.5 text-red-400" />
@@ -97,7 +97,7 @@ export const TimelinePage: React.FC<TimelinePageProps> = ({
           </div>
 
           {/* Right: Search Command Palette */}
-          <div className="w-48 sm:w-72 md:w-80 shrink-0">
+          <div className="w-36 sm:w-72 md:w-80 shrink-0">
             <SearchCommandPalette
               universes={universes}
               selectedFranchiseId={effectiveFranchiseId}

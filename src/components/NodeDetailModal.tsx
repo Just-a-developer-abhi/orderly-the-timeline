@@ -66,22 +66,22 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl">
         <motion.div
           initial={{ opacity: 0, scale: 0.96, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 15 }}
-          className="relative w-full max-w-2xl bg-[#0C101A] border border-white/15 rounded-2xl shadow-2xl overflow-hidden text-slate-100"
+          className="relative w-full max-w-2xl bg-[#0C101A] border border-white/15 rounded-2xl shadow-2xl overflow-hidden text-slate-100 max-h-[92vh] flex flex-col"
         >
           {/* Header Gradient Stripe */}
-          <div className={`h-2 w-full ${node.isTarget ? 'bg-gradient-to-r from-red-500 via-yellow-500 to-red-600' : 'bg-gradient-to-r from-red-600 via-red-900 to-red-600'}`} />
+          <div className={`h-2 w-full shrink-0 ${node.isTarget ? 'bg-gradient-to-r from-red-500 via-yellow-500 to-red-600' : 'bg-gradient-to-r from-red-600 via-red-900 to-red-600'}`} />
 
           {/* Close Button */}
           <button
             onClick={() => {
               onClose();
             }}
-            className="absolute top-5 right-5 p-2 rounded-full bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white transition-all z-10 cursor-pointer"
+            className="absolute top-4 right-4 p-2.5 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white transition-all z-10 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -90,7 +90,7 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
             data-scrollable="true"
             onWheel={(e) => e.stopPropagation()}
             onTouchMove={(e) => e.stopPropagation()}
-            className="p-6 sm:p-8 space-y-6 max-h-[85vh] overflow-y-auto custom-scrollbar overscroll-contain"
+            className="p-4 sm:p-8 space-y-4 sm:space-y-6 overflow-y-auto flex-1 custom-scrollbar overscroll-contain"
           >
             
             {/* Title & Canon Tags */}

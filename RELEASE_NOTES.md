@@ -6,6 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [v2.4.0] — 2026-08-31
+### 📱 Mobile & Tablet Responsive Architecture
+- **Adaptive Fullscreen Hero Layout (`UniverseHeroFullscreen.tsx`)**:
+  - Implemented responsive header scaling with safe-area insets (`safe-pt`) for iPhone Dynamic Island / notch.
+  - Formatted mobile hero content into an integrated, glassmorphic bottom card overlay with high contrast and glowing action button.
+  - Added interactive pagination dots and swipe gesture support for switching character frames on touch devices.
+- **Mobile Multiverse Universe Dropdown (`UniversesDropdown.tsx`)**:
+  - Adjusted dropdown viewport alignment on mobile (`fixed inset-x-3 top-18`) with 1-column card grid and large 48px touch targets.
+- **Responsive Multiverse Directory Modal (`MultiverseDirectoryModal.tsx`)**:
+  - Responsive grid: 1 column on phones (< 640px), 2 columns on tablets (640px–1023px), 3 columns on desktop ($\ge 1024px$).
+  - Horizontal scrolling category filter pills and responsive header.
+- **Adaptive Search Command Palette (`SearchCommandPalette.tsx`)**:
+  - Centered mobile dropdown drawer with comfortable tap spacing.
+- **Mobile Timeline Tree & Cards (`BranchTimeline.tsx`)**:
+  - Proportional timeline spine offset (`left-4 sm:left-6`, `pl-10 sm:pl-14`) on mobile.
+  - Responsive card interior with wrapping action buttons (`Mark as Watched`, streaming badge, lore trigger).
+- **Safe Area & Touch Utilities (`src/index.css`)**:
+  - Added `touch-action: manipulation`, `-webkit-tap-highlight-color: transparent`, and safe-area utilities (`.safe-pt`, `.safe-pb`, `.safe-px`).
+
+---
+
 ## [v2.3.2] — 2026-08-31
 ### 📜 Scrollability & Event Capture Fixes
 - **Independent Dropdown & Modal Scrolling**:

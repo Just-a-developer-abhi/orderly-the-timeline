@@ -144,7 +144,7 @@ export const UniversesDropdown: React.FC<UniversesDropdownProps> = ({
             data-scrollable="true"
             onWheel={(e) => e.stopPropagation()}
             onTouchMove={(e) => e.stopPropagation()}
-            className="absolute top-full mt-2 left-0 w-[92vw] sm:w-[460px] bg-[#07090f]/98 border border-white/20 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.95)] backdrop-blur-2xl z-50 overflow-hidden flex flex-col text-slate-200"
+            className="fixed inset-x-3 top-18 sm:absolute sm:inset-x-auto sm:left-0 sm:top-full mt-2 sm:mt-2 w-auto sm:w-[460px] max-h-[85vh] sm:max-h-[520px] bg-[#07090f]/98 border border-white/20 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.95)] backdrop-blur-2xl z-50 overflow-hidden flex flex-col text-slate-200"
           >
             {/* Header & Search */}
             <div className="p-3 bg-white/[0.02] border-b border-white/10 space-y-2">

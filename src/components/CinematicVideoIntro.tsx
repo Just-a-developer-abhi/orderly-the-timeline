@@ -97,13 +97,13 @@ export const CinematicVideoIntro: React.FC<CinematicVideoIntroProps> = ({ onComp
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/60 pointer-events-none" />
 
       {/* Top Header Minimal Controls */}
-      <div className="relative z-30 w-full max-w-7xl px-6 pt-6 flex items-center justify-between">
+      <div className="relative z-30 w-full max-w-7xl px-4 sm:px-6 safe-pt flex items-center justify-between">
         <div />
 
         <div className="flex items-center gap-3">
           <button
             onClick={toggleMute}
-            className="p-2.5 bg-black/40 hover:bg-white/10 border border-white/15 rounded-full text-slate-300 hover:text-white backdrop-blur-md transition-all cursor-pointer"
+            className="p-3 sm:p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center bg-black/50 hover:bg-white/15 border border-white/20 rounded-full text-slate-300 hover:text-white backdrop-blur-md transition-all cursor-pointer shadow-lg"
             title={isMuted ? "Unmute Audio" : "Mute Audio"}
           >
             {isMuted ? (
@@ -129,10 +129,10 @@ export const CinematicVideoIntro: React.FC<CinematicVideoIntroProps> = ({ onComp
               }}
               className="space-y-1"
             >
-              <div className="text-[10px] font-mono tracking-[0.35em] text-slate-400 uppercase">
+              <div className="text-[9px] sm:text-[10px] font-mono tracking-[0.35em] text-slate-400 uppercase">
                 THE ARCHIVAL MULTIVERSE DIRECTORY
               </div>
-              <h1 className="font-cinematic font-black text-3xl sm:text-5xl text-white tracking-[0.25em] uppercase">
+              <h1 className="font-cinematic font-black text-2xl sm:text-5xl text-white tracking-[0.25em] uppercase">
                 ORDERLY
               </h1>
             </motion.div>
@@ -141,13 +141,13 @@ export const CinematicVideoIntro: React.FC<CinematicVideoIntroProps> = ({ onComp
       </div>
 
       {/* Bottom Subtle Enter CTA (No progressbar, clean & elegant) */}
-      <div className="relative z-30 w-full max-w-md px-6 pb-12 flex justify-center">
+      <div className="relative z-30 w-full max-w-md px-4 sm:px-6 safe-pb flex justify-center">
         <motion.button
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
           onClick={handleEnter}
-          className="flex items-center gap-3 px-8 py-3 bg-black/60 hover:bg-white/10 border border-white/20 hover:border-white/40 text-slate-200 hover:text-white rounded-full font-mono text-xs tracking-[0.25em] uppercase backdrop-blur-xl transition-all shadow-2xl group cursor-pointer"
+          className="flex items-center justify-center gap-2.5 sm:gap-3 px-6 sm:px-8 py-3.5 sm:py-3 min-h-[48px] bg-black/70 hover:bg-white/15 border border-white/25 hover:border-white/50 text-slate-200 hover:text-white rounded-full font-mono text-[11px] sm:text-xs tracking-[0.25em] uppercase backdrop-blur-xl transition-all shadow-2xl group cursor-pointer w-full sm:w-auto text-center"
         >
           <span>ENTER DIRECTORY</span>
           <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-1 group-hover:text-white transition-all" />

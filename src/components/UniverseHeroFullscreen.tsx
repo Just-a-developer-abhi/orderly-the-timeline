@@ -505,18 +505,18 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
       <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/80 via-black/30 to-transparent pointer-events-none z-10" />
       <div className="absolute inset-x-0 bottom-0 h-64 sm:h-80 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none z-10" />
 
-      {/* TOP NAVIGATION BAR (As Specified in Reference Image) */}
-      <header className="relative z-30 w-full px-4 sm:px-10 pt-6 flex items-center justify-between gap-3 sm:gap-4">
+      {/* TOP NAVIGATION BAR */}
+      <header className="relative z-30 w-full px-3 sm:px-10 pt-4 sm:pt-6 safe-pt flex items-center justify-between gap-2 sm:gap-4">
         
         {/* Top Left: Website Name & Multiverse Dropdown */}
-        <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="font-cinematic font-bold text-sm sm:text-base tracking-[0.3em] text-white uppercase">
+        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <span className="font-cinematic font-bold text-xs sm:text-base tracking-[0.25em] sm:tracking-[0.3em] text-white uppercase">
               ORDERLY
             </span>
           </div>
 
-          {/* Top-Left Universes Dropdown (All 24 Universes, compact, scrollable cards) */}
+          {/* Top-Left Universes Dropdown (All 24 Universes) */}
           <UniversesDropdown
             universes={universes}
             selectedFranchiseId={selectedFranchiseId}
@@ -526,16 +526,16 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
           {/* Full Multiverse Directory Modal Trigger */}
           <button
             onClick={() => setIsDirectoryOpen(true)}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-2 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 rounded-full text-xs font-mono text-slate-300 hover:text-white transition-all cursor-pointer shrink-0"
+            className="hidden md:flex items-center gap-1.5 px-3 py-2 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 rounded-full text-xs font-mono text-slate-300 hover:text-white transition-all cursor-pointer shrink-0"
             title="Browse all 24 Universes & 325 Releases in Fullscreen Catalog"
           >
             <Compass className="w-3.5 h-3.5 text-red-400" />
-            <span className="hidden md:inline">Full Directory</span>
+            <span>Full Directory</span>
           </button>
         </div>
 
         {/* Top Right: Multiverse Search Command Palette */}
-        <div className="w-48 sm:w-80 md:w-96 shrink-0">
+        <div className="w-36 sm:w-72 md:w-96 shrink-0">
           <SearchCommandPalette
             universes={universes}
             selectedFranchiseId={selectedFranchiseId}
@@ -547,11 +547,11 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
 
       </header>
 
-      {/* CENTER INTERACTIVE CONTENT: UPPER LEFT & LOWER RIGHT */}
-      <div className="relative z-20 w-full h-full max-w-7xl mx-auto px-6 sm:px-10 flex flex-col justify-between py-12 pointer-events-none">
+      {/* CENTER INTERACTIVE CONTENT: ADAPTIVE MOBILE & DESKTOP LAYOUT */}
+      <div className="relative z-20 w-full h-full max-w-7xl mx-auto px-4 sm:px-10 flex flex-col justify-between py-6 sm:py-12 pointer-events-none">
         
-        {/* UPPER LEFT CONTENT AREA */}
-        <div className="max-w-md pt-4 sm:pt-8 text-left pointer-events-auto">
+        {/* UPPER LEFT / TOP HERO CONTENT AREA */}
+        <div className="max-w-md pt-2 sm:pt-8 text-left pointer-events-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={`${selectedFranchiseId}-${activeStageIndex}`}
@@ -559,31 +559,31 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.5 }}
-              className="space-y-3"
+              className="space-y-2 sm:space-y-3"
             >
               {/* Subtle Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-red-400 font-mono text-[11px] uppercase tracking-[0.25em]">
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-white/[0.06] sm:bg-white/[0.04] border border-white/15 sm:border-white/10 text-red-400 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.25em] backdrop-blur-md">
                 <Sparkles className="w-3 h-3 text-red-500" />
                 <span>{currentStage.badge}</span>
               </div>
 
               {/* Bold Cinematic Title */}
-              <h1 className="font-cinematic font-black text-3xl sm:text-5xl text-white tracking-wide uppercase leading-tight">
-                {currentStage.titleLine1} <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-400 to-white">
+              <h1 className="font-cinematic font-black text-2xl sm:text-4xl md:text-5xl text-white tracking-wide uppercase leading-tight drop-shadow-lg">
+                {currentStage.titleLine1} <br className="hidden sm:inline" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-400 to-white ml-1 sm:ml-0">
                   {currentStage.titleLine2}
                 </span>
               </h1>
 
-              <p className="text-xs sm:text-sm font-sans font-light text-slate-400 leading-relaxed max-w-sm">
+              <p className="text-xs sm:text-sm font-sans font-light text-slate-300 sm:text-slate-400 leading-relaxed max-w-sm drop-shadow">
                 {currentStage.leftSub}
               </p>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* LOWER RIGHT CONTENT AREA */}
-        <div className="max-w-sm ml-auto pb-6 text-right pointer-events-auto">
+        {/* LOWER RIGHT / BOTTOM HERO CONTENT AREA */}
+        <div className="w-full max-w-sm ml-auto pb-4 sm:pb-6 text-left sm:text-right pointer-events-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={`${selectedFranchiseId}-${activeStageIndex}`}
@@ -591,9 +591,9 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.5 }}
-              className="space-y-2.5"
+              className="space-y-2 sm:space-y-2.5 p-3.5 sm:p-0 bg-black/60 sm:bg-transparent rounded-2xl sm:rounded-none border border-white/10 sm:border-none backdrop-blur-md sm:backdrop-blur-none"
             >
-              <div className="font-mono text-[10px] text-red-500 uppercase tracking-[0.3em] font-semibold">
+              <div className="font-mono text-[9px] sm:text-[10px] text-red-500 uppercase tracking-[0.25em] sm:tracking-[0.3em] font-semibold">
                 {currentStage.rightTag}
               </div>
 
@@ -605,7 +605,7 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
                 onClick={() => {
                   onSelectTarget(currentStage.targetId, selectedFranchiseId);
                 }}
-                className="mt-2 inline-flex items-center gap-2 px-4 py-2 bg-red-600/20 hover:bg-red-600 text-white border border-red-500/50 rounded-xl text-xs font-mono tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(226,26,34,0.3)] group cursor-pointer"
+                className="mt-2 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 bg-red-600/30 hover:bg-red-600 active:bg-red-700 text-white border border-red-500/60 rounded-xl text-xs font-mono tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(226,26,34,0.4)] group cursor-pointer"
               >
                 <span>{currentStage.rightAction}</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -616,15 +616,27 @@ export const UniverseHeroFullscreen: React.FC<UniverseHeroFullscreenProps> = ({
 
       </div>
 
-      {/* BOTTOM SCROLL / TURN HINT */}
-      <footer className="relative z-30 w-full pb-6 flex items-center justify-between px-6 sm:px-10 text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+      {/* BOTTOM SCROLL / TURN HINT & MOBILE STAGE PAGINATION */}
+      <footer className="relative z-30 w-full pb-4 sm:pb-6 safe-pb flex items-center justify-between px-4 sm:px-10 text-[9px] sm:text-[10px] font-mono text-slate-500 uppercase tracking-wider sm:tracking-widest">
         <div>
-          FRAME: 0{activeImageIndex + 1} // 0{numImages}
+          FRAME: 0{activeImageIndex + 1} / 0{numImages}
         </div>
 
-        <div className="flex items-center gap-2 text-slate-400">
-          <span>Scroll slowly to shift frames & text</span>
-          <ChevronDown className="w-3 h-3 text-red-500 animate-bounce" />
+        {/* Interactive Stage Indicator Dots */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          {Array.from({ length: maxSteps + 1 }).map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => setStep(idx)}
+              className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                idx === step 
+                  ? 'w-5 sm:w-6 bg-red-500 shadow-[0_0_8px_rgba(226,26,34,0.8)]' 
+                  : 'w-1.5 bg-white/20 hover:bg-white/40'
+              }`}
+              title={`Jump to step ${idx + 1}`}
+            />
+          ))}
         </div>
 
         <div>
